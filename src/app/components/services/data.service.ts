@@ -39,11 +39,11 @@ export class DataService {
   }
 
   getGenresMovieData(): Observable<IGenres> {
-    return this.http.get<IGenres>(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`)
+    return this.http.get<IGenres>(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=ru-RU`)
   }
 
   getGenresTV_Data(): Observable<IGenres> {
-    return this.http.get<IGenres>(`https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}`)
+    return this.http.get<IGenres>(`https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}&language=ru-RU`)
   }
 
 
