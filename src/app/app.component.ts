@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {API_KEY, DataService} from "./components/services/data.service";
 
@@ -13,6 +12,29 @@ export interface IGenres {
 
 }
 
+export interface IMoviesAllData {
+  page: number
+  results: IMovieResults[]
+}
+
+export interface IMovieResults {
+  adult: boolean,
+  backdrop_path: string,
+  genre_ids: number[],
+  id: number,
+  original_language: string,
+  original_title: string,
+  overview: string,
+  popularity: number,
+  poster_path: string,
+  release_date: string,
+  title: string,
+  video: boolean,
+  vote_average: number,
+  vote_count: number,
+}
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,9 +42,10 @@ export interface IGenres {
 })
 export class AppComponent implements OnInit {
 
-  movies: any[] = [];
+  moviesRequest: string;
 
-  allGenres$: Observable<IGenres>
+  movieData: any
+  movie: any;
 
   genres: IGenre[]
   genresTV: IGenre[]
@@ -58,6 +81,12 @@ export class AppComponent implements OnInit {
     this.clickedGenreID = event_genre_id
     this.clickedGenreMovie_TV = movie_tv
     this.my_request = `/discover/${this.clickedGenreMovie_TV}?api_key=${API_KEY}&with_genres=${this.clickedGenreID}&language=ru-RU`
+    this.moviesRequest = `https://api.themoviedb.org/3${this.my_request}`
+    // console.log(this.moviesRequest)
+    this.movieData = this.http.get<IMoviesAllData>(this.moviesRequest).subscribe(response=>{
+      this.movie = response.results
+      console.log(this.movie)
+    })
   }
 
 }
