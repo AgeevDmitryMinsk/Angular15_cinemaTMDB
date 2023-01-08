@@ -32,10 +32,8 @@ export class AppComponent implements OnInit {
   clickedGenreID?: number
 
   movie_tv: string
-  request = {
-    // fetchActionMovies: `/discover/movie?api_key=${API_KEY}&with_genres=28&language=ru-RU`,
-    fetchActionMovies: `/discover/${this.clickedGenreMovie_TV}?api_key=${API_KEY}&with_genres=${this.clickedGenreID}&language=ru-RU`,
-  }
+  my_request = ''
+
   constructor(
     private http: HttpClient,
     private dataService: DataService
@@ -59,6 +57,7 @@ export class AppComponent implements OnInit {
     this.clickedGenre = event_genre
     this.clickedGenreID = event_genre_id
     this.clickedGenreMovie_TV = movie_tv
+    this.my_request = `/discover/${this.clickedGenreMovie_TV}?api_key=${API_KEY}&with_genres=${this.clickedGenreID}&language=ru-RU`
   }
 
 }
