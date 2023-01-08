@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {IGenre} from "../../app.component";
+import {IGenre} from "../../interfaces/global";
 
 
 @Component({
@@ -9,7 +9,4 @@ import {IGenre} from "../../app.component";
 })
 export class NavComponent {
   @Input() genre: IGenre
-
-
-
 }

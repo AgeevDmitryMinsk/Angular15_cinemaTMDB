@@ -1,17 +1,18 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {IGenres} from "../../app.component";
+import {IGenres} from "../../interfaces/global";
 
 export const API_KEY: string = "261986cbb51c934516a9889245136067";
+export const base_URL: string = "https://api.themoviedb.org/3";
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DataService {
-
-
 
   // 28 Action
   // 12 Adventure
@@ -39,11 +40,13 @@ export class DataService {
   }
 
   getGenresMovieData(): Observable<IGenres> {
-    return this.http.get<IGenres>(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=ru-RU`)
+    // return this.http.get<IGenres>(`${base_URL}/genre/movie/list?api_key=${API_KEY}&language=ru-RU`)
+    return this.http.get<IGenres>(`${base_URL}/genre/movie/list?api_key=${API_KEY}`)
   }
 
   getGenresTV_Data(): Observable<IGenres> {
-    return this.http.get<IGenres>(`https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}&language=ru-RU`)
+    // return this.http.get<IGenres>(`${base_URL}/genre/tv/list?api_key=${API_KEY}&language=ru-RU`)
+    return this.http.get<IGenres>(`${base_URL}/genre/tv/list?api_key=${API_KEY}`)
   }
 
 
