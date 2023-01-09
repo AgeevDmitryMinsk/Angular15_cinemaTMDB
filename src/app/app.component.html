@@ -24,7 +24,7 @@
          class="relative z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
 
       <app-nav *ngFor="let genre of genres" [genre]="genre"
-               (click)="dataService.getMovie(genre.name, genre.id, 'movie')"></app-nav>
+               (click)="getMovie(genre.name, genre.id, 'movie')"></app-nav>
     </div>
 
     <button id="dropdownDefaultButton2" data-dropdown-toggle="dropdown2"
@@ -40,7 +40,8 @@
     <!-- Dropdown menu -->
     <div id="dropdown2" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
       <app-nav *ngFor="let genre of genresTV" [genre]="genre"
-               (click)="dataService.getMovie(genre.name, genre.id, 'tv')"></app-nav>
+               (click)="getMovie(genre.name, genre.id, 'tv')"></app-nav>
+      <!--               (click)="dataService.getMovie(genre.name, genre.id, 'tv')"></app-nav>-->
     </div>
 
   </div>

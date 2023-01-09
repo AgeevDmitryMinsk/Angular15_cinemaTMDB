@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {DataService} from "./services/data.service";
-import {IGenre} from "./interfaces/global";
+import {base_URL, DataService} from "./services/data.service";
+import {IGenre, IMoviesAllData} from "./interfaces/global";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit  {
+export class AppComponent implements OnInit {
 
   moviesRequest: string;
 
@@ -15,13 +15,13 @@ export class AppComponent implements OnInit  {
   genresTV: IGenre[]
 
   clickedGenre: string = ''
-    clickedGenreID?: number
+  clickedGenreID?: number
 
   clickedGenreMovie_TV: string = ''
+  movie: any;
 
   constructor(
     public dataService: DataService,
-
   ) {
   }
 
@@ -34,7 +34,18 @@ export class AppComponent implements OnInit  {
     this.dataService.getGenresTV_Data().subscribe(result => {
       this.genresTV = result.genres
     })
-    this.clickedGenreMovie_TV =  this.dataService.clickedGenreMovie_TV
+    this.clickedGenreMovie_TV = this.dataService.clickedGenreMovie_TV
   }
 
+  getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
+    console.log("click =", event_genre, ',', movie_tv, ',', event_genre_id);
+    this.clickedGenre = event_genre;
+    this.clickedGenreID = event_genre_id;
+    this.clickedGenreMovie_TV = movie_tv;
+    this.dataService.getMovie('', event_genre_id, movie_tv).subscribe(response => {
+      this.moviesRequest = response.url;
+      this.movie = response.response.results;
+      console.log(this.movie)
+    })
+  }
 }
