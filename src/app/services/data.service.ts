@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {IGenres, IMoviesAllData} from "../interfaces/global";
 
-// export const API_KEY: string = "261986cbb51c934516a9889245136067"; перенес в interceptor
+// export const API_KEY: string = ""; перенес в interceptor
 export const base_URL: string = "https://api.themoviedb.org/3";
 
 

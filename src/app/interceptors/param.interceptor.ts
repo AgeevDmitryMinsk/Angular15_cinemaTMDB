@@ -6,6 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class ParamInterceptor implements HttpInterceptor {
@@ -19,7 +20,7 @@ export class ParamInterceptor implements HttpInterceptor {
       const paramReq = request.clone({
         params: request.params.set(
           'api_key',
-          '261986cbb51c934516a9889245136067'
+          environment.API_KY
         )
       });
       return next.handle(paramReq);
