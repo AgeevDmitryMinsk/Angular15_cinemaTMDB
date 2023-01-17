@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {base_URL, DataService} from "./services/data.service";
-import {IGenre, IMoviesAllData} from "./interfaces/global";
+import {DataService} from "./services/data.service";
+import {IGenre} from "./interfaces/global";
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -43,7 +44,8 @@ export class AppComponent implements OnInit {
     this.clickedGenreID = event_genre_id;
     this.clickedGenreMovie_TV = movie_tv;
     this.dataService.getMovie('', event_genre_id, movie_tv).subscribe(response => {
-      this.moviesRequest = response.url;
+      console.log(response.url)
+      this.moviesRequest = `${response.url}&api_key=${environment.API_KEY}`;
       this.movie = response.response.results;
       console.log(this.movie)
     })

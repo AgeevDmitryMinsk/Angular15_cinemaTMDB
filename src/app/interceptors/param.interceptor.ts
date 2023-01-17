@@ -20,7 +20,7 @@ export class ParamInterceptor implements HttpInterceptor {
       const paramReq = request.clone({
         params: request.params.set(
           'api_key',
-          environment.API_KY
+          environment.API_KEY
         )
       });
       return next.handle(paramReq);
