@@ -1,16 +1,17 @@
 <div class="relative ml-[500px] border-2 bg-gray-50">
-  <div class="relative text-3xl text-red-700 z-50">Результаты:</div>
+  <div class="relative text-3xl text-red-700 z-50">Результаты в компоненте ResultsComponent:</div>
 
-<!--  <div class="flex flex-col absolute bottom-[100px] left-[120px] bg-gray-50 rounded p-4 w-fit"-->
-<!--       *ngIf="clickedGenreMovie_TV">-->
-<!--    <span>You click to the genre: {{clickedGenre | titlecase}}</span>-->
-<!--    <span>You click to the genreID: {{clickedGenreID}}</span>-->
-<!--    <span>You click to drop-down (movie or TV): {{clickedGenreMovie_TV | titlecase}}</span>-->
 
-<!--    <span class="font-bold">You can click here to get the movie data:-->
-<!--        <a href="{{moviesRequest}}" target="_blank" class="font-bold text-red-700 cursor-pointer">{{moviesRequest}}</a>-->
-<!--    </span>-->
-<!--  </div>-->
+  <div class="flex flex-col absolute bottom-[100px] left-[120px] bg-gray-50 rounded p-4 w-fit"
+       *ngIf="clickedGenreMovie_TV">
+    <span>You click to the genre: {{clickedGenre | titlecase}}</span>
+    <span>You click to the genreID: {{clickedGenreID}}</span>
+    <span>You click to drop-down (movie or TV): {{clickedGenreMovie_TV | titlecase}}</span>
+
+    <span class="font-bold">You can click here to get the movie data:
+        <a href="{{moviesRequest}}" target="_blank" class="font-bold text-red-700 cursor-pointer">{{moviesRequest}}</a>
+    </span>
+  </div>
 
 </div>
 

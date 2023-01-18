@@ -67,6 +67,8 @@ export class DataService {
     }));
   }
 
+  myData: number = 1
+
 }
 
 

@@ -35,7 +35,6 @@ export class AppComponent implements OnInit {
     this.dataService.getGenresTV_Data().subscribe(result => {
       this.genresTV = result.genres
     })
-    this.clickedGenreMovie_TV = this.dataService.clickedGenreMovie_TV
   }
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
@@ -49,5 +48,6 @@ export class AppComponent implements OnInit {
       this.movie = response.response.results;
       console.log(this.movie)
     })
+    this.dataService.myData = 3
   }
 }
