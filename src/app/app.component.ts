@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from "./services/data.service";
 import {IGenre} from "./interfaces/global";
 import {environment} from "../environments/environment";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -23,11 +24,13 @@ export class AppComponent implements OnInit {
 
   constructor(
     public dataService: DataService,
+    public router: Router,
   ) {
   }
 
 
   ngOnInit() {
+    this.router.navigate(['movie-results'], {state: {id: '990909090', name: "что-то другое"}})
     this.dataService.getGenresMovieData().subscribe((result) => {
       // console.log(JSON.stringify(result))
       this.genres = result.genres

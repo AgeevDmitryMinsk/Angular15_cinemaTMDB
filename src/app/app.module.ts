@@ -12,11 +12,12 @@ import {ParamInterceptor} from "./interceptors/param.interceptor";
 import {RouterModule, Routes} from "@angular/router";
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {HomeComponent} from './components/home/home/home.component';
+import {animate} from "@angular/animations";
 
 
 const appRoutes: Routes =[
   {path: '',  component: HomeComponent},
-  {path: 'movie-results',  component: ResultsComponent},
+  {path: 'movie-results',  component: ResultsComponent, data :{ id:'1', name:"Angular"}},
   {path: 'tv-results',  component: ResultsComponent},
   {path: '**',  component: NotFoundComponent},
 
