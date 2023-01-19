@@ -45,9 +45,14 @@ export class AppComponent implements OnInit {
     this.dataService.getMovie('', event_genre_id, movie_tv).subscribe(response => {
       console.log(response.url)
       this.moviesRequest = `${response.url}&api_key=${environment.API_KEY}`;
+      this.dataService.moviesRequest = this.moviesRequest
       this.movie = response.response.results;
       console.log(this.movie)
     })
     this.dataService.myData = 3
+    this.dataService.clickedGenreMovie_TV = movie_tv
+    this.dataService.clickedGenre = event_genre
+    this.dataService.clickedGenreID = event_genre_id
+
   }
 }
