@@ -12,7 +12,8 @@ import {ParamInterceptor} from "./interceptors/param.interceptor";
 import {RouterModule, Routes} from "@angular/router";
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {HomeComponent} from './components/home/home/home.component';
-import {animate} from "@angular/animations";
+import {HeaderComponent} from './components/header/header.component';
+import {FooterComponent} from './components/footer/footer.component';
 
 
 const appRoutes: Routes =[
@@ -30,7 +31,9 @@ const appRoutes: Routes =[
     NavComponent,
     ResultsComponent,
     NotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
