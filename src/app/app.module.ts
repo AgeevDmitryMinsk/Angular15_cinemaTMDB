@@ -16,12 +16,11 @@ import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 
 
-const appRoutes: Routes =[
-  {path: '',  component: HomeComponent},
-  // {path: 'movie-results',  component: ResultsComponent, data :{ id:'1', name:"Angular"}},
-  {path: 'movie-results/:id',  component: ResultsComponent, data :{ id:'1', name:"Angular"}},
-  {path: 'tv-results/:id',  component: ResultsComponent},
-  {path: '**',  component: NotFoundComponent},
+const appRoutes: Routes = [
+  {path: '', component: HomeComponent},
+  {path: 'movie-results/:id', component: ResultsComponent, data: {id: '1', name: "Angular"}},
+  {path: 'tv-results/:id', component: ResultsComponent, data: {id: '1', name: "Angular"}},
+  {path: '**', component: NotFoundComponent},
 
 ]
 
@@ -42,7 +41,7 @@ const appRoutes: Routes =[
     AngularSvgIconModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
-  providers:  [
+  providers: [
     DataService, {
       provide: HTTP_INTERCEPTORS,
       useClass: ParamInterceptor,
@@ -50,4 +49,5 @@ const appRoutes: Routes =[
     }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

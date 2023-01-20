@@ -64,7 +64,10 @@ export class DataService {
     console.log("click =", event_genre, ',', movie_tv, ',', event_genre_id)
     return this.movieData = this.http.get<IMoviesAllData>(`${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`).pipe(map((data) => {
       console.log(data,  `${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`)
-      return {url: `${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`, response: data};
+      console.log('data.page in dataServise = ', data.page)
+      return {url: `${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`,
+        page: data.page,
+        response: data};
     }));
   }
 
