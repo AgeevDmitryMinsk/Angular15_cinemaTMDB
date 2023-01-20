@@ -17,8 +17,9 @@ import {animate} from "@angular/animations";
 
 const appRoutes: Routes =[
   {path: '',  component: HomeComponent},
-  {path: 'movie-results',  component: ResultsComponent, data :{ id:'1', name:"Angular"}},
-  {path: 'tv-results',  component: ResultsComponent},
+  // {path: 'movie-results',  component: ResultsComponent, data :{ id:'1', name:"Angular"}},
+  {path: 'movie-results/:id',  component: ResultsComponent, data :{ id:'1', name:"Angular"}},
+  {path: 'tv-results/:id',  component: ResultsComponent},
   {path: '**',  component: NotFoundComponent},
 
 ]
