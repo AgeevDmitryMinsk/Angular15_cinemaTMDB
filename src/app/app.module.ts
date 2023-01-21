@@ -14,6 +14,7 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import {HomeComponent} from './components/home/home/home.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
+import { MovieCardComponent } from './components/movie-card/movie-card.component';
 
 
 const appRoutes: Routes = [
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
     NotFoundComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    MovieCardComponent
   ],
   imports: [
     BrowserModule,

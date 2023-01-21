@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataService} from "../../services/data.service";
-import {IGenre} from "../../interfaces/global";
 import {ActivatedRoute} from "@angular/router";
 import {Subject, Subscription, takeUntil} from "rxjs";
 
@@ -14,6 +13,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
   movie_tv: string;
   page: number
   name: string
+  allClickedMovies: any;
 
   private destroy: Subject<boolean> = new Subject<boolean>();
 
@@ -45,6 +45,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
 
 
   public ngOnInit(): void {
+    this.allClickedMovies = this.dataService.movie;
     this.activatedRoute.data
       .pipe(takeUntil(this.destroy)) // так как это "горячий" наблюдаемый, от него необходимо отписываться, иначе может быть "утечка" памяти
       .subscribe((data) => {

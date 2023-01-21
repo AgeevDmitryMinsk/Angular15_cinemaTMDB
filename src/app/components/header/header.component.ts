@@ -37,6 +37,10 @@ export class HeaderComponent {
     this.dataService.getGenresTV_Data().subscribe(result => {
       this.genresTV = result.genres
     })
+
+    // this.dataService.searsh$.subscribe(result=>{
+    //   console.log(result)
+    // })
   }
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
@@ -50,6 +54,7 @@ export class HeaderComponent {
       console.log(50, this.page)
       console.log(51, this.dataService.moviesRequest)
       this.movie = response.response.results;
+      this.dataService.movie = this.movie;
       console.log(53, this.movie)
 
       this.router.navigate(
@@ -66,6 +71,7 @@ export class HeaderComponent {
     this.dataService.clickedGenreMovie_TV = movie_tv
     this.dataService.clickedGenre = event_genre
     this.dataService.clickedGenreID = event_genre_id
+
 
     // console.log(70, 'this.dataService.page = ', this.dataService.page)
     // console.log(71, 'this.dataService.clickedGenreMovie_TV = ', this.dataService.clickedGenreMovie_TV)

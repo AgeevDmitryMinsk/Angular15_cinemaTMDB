@@ -7,7 +7,6 @@ import {IGenres, IMoviesAllData} from "../interfaces/global";
 export const base_URL: string = "https://api.themoviedb.org/3";
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -50,7 +49,7 @@ export class DataService {
   ) {
   }
 
-  getGenresMovieData(): Observable<IGenres> {
+  getGenresMovieData(): Observable<IGenres> { // Observable - конструктор источника событий
     // return this.http.get<IGenres>(`${base_URL}/genre/movie/list?api_key=${API_KEY}&language=ru-RU`)
     return this.http.get<IGenres>(`${base_URL}/genre/movie/list`)
   }
@@ -63,16 +62,28 @@ export class DataService {
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
     console.log("click =", event_genre, ',', movie_tv, ',', event_genre_id)
-    return this.movieData = this.http.get<IMoviesAllData>(`${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`).pipe(map((data) => {
-      console.log(data,  `${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`)
-      console.log('data.page in dataServise = ', data.page)
-      return {url: `${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`,
-        page: data.page,
-        response: data};
-    }));
+    return this.movieData = this.http.get<IMoviesAllData>(`${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`)
+      .pipe(map((data) => {
+        console.log(data, `${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`)
+        console.log('data.page in dataServise = ', data.page)
+        return {
+          url: `${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`,
+          page: data.page,
+          response: data
+        };
+      }));
   }
 
-  myData: number = 1
+  myData: number = 1;
+
+  //тренировал Observable)))
+  searsh$ = new Observable(observer=> {
+    console.log('start in Observable')
+    observer.next(1);
+    observer.next(2);
+    observer.next(3);
+    console.log('end in Observable')
+  })
 
 }
 
