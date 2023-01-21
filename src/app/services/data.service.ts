@@ -42,6 +42,7 @@ export class DataService {
 
   movieData: any
   movie: any;
+  page: number;
 
 
   constructor(

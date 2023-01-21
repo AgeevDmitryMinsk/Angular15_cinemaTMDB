@@ -2,6 +2,7 @@
   <div class="text-3xl text-red-700 z-50">Результаты в компоненте ResultsComponent:</div>
 
   <div class="flex flex-col bg-gray-50 rounded p-4 w-fit" *ngIf="dataService.clickedGenreMovie_TV">
+    <span>Page number (of search): {{dataService.page}}</span>
     <span>You click to the genre: {{dataService.clickedGenre | titlecase}}</span>
     <span>You click to the genreID: {{dataService.clickedGenreID}}</span>
     <span>You click to drop-down (movie or TV): {{dataService.clickedGenreMovie_TV | titlecase}}</span>

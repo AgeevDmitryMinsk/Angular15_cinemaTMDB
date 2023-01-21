@@ -41,30 +41,35 @@ export class HeaderComponent {
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
     console.log("click =", event_genre, ',', movie_tv, ',', event_genre_id);
-    this.clickedGenre = event_genre;
-    this.clickedGenreID = event_genre_id;
-    this.clickedGenreMovie_TV = movie_tv;
     this.dataService.getMovie('', event_genre_id, movie_tv).subscribe(response => {
       console.log(response.url)
       this.moviesRequest = `${response.url}&api_key=${environment.API_KEY}`;
       this.dataService.moviesRequest = this.moviesRequest
       this.page = response.page
+      this.dataService.page = this.page
+      console.log(50, this.page)
       console.log(51, this.dataService.moviesRequest)
       this.movie = response.response.results;
       console.log(53, this.movie)
+
+      this.router.navigate(
+        [movie_tv === 'movie' ? 'movie-results' : 'tv-results', event_genre],
+        {
+          state: {id: '990909090', name: "что-то другое"},
+          queryParams: {
+            'movie_tv': movie_tv, 'clickedGenreID': event_genre_id, 'page': this.dataService.page
+          }
+        }
+      )
     })
-    this.dataService.myData = 3
+    this.dataService.myData = 3 // for test transfer data in dataService
     this.dataService.clickedGenreMovie_TV = movie_tv
     this.dataService.clickedGenre = event_genre
     this.dataService.clickedGenreID = event_genre_id
 
-    this.router.navigate([movie_tv === 'movie' ? 'movie-results' : 'tv-results', event_genre],
-      {
-        state: {id: '990909090', name: "что-то другое"},
-        queryParams: {
-          'movie_tv': movie_tv, 'clickedGenreID': event_genre_id, 'page': this.page
-        }
-      }
-    )
+    // console.log(70, 'this.dataService.page = ', this.dataService.page)
+    // console.log(71, 'this.dataService.clickedGenreMovie_TV = ', this.dataService.clickedGenreMovie_TV)
+    // console.log(72, 'this.dataService.clickedGenre = ', this.dataService.clickedGenre)
+    // console.log(73, 'this.dataService.clickedGenreID = ', this.dataService.clickedGenreID)
   }
 }
