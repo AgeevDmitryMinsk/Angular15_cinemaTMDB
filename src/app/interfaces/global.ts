@@ -29,3 +29,59 @@ export interface IMovieResults {
   vote_average: number,
   vote_count: number,
 }
+
+export interface IMovieCrewPeople{
+  adult: boolean,
+  gender: number,
+  id: number,
+  known_for_department: string,
+  name: string,
+  original_name: string,
+  popularity: number,
+  profile_path: string,
+  credit_id: string,
+  department: string,
+  job: string,
+}
+
+export interface IMoviePeople{
+  cast: {
+    adult: boolean,
+    gender: number,
+    id: number,
+    known_for_department: string,
+    name: string,
+    original_name: string,
+    popularity: number,
+    profile_path: string,
+    cast_id: number,
+    character: string,
+    credit_id: string,
+    order: number,
+  } [],
+  crew: IMovieCrewPeople[]
+}
+
+export enum numberToGenre {
+  Action = 28,
+  Adventure = 12,
+  Animation = 16,
+  Comedy = 35,
+  Crime = 80,
+  Documentary = 99,
+  Drama = 18,
+  Family = 10751,
+  Fantasy = 14,
+  History = 36,
+  Horror = 27,
+  Music = 10402,
+  Mystery = 9648,
+  Romance = 10749,
+  Science_Fiction = 878,
+  TV_Movie= 10770,
+  Thriller = 53,
+  War = 10752,
+  Western = 37
+}
+
+

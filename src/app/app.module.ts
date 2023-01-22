@@ -15,6 +15,10 @@ import {HomeComponent} from './components/home/home/home.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatCardModule} from "@angular/material/card";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 
 const appRoutes: Routes = [
@@ -41,7 +45,11 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     AngularSvgIconModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    MatSlideToggleModule,
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [
     DataService, {

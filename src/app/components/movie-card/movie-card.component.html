@@ -1,2 +1,38 @@
+<mat-card class="example-card m-5">
+  <mat-card-header>
+    <!--    <img mat-card-avatar class="example-header-image"></img>-->
+    <img mat-card-avatar src="{{base_image_URL}}{{movie.backdrop_path}}" alt="Photo of a Shiba Inu">
+    <mat-card-title>{{movie.title}} ({{movie.release_date | date: 'yyyy'}})</mat-card-title>
+    <mat-card-subtitle>Genre:
+      {{movie.genre_ids.includes(28) ? 'Action, ' : ''}}
+      {{movie.genre_ids.includes(12) ? 'Adventure, ' : ''}}
+      {{movie.genre_ids.includes(16) ? 'Animation, ' : ''}}
+      {{movie.genre_ids.includes(35) ? 'Comedy, ' : ''}}
+      {{movie.genre_ids.includes(80) ? 'Crime, ' : ''}}
+      {{movie.genre_ids.includes(99) ? 'Documentary, ' : ''}}
+      {{movie.genre_ids.includes(18) ? 'Drama, ' : ''}}
+      {{movie.genre_ids.includes(10751) ? 'Family, ' : ''}}
+      {{movie.genre_ids.includes(14) ? 'Fantasy, ' : ''}}
+      {{movie.genre_ids.includes(36) ? 'History, ' : ''}}
+      {{movie.genre_ids.includes(27) ? 'Horror, ' : ''}}
+      {{movie.genre_ids.includes(10402) ? 'Music, ' : ''}}
+      {{movie.genre_ids.includes(9648) ? 'Mystery, ' : ''}}
+      {{movie.genre_ids.includes(878) ? 'Science Fiction, ' : ''}}
+      {{movie.genre_ids.includes(10770) ? 'TV Movie, ' : ''}}
+      {{movie.genre_ids.includes(52) ? 'Thriller, ' : ''}}
+      {{movie.genre_ids.includes(10752) ? 'War, ' : ''}}
+      {{movie.genre_ids.includes(36) ? 'History, ' : ''}}
+      {{movie.genre_ids.includes(37) ? 'Western, ' : ''}}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{base_image_URL}}{{movie.poster_path}}" alt="poster_path">
+  <mat-card-content>
+    <p class="text-2xl pb-2">Overview</p>
+    <p>
+     {{movie.overview}}
+    </p>
+    <p class="text-xl pt-1.5">User Score: <b>{{movie.vote_average * 10}}</b> %</p>
+    <p class="text-xl pt-1.5">Director: <b>{{MovieDirectorName}}</b> </p>
 
-<div>{{movie.title}}</div>
+  </mat-card-content>
+</mat-card>

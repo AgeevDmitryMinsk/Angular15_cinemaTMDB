@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
-import {IGenres, IMoviesAllData} from "../interfaces/global";
+import {IGenres, IMovieCrewPeople, IMoviePeople, IMoviesAllData} from "../interfaces/global";
 
 // export const API_KEY: string = ""; перенес в interceptor
 export const base_URL: string = "https://api.themoviedb.org/3";
+export const base_image_URL : string = "https://image.tmdb.org/t/p/w500"
+
+export const base_director_URL : string = "https://api.themoviedb.org/3/movie"
 
 
 @Injectable({
@@ -42,6 +45,9 @@ export class DataService {
   movieData: any
   movie: any;
   page: number;
+  movieDirector: string
+  DirectorArr: IMovieCrewPeople[]
+  Director:string
 
 
   constructor(
@@ -72,6 +78,21 @@ export class DataService {
           response: data
         };
       }));
+  }
+
+  //метод для получения имени режиссера в компоненте MovieCardComponent
+  getMovieDirector(movieID: number) {
+    return this.http.get<IMoviePeople>(`${base_URL}/movie/${movieID}/credits`)
+      .pipe(map(response => {
+        this.DirectorArr = response.crew.filter(({job})=> job ==='Director')
+        console.log( this.DirectorArr[0])
+         this.Director = this.DirectorArr[0].name
+        console.log(this.Director)
+        return {
+          Director: this.Director
+        }
+      }))
+
   }
 
   myData: number = 1;
