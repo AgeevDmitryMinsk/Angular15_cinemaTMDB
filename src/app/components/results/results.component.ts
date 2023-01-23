@@ -35,6 +35,8 @@ export class ResultsComponent implements OnInit, OnDestroy {
         console.log('this.clickedGenreID=', this.clickedGenreID)
         this.page = queryParam['page']
         console.log('this.page =', this.page)
+        this.allClickedMovies = this.dataService.movie; // добавил для привязки получение данных к чендж роута и профит.
+        console.log(39, 'this.allClickedMovies in resultComponent = ', this.allClickedMovies) // correct movie or tv
       }
     );
     this.queryState = route.data.subscribe((queryParam: any) => {
@@ -46,6 +48,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.allClickedMovies = this.dataService.movie;
+    console.log(51, 'this.allClickedMovies in resultComponent = ', this.allClickedMovies) // correct movie or tv
     this.activatedRoute.data
       .pipe(takeUntil(this.destroy)) // так как это "горячий" наблюдаемый, от него необходимо отписываться, иначе может быть "утечка" памяти
       .subscribe((data) => {

@@ -18,13 +18,13 @@ export class MovieCardComponent {
   ) {
   }
 
-  //получаю имя режиссера фильма:
-  ngOnInit() {
-    this.dataService.getMovieDirector(this.movie.id).subscribe((result)=>{
-      console.log(36, JSON.stringify(result))
-      this.MovieDirectorName = result.Director
-    })
-  }
+  //получаю имя режиссера фильма (но только для movie, т.к. у tv нет такого свойства в объекте и падает ошибка):
+  // ngOnInit() {
+  //   this.dataService.getMovieDirector(this.movie.id).subscribe((result)=>{
+  //     console.log(36, JSON.stringify(result))
+  //     this.MovieDirectorName = result.Director
+  //   })
+  // }
 
 
 }

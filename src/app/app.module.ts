@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
+import { MovieGenreIdToNamePipe } from './components/movie-card/movie-genre-id-to-name.pipe';
 
 
 const appRoutes: Routes = [
@@ -38,7 +39,8 @@ const appRoutes: Routes = [
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    MovieCardComponent
+    MovieCardComponent,
+    MovieGenreIdToNamePipe
   ],
   imports: [
     BrowserModule,

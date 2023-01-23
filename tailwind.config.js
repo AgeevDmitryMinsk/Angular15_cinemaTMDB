@@ -1,9 +1,20 @@
 module.exports = {
   content: ["./src/**/*.{html,js}", "./node_modules/flowbite/**/*.js"],
-  theme: {
-    extend: {},
-  },
   plugins: [
-    require('flowbite/plugin')
-  ]
+    require('@tailwindcss/line-clamp'),
+    require('flowbite/plugin'),
+  ],
+  theme: {
+    extend: {
+      lineClamp: {
+        7: '7',
+        8: '8',
+        9: '9',
+        10: '10',
+      }
+    }
+  },
+  variants: {
+    lineClamp: ['responsive', 'hover']
+  }
 }

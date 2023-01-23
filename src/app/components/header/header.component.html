@@ -1,16 +1,22 @@
 <nav class="relative flex px-2 py-3 bg-fuchsia-700">
   <div class="container mx-auto align-middle flex">
+
+<!--    кнопка Home-->
     <button routerLink="/" class=" w-1/12 justify-center  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300
       font-medium rounded-lg text-sm px-4 py-1.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >
+
       Home
+
       <svg-icon src="../assets/home-svgrepo.svg"
                 [svgStyle]="{ 'width.px':35, 'height.px':35, 'marginLeft.px':20, 'fill':'rgb(255,255,255)' }"></svg-icon>
     </button>
 
 
+<!--    кнопка Movie-->
     <button id="dropdownDefaultButton1" data-dropdown-toggle="dropdown"
             class="ml-auto mr-3 w-1/12 justify-center  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             type="button">
+
       Movie
 
       <svg-icon src="../assets/down-arrow-in-a-circle-svgrepo-com.svg"
@@ -25,9 +31,14 @@
       ></app-nav>
     </div>
 
+
+<!--    кнопка TV-->
     <button id="dropdownDefaultButton2" data-dropdown-toggle="dropdown2"
             class="w-1/12 justify-center text-white bg-yellow-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button">TV
+            type="button">
+
+      TV
+
       <svg-icon src="../assets/down-arrow-in-a-circle-svgrepo-com.svg"
                 [svgStyle]="{ 'width.px':25, 'height.px':25, 'marginLeft.px':20, 'fill':'rgb(255,255,255)' }"></svg-icon>
 
@@ -36,6 +47,7 @@
       <app-nav *ngFor="let genre of genresTV" [genre]="genre"
                (click)="getMovie(genre.name, genre.id, 'tv')"></app-nav>
     </div>
+
 
   </div>
 

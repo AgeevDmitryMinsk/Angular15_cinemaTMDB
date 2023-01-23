@@ -48,11 +48,11 @@ export class HeaderComponent {
       this.dataService.moviesRequest = this.moviesRequest
       this.page = response.page
       this.dataService.page = this.page
-      console.log(50, this.page)
-      console.log(51, this.dataService.moviesRequest)
+      console.log(51, this.page)
+      console.log(52, this.dataService.moviesRequest)
       this.movie = response.response.results;
       this.dataService.movie = this.movie;
-      console.log(53, this.movie)
+      console.log(55, this.movie)
 
       this.router.navigate(
         [movie_tv === 'movie' ? 'movie-results' : 'tv-results', event_genre],
