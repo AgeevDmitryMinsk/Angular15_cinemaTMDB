@@ -53,7 +53,7 @@ export class DataService {
 
   movieData: any
   movie: any;
-  page: number;
+  page: number=1;
   movieDirector: string
   DirectorArr: IMovieCrewPeople[]
   Director:string
@@ -75,15 +75,16 @@ export class DataService {
   }
 
 
-  getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
+  getMovie(event_genre: string, event_genre_id: number, movie_tv: string ) {
     console.log("click =", event_genre, ',', movie_tv, ',', event_genre_id)
-    return this.movieData = this.http.get<IMoviesAllData>(`${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`)
+    return this.movieData = this.http.get<IMoviesAllData>(`${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}&page=${this.page}`)
       .pipe(map((data) => {
         console.log(data, `${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`)
         console.log('data.page in dataServise = ', data.page)
         return {
           url: `${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`,
-          page: data.page,
+          // page: data.page,
+          page: this.page,
           response: data
         };
       }));

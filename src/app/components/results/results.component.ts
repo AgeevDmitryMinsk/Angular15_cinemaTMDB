@@ -9,7 +9,7 @@ import {Subject, Subscription, takeUntil} from "rxjs";
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent implements OnInit, OnDestroy {
-  clickedGenreID?: number
+  clickedGenreID: number
   movie_tv: string;
   page: number
   name: string
@@ -59,6 +59,17 @@ export class ResultsComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.destroy.next(true);
     this.destroy.unsubscribe();
+  }
+
+  loadMore(){
+    this.dataService.page++
+    console.log('loadMore button clicked', 'And this.dataService.page = ', this.dataService.page)
+    this.dataService.getMovie('', this.clickedGenreID, this.movie_tv).subscribe(responz=>{
+      console.log('responz in resultComponent' , responz)
+      this.allClickedMovies = [...this.allClickedMovies, ...responz.response.results]
+    })
+
+
   }
 
 }

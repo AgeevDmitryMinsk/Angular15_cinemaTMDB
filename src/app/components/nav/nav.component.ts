@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {IGenre} from "../../interfaces/global";
 import {DataService} from "../../services/data.service";
 import {Router} from "@angular/router";
@@ -60,7 +60,7 @@ export class NavComponent {
         {
           state: {id: '990909090', name: "что-то другое"},
           queryParams: {
-            'movie_tv': movie_tv, 'clickedGenreID': event_genre_id, 'page': this.dataService.page
+            'movie_tv': movie_tv, 'clickedGenreID': event_genre_id
           }
         }
       )
