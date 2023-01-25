@@ -1,8 +1,8 @@
 module.exports = {
-  content: ["./src/**/*.{html,js}", "./node_modules/flowbite/**/*.js"],
+  content: ["./node_modules/flowbite/**/*.js", "./src/**/*.{html,js}" ],
   plugins: [
-    require('@tailwindcss/line-clamp'),
     require('flowbite/plugin'),
+    require('@tailwindcss/line-clamp'),
   ],
   theme: {
     extend: {
@@ -11,6 +11,9 @@ module.exports = {
         8: '8',
         9: '9',
         10: '10',
+      },
+      animation: {
+        wiggle: 'wiggle 5s ease-in-out infinite',
       }
     }
   },

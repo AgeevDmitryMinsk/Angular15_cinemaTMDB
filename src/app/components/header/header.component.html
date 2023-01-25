@@ -2,16 +2,19 @@
   <div class="container mx-auto align-middle flex ">
 
     <!--    кнопка Home-->
-    <button routerLink="/" class=" w-1/12 justify-center shadow-lg shadow-cyan-500/50 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300
-      font-medium rounded-lg text-sm px-4 py-1.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mr-auto">
+    <button routerLink="/" class="hover:scale-105 ease-in duration-300 w-1/12 justify-center shadow-lg shadow-cyan-500/50 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300
+      font-medium rounded-lg text-sm px-4 py-1.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mr-auto hover:animate-bounce">
       Home
-      <svg-icon src="../assets/home-svgrepo.svg"
-                [svgStyle]="{
+      <div class="animate-bounce h-8 ">
+        <svg-icon src="../assets/home-svgrepo.svg"
+                  [svgStyle]="{
                 'width.px':35,
                 'height.px':35,
                 'marginLeft.px':20,
                 'fill':'rgb(255,255,255)' }">
-      </svg-icon>
+        </svg-icon>
+      </div>
+
     </button>
 
 
