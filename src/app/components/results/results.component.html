@@ -1,33 +1,18 @@
 
-<div class="flex flex-row flex-wrap m-5 justify-center">
-  <app-movie-card *ngFor="let movie of allClickedMovies" [movie]="movie"></app-movie-card>
-</div>
+  <div class="flex flex-row flex-wrap m-5 justify-center">
+    <app-movie-card *ngFor="let movie of allClickedMovies" [movie]="movie"></app-movie-card>
+  </div>
 
-<div class="flex justify-center m-[20px]">
-  <button class="text-5xl text-white hover:text-black p-4 rounded-lg bg-[#1da1f2]/90 "
-          (click)="loadMore()"
-  >Load More</button>
-</div>
+  <div class="flex justify-center m-[20px]">
+    <button class="text-5xl text-white hover:text-black p-4 rounded-lg bg-[#1da1f2]/90 shadow-lg shadow-fuchsia-600/50"
+            (click)="loadMore()"
+    >Load More
+    </button>
+  </div>
 
 
 
-<!--<div class="w-full container mx-auto">-->
-<!--  <div class="text-3xl text-red-700 z-50">Результаты в компоненте ResultsComponent:</div>-->
-<!--  <div class="flex flex-col bg-gray-50 rounded p-4 w-fit" *ngIf="dataService.clickedGenreMovie_TV">-->
-<!--    <span>Page number (of search): {{dataService.page}}</span>-->
-<!--    <span>You click to the genre: {{dataService.clickedGenre | titlecase}}</span>-->
-<!--    <span>You click to the genreID: {{dataService.clickedGenreID}}</span>-->
-<!--    <span>You click to drop-down (movie or TV): {{dataService.clickedGenreMovie_TV | titlecase}}</span>-->
-<!--    <span class="font-bold">You can click here to get the movie data:-->
-<!--        <a href="{{dataService.moviesRequest}}" target="_blank"-->
-<!--           class="font-bold text-red-700 cursor-pointer">{{dataService.moviesRequest}}</a>-->
-<!--    </span>-->
-<!--  </div>-->
-<!--  <div class="mt-5 bg-gray-50 rounded p-4 w-fit border border-2  border-pink-500"-->
-<!--       *ngIf="!dataService.clickedGenreMovie_TV">-->
-<!--    Результатов не найдено-->
-<!--  </div>-->
-<!--</div>-->
+
 
 
 
