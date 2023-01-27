@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataService} from "../../services/data.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Subject, Subscription, takeUntil} from "rxjs";
 
 @Component({
@@ -14,6 +14,8 @@ export class ResultsComponent implements OnInit, OnDestroy {
   page: number
   name: string
   allClickedMovies: any;
+  i: number;
+  movieName: string
 
   private destroy: Subject<boolean> = new Subject<boolean>();
 
@@ -25,7 +27,8 @@ export class ResultsComponent implements OnInit, OnDestroy {
   constructor(
     public dataService: DataService,
     private activatedRoute: ActivatedRoute,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    public router: Router  ) {
     this.routeSubscription = route.params.subscribe(params => this.id = params['id']);
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
@@ -72,4 +75,23 @@ export class ResultsComponent implements OnInit, OnDestroy {
 
   }
 
+  getDetailedCard(movieId: number, ind:number) {
+    console.log('getDetailedCard movieId in ResultsComponent =', movieId )
+    console.log('ind in ResultsComponent =', ind )
+    console.log('this.allClickedMovies in ResultsComponent =', this.allClickedMovies[ind].title, this.allClickedMovies[ind].name )
+
+    this.dataService.movieID.next(movieId) // кладу в переменную movieID новое значение movieId и потом отслеживаю его через this.dataService.movieID.subscribe в TestCardDetailedComponent
+
+    this.movieName = this.allClickedMovies[ind].title || this.allClickedMovies[ind].name
+    this.movieName = `${movieId}-${this.movieName.toLowerCase().replace(/[^\w\s\']|_/g, '').trim().split(' ').join('-')}`
+    this.router.navigate(
+      ['movie', this.movieName],
+      {
+        state: {id: '990909090', name: "что-то другое"},
+        queryParams: {
+          // '':  this.movieName.toLowerCase().replace(/[^\w\s\']|_/g, '').trim().split(' ').join('-')
+        }
+      }
+    )
+  }
 }

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {AsyncSubject, BehaviorSubject, map, Observable, Subject} from "rxjs";
 import {IGenres, IMovieCrewPeople, IMoviePeople, IMoviesAllData} from "../interfaces/global";
 
 // export const API_KEY: string = ""; перенес в interceptor
@@ -73,6 +73,7 @@ export class DataService {
     // return this.http.get<IGenres>(`${base_URL}/genre/tv/list?api_key=${API_KEY}&language=ru-RU`)
     return this.http.get<IGenres>(`${base_URL}/genre/tv/list`)
   }
+  movieID = new BehaviorSubject<number>(0);
 
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string ) {
@@ -115,7 +116,6 @@ export class DataService {
     observer.next(3);
     console.log('end in Observable')
   })
-
 }
 
 

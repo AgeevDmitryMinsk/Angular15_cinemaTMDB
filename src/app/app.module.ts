@@ -21,12 +21,14 @@ import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import { MovieGenreIdToNamePipe } from './components/movie-card/movie-genre-id-to-name.pipe';
 import { GenreComponent } from './components/genre/genre.component';
+import { TestCardDetailedComponent } from './components/test-card-detailed/test-card-detailed.component';
 
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'movie-results/:id', component: ResultsComponent, data: {id: '1', name: "Angular"}},
   {path: 'tv-results/:id', component: ResultsComponent, data: {id: '1', name: "Angular"}},
+  {path: 'movie/:id', component: TestCardDetailedComponent, data: {id: '1', name: "Angular"}},
   {path: '**', component: NotFoundComponent},
 
 ]
@@ -42,7 +44,8 @@ const appRoutes: Routes = [
     FooterComponent,
     MovieCardComponent,
     MovieGenreIdToNamePipe,
-    GenreComponent
+    GenreComponent,
+    TestCardDetailedComponent
   ],
   imports: [
     BrowserModule,

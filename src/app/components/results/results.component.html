@@ -1,5 +1,5 @@
   <div class="flex flex-row flex-wrap m-5 justify-center">
-    <app-movie-card *ngFor="let movie of allClickedMovies" [movie]="movie"></app-movie-card>
+    <app-movie-card *ngFor="let movie of allClickedMovies; let i = index" [attr.data-index]="i" [movie]="movie" (click)="getDetailedCard(movie.id, i)"></app-movie-card>
      </div>
 
   <div class="animate-bounce w-6 h-6 flex flex mx-auto pr-20">
