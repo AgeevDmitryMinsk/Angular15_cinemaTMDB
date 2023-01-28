@@ -1,4 +1,6 @@
-<mat-card class="flex max-w-[400px] m-5 rounded-lg shadow-lg shadow-cyan-500/50 hover:scale-105 ease-in duration-300" >
+<mat-card class="flex max-w-[400px] m-5 rounded-lg shadow-lg shadow-cyan-500/50 hover:scale-105 ease-in duration-300"
+(click)="getDetailedMovieTvCard(movie.id, movie.title || movie.name)">
+
   <mat-card-header class="flex min-h-[100px] bg-gray-50 rounded-lg" >
 
     <img mat-card-avatar src="{{base_image_URL}}{{movie.backdrop_path}}" alt="Photo of a Shiba Inu">
@@ -20,6 +22,7 @@
     </p>
 
     <p class="text-xl pt-1.5">User Score: <b>{{movie.vote_average * 10}}</b> %</p>
+    <p class="text-xl pt-1.5">Movie ID: <b>{{movie.id}}</b> </p>
 
 <!--    получаю имя режиссера фильма (но только для movie, т.к. у tv нет такого свойства в объекте и падает ошибка):-->
 <!--    <p class="text-xl pt-1.5">Director: <b>{{MovieDirectorName}}</b> </p>-->

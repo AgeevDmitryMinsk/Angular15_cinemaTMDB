@@ -57,6 +57,7 @@ export class DataService {
   movieDirector: string
   DirectorArr: IMovieCrewPeople[]
   Director:string
+  clickedMovieId: number
 
 
   constructor(

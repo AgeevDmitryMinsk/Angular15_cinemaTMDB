@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {IMovieResults} from "../../interfaces/global";
 import {base_image_URL, DataService} from "../../services/data.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-movie-card',
@@ -15,6 +16,7 @@ export class MovieCardComponent {
 
   constructor(
     public dataService: DataService,
+    public router: Router,
   ) {
   }
 
@@ -27,4 +29,17 @@ export class MovieCardComponent {
   // }
 
 
+  getDetailedMovieTvCard(idCard:number, titleCard: string) {
+    console.log("You click at card with ID:", idCard)
+    ///превращаю idCard и titleCard в строку через дефис типа: 211239-the-love-in-your-eyes
+    let cardName= `${idCard}-${titleCard.toLowerCase().trim().replace(/[^a-z ]/g, '').split(' ').join('-')}`
+    this.dataService.clickedMovieId = idCard
+    this.router.navigate(
+      ["movie" , cardName],
+      {
+        state: {id: '990909090', name: "что-то другое"},
+
+      }
+    )
+  }
 }

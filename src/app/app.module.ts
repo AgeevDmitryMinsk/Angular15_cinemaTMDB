@@ -21,12 +21,16 @@ import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import { MovieGenreIdToNamePipe } from './components/movie-card/movie-genre-id-to-name.pipe';
 import { GenreComponent } from './components/genre/genre.component';
+import { MovieDetailedCardComponent } from './components/movie-detailed-card/movie-detailed-card.component';
+import { TvDetailedCardComponent } from './components/tv-detailed-card/tv-detailed-card.component';
 
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'movie-results/:id', component: ResultsComponent, data: {id: '1', name: "Angular"}},
   {path: 'tv-results/:id', component: ResultsComponent, data: {id: '1', name: "Angular"}},
+  {path: 'movie/:id', component: MovieDetailedCardComponent, data: {id: '1', name: "Angular"}},
+  {path: 'tv/:id', component: TvDetailedCardComponent, data: {id: '1', name: "Angular"}},
   {path: '**', component: NotFoundComponent},
 
 ]
@@ -42,7 +46,9 @@ const appRoutes: Routes = [
     FooterComponent,
     MovieCardComponent,
     MovieGenreIdToNamePipe,
-    GenreComponent
+    GenreComponent,
+    MovieDetailedCardComponent,
+    TvDetailedCardComponent
   ],
   imports: [
     BrowserModule,
