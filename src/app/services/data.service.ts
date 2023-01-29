@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {AsyncSubject, BehaviorSubject, map, Observable, Subject} from "rxjs";
-import {IGenres, IMovieCrewPeople, IMoviePeople, IMoviesAllData} from "../interfaces/global";
+import {BehaviorSubject, map, Observable} from "rxjs";
+import {IGenres, IMovieCrewPeople, IMovieDetails, IMoviePeople, IMoviesAllData} from "../interfaces/global";
 
 // export const API_KEY: string = ""; перенес в interceptor
 export const base_URL: string = "https://api.themoviedb.org/3";
@@ -57,6 +57,7 @@ export class DataService {
   movieDirector: string
   DirectorArr: IMovieCrewPeople[]
   Director:string
+  movieDetails: IMovieDetails
 
 
   constructor(
@@ -103,7 +104,17 @@ export class DataService {
           Director: this.Director
         }
       }))
+  }
 
+  getMovieDetails(movieID: number){
+    return this.http.get<IMovieDetails>(`${base_URL}/movie/${movieID}`)
+      .pipe(map(responsse=>{
+        console.log(responsse)
+        this.movieDetails = responsse
+        return {
+          movieDetailsFromDataService: this.movieDetails
+        }
+    }))
   }
 
   myData: number = 1;
