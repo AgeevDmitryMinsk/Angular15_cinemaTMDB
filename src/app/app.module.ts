@@ -26,6 +26,7 @@ import { CardDetailStringPipe } from './components/test-card-detailed/card-detai
 import { MinutesToHHMMPipe } from './components/test-card-detailed/minutes-to-hh-mm.pipe';
 import { VoteToPercentPipe } from './components/test-card-detailed/vote-to-percent.pipe';
 import {NgCircleProgressModule} from "ng-circle-progress";
+import {YouTubePlayerModule} from "@angular/youtube-player";
 
 
 const appRoutes: Routes = [
@@ -54,27 +55,28 @@ const appRoutes: Routes = [
     MinutesToHHMMPipe,
     VoteToPercentPipe
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        FormsModule,
-        AngularSvgIconModule.forRoot(),
-        RouterModule.forRoot(appRoutes),
-        BrowserAnimationsModule,
-        MatSlideToggleModule,
-        MatCardModule,
-        MatGridListModule,
-        // NgCircleProgressModule,
-      NgCircleProgressModule.forRoot({
-        // set defaults here
-        radius: 100,
-        outerStrokeWidth: 16,
-        innerStrokeWidth: 8,
-        outerStrokeColor: "#78C000",
-        innerStrokeColor: "#C7E596",
-        animationDuration: 300
-      })
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    AngularSvgIconModule.forRoot(),
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    MatSlideToggleModule,
+    MatCardModule,
+    MatGridListModule,
+    // NgCircleProgressModule,
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300
+    }),
+    YouTubePlayerModule
+  ],
   providers: [
     DataService, {
       provide: HTTP_INTERCEPTORS,

@@ -1,18 +1,29 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, map, Observable} from "rxjs";
-import {IGenres, IMovieCrewPeople, IMovieDetails, IMoviePeople, IMoviesAllData} from "../interfaces/global";
+import {
+  IGenres,
+  IMovieCrewPeople,
+  IMovieDetails,
+  IMoviePeople,
+  IMoviesAllData,
+  IMovieVideos, IMovieVideosResults
+} from "../interfaces/global";
 
 // export const API_KEY: string = ""; перенес в interceptor
 export const base_URL: string = "https://api.themoviedb.org/3";
-export const base_image_URL : string = "https://image.tmdb.org/t/p/w500"
+export const base_image_URL: string = "https://image.tmdb.org/t/p/w500"
+export const base_image_URL1920: string = "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces"
 
-export const base_director_URL : string = "https://api.themoviedb.org/3/movie"
+export const base_director_URL: string = "https://api.themoviedb.org/3/movie"
+
 
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 
 export class DataService {
 
@@ -53,11 +64,14 @@ export class DataService {
 
   movieData: any
   movie: any;
-  page: number=1;
+  page: number = 1;
   movieDirector: string
   DirectorArr: IMovieCrewPeople[]
-  Director:string
+  Director: string
   movieDetails: IMovieDetails
+  movieTrailer: IMovieVideosResults[]
+  movieTrailerKey: string
+
 
 
   constructor(
@@ -74,10 +88,11 @@ export class DataService {
     // return this.http.get<IGenres>(`${base_URL}/genre/tv/list?api_key=${API_KEY}&language=ru-RU`)
     return this.http.get<IGenres>(`${base_URL}/genre/tv/list`)
   }
+
   movieID = new BehaviorSubject<number>(0);
 
 
-  getMovie(event_genre: string, event_genre_id: number, movie_tv: string ) {
+  getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
     console.log("click =", event_genre, ',', movie_tv, ',', event_genre_id)
     return this.movieData = this.http.get<IMoviesAllData>(`${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}&page=${this.page}`)
       .pipe(map((data) => {
@@ -96,9 +111,9 @@ export class DataService {
   getMovieDirector(movieID: number) {
     return this.http.get<IMoviePeople>(`${base_URL}/movie/${movieID}/credits`)
       .pipe(map(response => {
-        this.DirectorArr = response.crew.filter(({job})=> job ==='Director')
-        console.log( this.DirectorArr[0])
-         this.Director = this.DirectorArr[0].name
+        this.DirectorArr = response.crew.filter(({job}) => job === 'Director')
+        console.log(this.DirectorArr[0])
+        this.Director = this.DirectorArr[0].name
         console.log(this.Director)
         return {
           Director: this.Director
@@ -106,21 +121,38 @@ export class DataService {
       }))
   }
 
-  getMovieDetails(movieID: number){
+  getMovieDetails(movieID: number) {
     return this.http.get<IMovieDetails>(`${base_URL}/movie/${movieID}`)
-      .pipe(map(responsse=>{
+      .pipe(map(responsse => {
         console.log(responsse)
         this.movieDetails = responsse
         return {
           movieDetailsFromDataService: this.movieDetails
         }
-    }))
+      }))
+  }
+
+  getMovieTrailer(movieID: number) {
+    return this.http.get<IMovieVideos>(`${base_URL}/movie/${movieID}/videos`)
+      .pipe(map(videoResponse => {
+        console.log(`videoResponse.results in DataService = `, videoResponse.results)
+
+        this.movieTrailer = videoResponse.results.filter(({name}) => name === 'Official Trailer')
+
+        console.log(`videoResponse.results in DataService after filter= `, this.movieTrailer)
+        this.movieTrailerKey = this.movieTrailer[0].key
+        console.log(`this.movieTrailerKey in DataService =`, this.movieTrailerKey)
+        return {
+          movieTrailerFromDataService: this.movieTrailer,
+          movieTrailerKeyFromDataService: this.movieTrailerKey
+        }
+      }))
   }
 
   myData: number = 1;
 
   //тренировал Observable)))
-  searsh$ = new Observable(observer=> {
+  searsh$ = new Observable(observer => {
     console.log('start in Observable')
     observer.next(1);
     observer.next(2);

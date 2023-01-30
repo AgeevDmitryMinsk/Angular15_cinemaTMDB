@@ -1,5 +1,5 @@
 <div *ngIf="movieDetails" class="absolute movieDetails">
-  <img src="{{imageBackGroundCard}}" alt="imageBackGroundCard" class="h-[510px] w-[100vw] object-cover opacity-50 z-0">
+  <img src="{{imageBackGroundCard}}" alt="imageBackGroundCard" class="h-[510px] w-[100vw] object-cover opacity-20">
 
   <div class="contentss">
 
@@ -9,38 +9,46 @@
       <p class="text-amber-50 text-xl">{{movieDetails.release_date | date: 'dd/MM/y'}}
         &centerdot; {{movieDetails.genres | cardDetailString }} &centerdot; {{movieDetails.runtime | minutesToHHMM}}
       </p>
-      <p class="text-amber-50 text-xl">Vote_average: {{movieDetails.vote_average | voteToPercent}}</p>
 
-      <circle-progress
-        [percent]="movieDetails.vote_average*10"
-        [radius]="50"
-        [outerStrokeWidth]="6"
-        [innerStrokeWidth]="8"
-        [outerStrokeColor]="'#78C000'"
-        [innerStrokeColor]="'#C7E596'"
-        [animation]="true"
-        [animationDuration]="300"
-        [titleColor]="'#FF00FF'"
-        [subtitleColor]="'#BFFF00'"
-        [units]="'%'"
-        [unitsColor]="'#BFFF00'"
-        [showUnits]="true"
-        [subtitle]="'Raiting'"
-      ></circle-progress>
+      <div class="flex items-center">
+        <circle-progress
+          [percent]="movieDetails.vote_average*10"
+          [radius]="50"
+          [outerStrokeWidth]="6"
+          [innerStrokeWidth]="8"
+          [outerStrokeColor]="'#78C000'"
+          [innerStrokeColor]="'#C7E596'"
+          [animation]="true"
+          [animationDuration]="300"
+          [titleColor]="'#FF00FF'"
+          [subtitleColor]="'#BFFF00'"
+          [units]="'%'"
+          [unitsColor]="'#BFFF00'"
+          [showUnits]="true"
+          [subtitle]="'Raiting'"
+        ></circle-progress>
 
+        <p class="text-amber-50 text-xl px-2">User <br>Score</p>
 
+        <p class="text-xl text-amber-50 hover:text-amber-200 p-2 flex cursor-pointer hover:border hover:rounded-3xl" (click)="playTrailer()">
+          &#9658; Play Trailer
+        </p>
+      </div>
 
-
-
-
-      <p class="top-1/3">{{movieDetails.backdrop_path }}</p>
       <p class="">cardDetailMovieID: {{cardDetailMovieID}}</p>
 
     </div>
-
-
   </div>
-
-
 </div>
 
+<div *ngIf="showTrailer" class="flex justify-center relative pl-5">
+  <youtube-player class=" "
+                  [height]="900"
+                  [width]="1400"
+
+                  videoId="{{movieTrailerKeyInCard}}"
+  >
+
+  </youtube-player>
+  <div class="text-black text-7xl leading-[0] h-3 cursor-pointer" (click)="claseTrailer()">   &times;   </div>
+</div>
