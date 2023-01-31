@@ -60,7 +60,7 @@ export class NavComponent {
         {
           state: {id: '990909090', name: "что-то другое"},
           queryParams: {
-            'movie_tv': movie_tv, 'clickedGenreID': event_genre_id
+            'movie_tv': movie_tv, 'clickedGenreID': event_genre_id, 'page': 1, 'event_genre': event_genre
           }
         }
       )
