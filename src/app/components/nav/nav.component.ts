@@ -51,7 +51,7 @@ export class NavComponent {
       this.dataService.page = this.page
       console.log(51, this.page)
       console.log(52, this.dataService.moviesRequest)
-      this.movie = response.response.results;
+      this.movie = response.response;
       this.dataService.movie = this.movie;
       console.log(55, this.movie)
 

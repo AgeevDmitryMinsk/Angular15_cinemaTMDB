@@ -6,8 +6,10 @@ import {
   IMovieCrewPeople,
   IMovieDetails,
   IMoviePeople,
+  IMovieResults,
   IMoviesAllData,
-  IMovieVideos, IMovieVideosResults
+  IMovieVideos,
+  IMovieVideosResults
 } from "../interfaces/global";
 
 // export const API_KEY: string = ""; перенес в interceptor
@@ -71,6 +73,7 @@ export class DataService {
   movieDetails: IMovieDetails
   movieTrailer: IMovieVideosResults[]
   movieTrailerKey: string
+  allClickedMovies: IMovieResults[] = []
 
 
 
@@ -98,11 +101,12 @@ export class DataService {
       .pipe(map((data) => {
         console.log(data, `${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`)
         console.log('data.page in dataServise = ', data.page)
+        console.log(`this.allClickedMovies in DataService = `, this.allClickedMovies)
         return {
           url: `${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}`,
           // page: data.page,
           page: this.page,
-          response: data
+          response: [...this.allClickedMovies, ...data.results]
         };
       }));
   }
@@ -150,6 +154,7 @@ export class DataService {
   }
 
   myData: number = 1;
+
 
   //тренировал Observable)))
   searsh$ = new Observable(observer => {

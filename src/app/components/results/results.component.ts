@@ -53,7 +53,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
           this.dataService.page = this.page
           console.log(51, this.page)
           console.log(52, this.dataService.moviesRequest)
-          this.movie = response.response.results;
+          this.movie = response.response;
           this.dataService.movie = this.movie;
           console.log(55, this.movie)
           this.allClickedMovies = this.dataService.movie; // добавил для привязки получение данных к чендж роута и профит.
@@ -88,19 +88,22 @@ export class ResultsComponent implements OnInit, OnDestroy {
     console.log(85, 'loadMore button clicked', 'And this.dataService.page = ', this.dataService.page)
 
     console.log(93, ' in loadMore ')
-    this.router.navigate(
-      [this.movie_tv === 'movie' ? 'movie-results' : 'tv-results', this.event_genre],
-      {
-        state: {id: '990909090', name: "что-то другое"},
-        queryParams: {
-          'movie_tv':this.movie_tv, 'clickedGenreID': this.clickedGenreID, 'page': this.dataService.page, 'event_genre': this.event_genre
-        }
-      }
-    )
+
 
     this.dataService.getMovie('', this.clickedGenreID, this.movie_tv).subscribe(responz=>{
       console.log('responz in resultComponent' , responz)
-      this.allClickedMovies = [...this.allClickedMovies, ...responz.response.results]
+      // this.allClickedMovies = [...this.allClickedMovies, ...responz.response]
+      this.dataService.allClickedMovies = this.allClickedMovies
+
+      this.router.navigate(
+        [this.movie_tv === 'movie' ? 'movie-results' : 'tv-results', this.event_genre],
+        {
+          state: {id: '990909090', name: "что-то другое"},
+          queryParams: {
+            'movie_tv':this.movie_tv, 'clickedGenreID': this.clickedGenreID, 'page': this.dataService.page, 'event_genre': this.event_genre
+          }
+        }
+      )
     })
 
   }
