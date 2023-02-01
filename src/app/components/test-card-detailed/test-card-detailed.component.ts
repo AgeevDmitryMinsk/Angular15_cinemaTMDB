@@ -28,6 +28,7 @@ export class TestCardDetailedComponent {
   private routeSubscription: Subscription;
 
 
+
   constructor(
     public dataService: DataService,
     private route: ActivatedRoute) {
@@ -77,4 +78,16 @@ export class TestCardDetailedComponent {
   claseTrailer() {
     this.showTrailer = false
   }
+
+  onPlayerReady($event: YT.PlayerEvent){
+    console.log('onPlayerReady clicked')
+    $event.target.playVideo()
+  }
+
+  onApiChange($event: YT.PlayerEvent) {
+    console.log('onApiChange clicked', $event)
+  }
+
+  onErrorYoutube($event: YT.OnErrorEvent) {
+    console.log('onErrorYoutube some error:', $event)  }
 }

@@ -50,6 +50,13 @@
   <youtube-player class=" "
                   [height]="900"
                   [width]="1400"
+                  (ready)="onPlayerReady($event)"
+                  (apiChange)="onApiChange($event)"
+                  (error)="onErrorYoutube($event)"
+                  suggestedQuality = "highres"
+                  [startSeconds]="1"
+                  [playerVars] = {start:1}
+
 
                   videoId="{{movieTrailerKeyInCard}}"
   >

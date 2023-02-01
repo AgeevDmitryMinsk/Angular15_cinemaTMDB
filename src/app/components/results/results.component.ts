@@ -126,7 +126,6 @@ export class ResultsComponent implements OnInit, OnDestroy {
       {
         state: {id: '990909090', name: "что-то другое"},
         queryParams: {
-          // '':  this.movieName.toLowerCase().replace(/[^\w\s\']|_/g, '').trim().split(' ').join('-')
         }
       }
     )
