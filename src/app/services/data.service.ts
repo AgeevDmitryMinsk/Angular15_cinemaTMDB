@@ -71,8 +71,8 @@ export class DataService {
   DirectorArr: IMovieCrewPeople[]
   Director: string
   movieDetails: IMovieDetails
-  movieTrailer: IMovieVideosResults[]
-  movieTrailerKey: string
+  movieTrailer: IMovieVideosResults[] | null
+  movieTrailerKey: string | null
   allClickedMovies: IMovieResults[] = []
 
 
@@ -147,6 +147,9 @@ export class DataService {
           console.log(`videoResponse.results in DataService after filter= `, this.movieTrailer)
           this.movieTrailerKey = this.movieTrailer[0].key
           console.log(`this.movieTrailerKey in DataService =`, this.movieTrailerKey)
+        } else {
+          this.movieTrailer = null
+          this.movieTrailerKey = null
         }
 
         return {

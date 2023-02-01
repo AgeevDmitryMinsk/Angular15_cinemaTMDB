@@ -18,8 +18,8 @@ export class TestCardDetailedComponent {
   base_image_URL1920: string = base_image_URL1920
   imageBackGroundCard: string
   imageCardPoster: string
-  movieTrailer: IMovieVideosResults[]
-  movieTrailerKeyInCard: string
+  movieTrailer: IMovieVideosResults[] | null
+  movieTrailerKeyInCard: string | null
   safeURL: string
   showTrailer:boolean = false
 
