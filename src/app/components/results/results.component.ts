@@ -46,18 +46,18 @@ export class ResultsComponent implements OnInit, OnDestroy {
         console.log(46, 'this.event_genre =', this.event_genre)
 
         this.dataService.getMovie('', this.clickedGenreID,  this.movie_tv).subscribe(response => {
-          console.log(response.url)
+          console.log(49, response.url)
           this.moviesRequest = `${response.url}&api_key=${environment.API_KEY}`;
           this.dataService.moviesRequest = this.moviesRequest
           this.page = response.page
           this.dataService.page = this.page
-          console.log(51, this.page)
-          console.log(52, this.dataService.moviesRequest)
+          console.log(54, this.page)
+          console.log(55, this.dataService.moviesRequest)
           this.movie = response.response;
           this.dataService.movie = this.movie;
-          console.log(55, this.movie)
+          console.log(58, this.movie)
           this.allClickedMovies = this.dataService.movie; // добавил для привязки получение данных к чендж роута и профит.
-          console.log(42, 'this.allClickedMovies in resultComponent = ', this.allClickedMovies) // correct movie or tv
+          console.log(60, 'this.allClickedMovies in resultComponent = ', this.allClickedMovies) // correct movie or tv
         })
       }
     );
