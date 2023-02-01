@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {base_image_URL, base_image_URL1920, DataService} from "../../services/data.service";
 import {IMovieDetails, IMovieVideosResults} from "../../interfaces/global";
+import {Subscription} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
 
 let apiLoaded = false;
 
@@ -21,16 +23,20 @@ export class TestCardDetailedComponent {
   movieTrailer: IMovieVideosResults[] | null
   movieTrailerKeyInCard: string | null
   safeURL: string
-  showTrailer:boolean = false
+  showTrailer: boolean = false
+
+  private routeSubscription: Subscription;
 
 
   constructor(
-    public dataService: DataService) {
-    this.dataService.movieID.subscribe((result) => {
-
-      // console.log('result in TestCardDetailedComponent = ', result )
-      this.cardDetailMovieID = result
-    })
+    public dataService: DataService,
+    private route: ActivatedRoute) {
+    this.routeSubscription = route.params.subscribe(params => this.cardDetailMovieID = Number(params['id'].split('-')[0]));
+    console.log(35, `this.cardDetailMovieID =`, this.cardDetailMovieID)
+    // this.dataService.movieID.subscribe((result) => {
+    //   console.log(37, 'result in TestCardDetailedComponent = ', result)
+    //   this.cardDetailMovieID = result
+    // })
   }
 
   ngOnInit(): void {
