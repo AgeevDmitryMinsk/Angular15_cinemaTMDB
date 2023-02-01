@@ -3,6 +3,7 @@ import {DataService} from "../../services/data.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subject, Subscription, takeUntil} from "rxjs";
 import {environment} from "../../../environments/environment";
+import {Utils} from "../Utils/utils";
 
 @Component({
   selector: 'app-results',
@@ -116,7 +117,10 @@ export class ResultsComponent implements OnInit, OnDestroy {
     this.dataService.movieID.next(movieId) // кладу в переменную movieID новое значение movieId и потом отслеживаю его через this.dataService.movieID.subscribe в TestCardDetailedComponent
 
     this.movieName = this.allClickedMovies[ind].title || this.allClickedMovies[ind].name
-    this.movieName = `${movieId}-${this.movieName.toLowerCase().replace(/[^\w\s\']|_/g, '').trim().split(' ').join('-')}`
+
+    // this.movieName = `${movieId}-${this.movieName.toLowerCase().replace(/[^\w\s\']|_/g, '').trim().split(' ').join('-')}`
+    this.movieName = `${movieId}-${new Utils(this.movieName).urlTransformName()}`
+
     this.router.navigate(
       ['movie', this.movieName],
       {
