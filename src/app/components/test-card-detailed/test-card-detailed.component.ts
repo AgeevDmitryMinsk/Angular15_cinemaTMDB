@@ -3,6 +3,7 @@ import {base_image_URL, base_image_URL1920, DataService} from "../../services/da
 import {IMovieDetails, IMovieVideosResults} from "../../interfaces/global";
 import {Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 let apiLoaded = false;
 
@@ -28,10 +29,11 @@ export class TestCardDetailedComponent {
   private routeSubscription: Subscription;
 
 
-
   constructor(
     public dataService: DataService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar
+  ) {
     this.routeSubscription = route.params.subscribe(params => this.cardDetailMovieID = Number(params['id'].split('-')[0]));
     console.log(35, `this.cardDetailMovieID =`, this.cardDetailMovieID)
     // this.dataService.movieID.subscribe((result) => {
@@ -73,21 +75,40 @@ export class TestCardDetailedComponent {
     console.log('playTrayler ', this.cardDetailMovieID)
     this.dataService.getMovieTrailer(this.cardDetailMovieID)
     this.showTrailer = true
+
+    this.openSnackBar('playTraylerMessage', 'Action')
   }
 
-  claseTrailer() {
+  closeTrailer() {
     this.showTrailer = false
   }
 
-  onPlayerReady($event: YT.PlayerEvent){
+  onPlayerReady($event: YT.PlayerEvent) {
     console.log('onPlayerReady clicked')
+    this.openSnackBar('onPlayerReady', 'Action')
     $event.target.playVideo()
   }
 
   onApiChange($event: YT.PlayerEvent) {
     console.log('onApiChange clicked', $event)
+    this.openSnackBar('onApiChangeMessage', 'Action')
   }
 
   onErrorYoutube($event: YT.OnErrorEvent) {
-    console.log('onErrorYoutube some error:', $event)  }
+    console.log('onErrorYoutube some error:', $event)
+    this.openSnackBar('onErrorYoutubeMessage', 'Action')
+  }
+
+  // openSnackBar(message: string, action: string) {
+  //   this._snackBar.open(message, action);
+  // }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: "right",
+      verticalPosition: "top"
+    });
+  }
+
 }

@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {NavComponent} from './components/nav/nav.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ResultsComponent} from './components/results/results.component';
 import {AngularSvgIconModule} from "angular-svg-icon";
 import {DataService} from "./services/data.service";
@@ -27,6 +27,9 @@ import { MinutesToHHMMPipe } from './components/test-card-detailed/minutes-to-hh
 import { VoteToPercentPipe } from './components/test-card-detailed/vote-to-percent.pipe';
 import {NgCircleProgressModule} from "ng-circle-progress";
 import {YouTubePlayerModule} from "@angular/youtube-player";
+import {MatInputModule} from "@angular/material/input";
+import {MaterialModule} from "../material/material.module";
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 const appRoutes: Routes = [
@@ -55,28 +58,33 @@ const appRoutes: Routes = [
     MinutesToHHMMPipe,
     VoteToPercentPipe
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    AngularSvgIconModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
-    BrowserAnimationsModule,
-    MatSlideToggleModule,
-    MatCardModule,
-    MatGridListModule,
-    // NgCircleProgressModule,
-    NgCircleProgressModule.forRoot({
-      // set defaults here
-      radius: 100,
-      outerStrokeWidth: 16,
-      innerStrokeWidth: 8,
-      outerStrokeColor: "#78C000",
-      innerStrokeColor: "#C7E596",
-      animationDuration: 300
-    }),
-    YouTubePlayerModule
-  ],
+	imports: [
+		BrowserModule,
+		HttpClientModule,
+		FormsModule,
+		AngularSvgIconModule.forRoot(),
+		RouterModule.forRoot(appRoutes),
+		BrowserAnimationsModule,
+		MatSlideToggleModule,
+		MatCardModule,
+		MatGridListModule,
+		// NgCircleProgressModule,
+		NgCircleProgressModule.forRoot({
+			// set defaults here
+			radius: 100,
+			outerStrokeWidth: 16,
+			innerStrokeWidth: 8,
+			outerStrokeColor: "#78C000",
+			innerStrokeColor: "#C7E596",
+			animationDuration: 300
+		}),
+		YouTubePlayerModule,
+		MatInputModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    MatNativeDateModule,
+    FormsModule
+	],
   providers: [
     DataService, {
       provide: HTTP_INTERCEPTORS,
