@@ -30,6 +30,7 @@ import {YouTubePlayerModule} from "@angular/youtube-player";
 import {MatInputModule} from "@angular/material/input";
 import {MaterialModule} from "../material/material.module";
 import {MatNativeDateModule} from "@angular/material/core";
+import {ToastrModule} from "ngx-toastr";
 
 
 const appRoutes: Routes = [
@@ -83,7 +84,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MaterialModule,
     MatNativeDateModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot(),
 	],
   providers: [
     DataService, {

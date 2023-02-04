@@ -5074,6 +5074,13 @@ ng-circle-progress@^1.7.1:
   dependencies:
     tslib "^2.0.0"
 
+ngx-toastr@^16.0.2:
+  version "16.0.2"
+  resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-16.0.2.tgz#349068a16a73867111c6feae68eedb89a638a33f"
+  integrity sha512-J6SueNCaGwm/gpXdsG56UzMEAcuayYWEW6NmIrNoe5iP7lOUohg4xYXWipkbMH9wGWmLPD9gU8AufUVWMplCvg==
+  dependencies:
+    tslib "^2.3.0"
+
 nice-napi@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/nice-napi/-/nice-napi-1.0.2.tgz#dc0ab5a1eac20ce548802fc5686eaa6bc654927b"

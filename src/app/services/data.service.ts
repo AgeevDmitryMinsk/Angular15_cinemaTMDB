@@ -142,7 +142,7 @@ export class DataService {
         if(videoResponse.results.length>0) {
           console.log(`videoResponse.results in DataService = `, videoResponse.results)
 
-          this.movieTrailer = videoResponse.results.filter(({name}) => name.includes('Official Trailer'))
+          this.movieTrailer = videoResponse.results.filter(({name}) => name.includes(`Trailer`))
 
           console.log(`videoResponse.results in DataService after filter= `, this.movieTrailer)
           this.movieTrailerKey = this.movieTrailer[0].key

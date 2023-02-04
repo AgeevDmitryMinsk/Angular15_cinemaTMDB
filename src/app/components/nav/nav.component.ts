@@ -3,6 +3,8 @@ import {IGenre} from "../../interfaces/global";
 import {DataService} from "../../services/data.service";
 import {Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -26,19 +28,41 @@ export class NavComponent {
   constructor(
     public dataService: DataService,
     public router: Router,
+    private _snackBar: MatSnackBar,
+    private toastr: ToastrService
   ) {
   }
 
 
   ngOnInit() {
-    this.dataService.getGenresMovieData().subscribe((result) => {
-      // console.log(JSON.stringify(result))
-      this.genres = result.genres
-    })
-    this.dataService.getGenresTV_Data().subscribe(result => {
-      this.genresTV = result.genres
-    })
+    this.dataService.getGenresMovieData()
+      .subscribe({
+        next: (result) => {
+          // console.log(JSON.stringify(result))
+          this.genres = result.genres
+          this.showSuccessToastr('Movie-genres are loaded from back')
+        },
+        error: (e) => {
+          console.log("ОШИБКА:", e.message)
+          this.openSnackBar(e.message)
+          this.showErrorToastr(e.message)
+        },
+        complete: () => console.log('done')
+      })
 
+    this.dataService.getGenresTV_Data()
+      .subscribe({
+        next: (result) => {
+          this.genresTV = result.genres
+          this.showSuccessToastr('TV-genres are loaded from backend')
+        },
+        error: (e) => {
+          console.log("ОШИБКА:", e.message)
+          this.openSnackBar(e.message)
+          this.showErrorToastr(e.message)
+        },
+        complete: () => console.log('done2')
+      })
   }
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
@@ -70,4 +94,27 @@ export class NavComponent {
     this.dataService.clickedGenre = event_genre
     this.dataService.clickedGenreID = event_genre_id
   }
+
+  openSnackBar(message: string) { // openSnackBar для последовательного отображения сообщений в углу экрана
+    this._snackBar.open(message, '_snackBar ERROR: try to use VPN ', {
+      duration: 3000,
+      horizontalPosition: "left",
+      verticalPosition: "top",
+    });
+  }
+
+  showErrorToastr(message: string) { // toastr для параллельного отображения сообщений в углу экрана
+    this.toastr.error(message, 'Try to use VPN if you are in BELARUS (Toastr ERROR)', {
+      timeOut: 4000,
+      positionClass: 'toast-bottom-right',
+    });
+  }
+
+  showSuccessToastr(message: string) { // toastr для параллельного отображения сообщений в углу экрана
+    this.toastr.success(message, '(Message from ToastrService)', {
+      timeOut: 4000,
+      positionClass: 'toast-bottom-right',
+    });
+  }
+
 }
