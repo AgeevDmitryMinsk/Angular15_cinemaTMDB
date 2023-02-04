@@ -61,6 +61,7 @@ export class TestCardDetailedComponent {
       console.log('this.movieTrailer in TestCardDetailedComponent = ', this.movieTrailer)
       if (!this.movieTrailer ) {
         this.showErrorToastr('Trailers not found')
+        console.log(`!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`)
       } else {
         this.showSuccessToastr('Trailer found')
       }
