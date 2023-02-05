@@ -1,4 +1,4 @@
-<div *ngIf="movieDetails" class="absolute max-w-[1500px] overflow-x-scroll">
+<div *ngIf="movieDetails" class="absolute">
   <div class="myGrayBackGround">
     <img src="{{imageBackGroundCard}}" alt="imageBackGroundCard"
          class="myBackGround h-[510px] w-[100vw] object-cover opacity-30">
@@ -84,7 +84,7 @@
   <div class="p-10 font-bold text-xl">
     Top Billed Cast
 
-    <div class="flex text-base font-normal">
+    <div class="flex text-base font-normal max-w-screen-xl overflow-x-scroll">
 
       <app-top-billed-cast-card *ngFor="let castActor of cast"
                                 [castActor]="castActor"
