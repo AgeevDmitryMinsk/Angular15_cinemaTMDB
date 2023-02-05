@@ -31,6 +31,11 @@ export class TestCardDetailedComponent {
 
   timeOut = 1500;
 
+  movieDirector: string
+  movieScreenplay: string
+
+  movieStory: string
+
   private routeSubscription: Subscription;
 
 
@@ -88,6 +93,18 @@ export class TestCardDetailedComponent {
       document.body.appendChild(tag);
       apiLoaded = true;
     }
+
+    this.dataService.getMovieDirector(this.cardDetailMovieID).subscribe(resultt=>{
+      this.movieDirector = resultt.Director
+      console.log(this.movieDirector)
+    })
+
+    this.dataService.getMovieCastAndCrew(this.cardDetailMovieID).subscribe(resultt=>{
+      this.movieDirector = resultt.Director
+      console.log(this.movieDirector)
+      this.movieScreenplay = resultt.Screenplay
+      this.movieStory = resultt.Story
+    })
 
   }
 

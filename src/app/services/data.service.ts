@@ -20,11 +20,9 @@ export const base_image_URL1920: string = "https://image.tmdb.org/t/p/w1920_and_
 export const base_director_URL: string = "https://api.themoviedb.org/3/movie"
 
 
-
 @Injectable({
   providedIn: 'root'
 })
-
 
 
 export class DataService {
@@ -69,12 +67,15 @@ export class DataService {
   page: number = 1;
   movieDirector: string
   DirectorArr: IMovieCrewPeople[]
+  ScreenplayArr: IMovieCrewPeople[]
+  StoryArr: IMovieCrewPeople[]
   Director: string
+  Screenplay: string
+  Story: string
   movieDetails: IMovieDetails
   movieTrailer: IMovieVideosResults[] | null
   movieTrailerKey: string | null
   allClickedMovies: IMovieResults[] = []
-
 
 
   constructor(
@@ -115,12 +116,38 @@ export class DataService {
   getMovieDirector(movieID: number) {
     return this.http.get<IMoviePeople>(`${base_URL}/movie/${movieID}/credits`)
       .pipe(map(response => {
+        console.log(`response in getMovieDirector`, response)
         this.DirectorArr = response.crew.filter(({job}) => job === 'Director')
         console.log(this.DirectorArr[0])
         this.Director = this.DirectorArr[0].name
         console.log(this.Director)
         return {
           Director: this.Director
+        }
+      }))
+  }
+
+  //метод для получения актерского состава и команды работников съемки (режиссера, постановщик, продюсеры) в компоненте MovieCardComponent
+  getMovieCastAndCrew(movieID: number) {
+    return this.http.get<IMoviePeople>(`${base_URL}/movie/${movieID}/credits`)
+      .pipe(map(response => {
+        console.log(`response in getMovieCastAndCrew`, response)
+        this.DirectorArr = response.crew.filter(({job}) => job === 'Director')
+        this.ScreenplayArr = response.crew.filter(({job}) => job === 'Screenplay')
+        this.StoryArr = response.crew.filter(({job}) => job === 'Story')
+        console.log(this.DirectorArr[0])
+        this.Director = this.DirectorArr[0].name
+        this.Screenplay = this.ScreenplayArr[0].name
+        this.Story = this.StoryArr[0].name
+        if(this.Screenplay === this.Story)  {
+          this.Story = this.StoryArr[1].name
+        }
+        console.log('Director = ', this.Director,
+          ` Screenplay = `, this.Screenplay, ' Story =', this.Story)
+        return {
+          Director: this.Director,
+          Screenplay: this.Screenplay,
+          Story: this.Story
         }
       }))
   }
@@ -139,7 +166,7 @@ export class DataService {
   getMovieTrailer(movieID: number) {
     return this.http.get<IMovieVideos>(`${base_URL}/movie/${movieID}/videos`)
       .pipe(map(videoResponse => {
-        if(videoResponse.results.length>0) {
+        if (videoResponse.results.length > 0) {
           console.log(`videoResponse.results in DataService = `, videoResponse.results)
 
           // this.movieTrailer = videoResponse.results.filter(({name}) => name.includes(`Trailer`))

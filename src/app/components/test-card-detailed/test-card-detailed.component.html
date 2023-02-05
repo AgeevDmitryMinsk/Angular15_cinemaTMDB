@@ -1,4 +1,4 @@
-<div *ngIf="movieDetails" class="absolute movieDetails">
+<div *ngIf="movieDetails" class="absolute">
   <img src="{{imageBackGroundCard}}" alt="imageBackGroundCard" class="h-[510px] w-[100vw] object-cover opacity-20">
 
   <div class="contentss">
@@ -40,9 +40,38 @@
 
       </div>
 
+      <p class="text-amber-50 text-xl italic">{{movieDetails.tagline}}</p>
+
+      <p class="text-amber-50 text-2xl">Overview</p>
+      <p class="text-amber-50">{{movieDetails.overview}}</p>
+
+      <div class="flex items-center text-amber-50 pt-5">
+
+        <div>
+          <p class="font-bold">{{movieDirector}}</p>
+          <p>Director</p>
+        </div>
+
+        <div class="pl-20">
+          <p class="font-bold">{{movieScreenplay}}</p>
+          <p>Screenplay</p>
+        </div>
+
+        <div class="pl-20">
+          <p class="font-bold">{{movieStory}}</p>
+          <p>Story</p>
+        </div>
+
+      </div>
+
+
       <p class="">cardDetailMovieID: {{cardDetailMovieID}}</p>
 
     </div>
+  </div>
+
+  <div>
+    Top Billed Cast
   </div>
 </div>
 
