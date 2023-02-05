@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {
-  IGenres,
+  IGenres, IMovieCastPeople,
   IMovieCrewPeople,
   IMovieDetails,
   IMoviePeople,
@@ -69,9 +69,12 @@ export class DataService {
   DirectorArr: IMovieCrewPeople[]
   ScreenplayArr: IMovieCrewPeople[]
   StoryArr: IMovieCrewPeople[]
+  WriterArr: IMovieCrewPeople[]
+  cast: IMovieCastPeople[]
   Director: string
   Screenplay: string
   Story: string
+  Writer: string
   movieDetails: IMovieDetails
   movieTrailer: IMovieVideosResults[] | null
   movieTrailerKey: string | null
@@ -131,23 +134,36 @@ export class DataService {
   getMovieCastAndCrew(movieID: number) {
     return this.http.get<IMoviePeople>(`${base_URL}/movie/${movieID}/credits`)
       .pipe(map(response => {
-        console.log(`response in getMovieCastAndCrew`, response)
+        console.log(`!!!!!!! response in getMovieCastAndCrew`, response)
         this.DirectorArr = response.crew.filter(({job}) => job === 'Director')
         this.ScreenplayArr = response.crew.filter(({job}) => job === 'Screenplay')
         this.StoryArr = response.crew.filter(({job}) => job === 'Story')
+        this.WriterArr = response.crew.filter(({job}) => job === 'Writer')
         console.log(this.DirectorArr[0])
         this.Director = this.DirectorArr[0].name
-        this.Screenplay = this.ScreenplayArr[0].name
-        this.Story = this.StoryArr[0].name
-        if(this.Screenplay === this.Story)  {
-          this.Story = this.StoryArr[1].name
+        if (this.ScreenplayArr[0]) {
+          this.Screenplay = this.ScreenplayArr[0].name
         }
-        console.log('Director = ', this.Director,
-          ` Screenplay = `, this.Screenplay, ' Story =', this.Story)
+        if (this.StoryArr[0]) {
+          this.Story = this.StoryArr[0].name
+        }
+        if (this.Screenplay === this.Story) {
+          if (this.ScreenplayArr[1]) {
+            this.Screenplay = this.ScreenplayArr[1].name
+          }
+        }
+        if (this.WriterArr[0]) {
+          this.Writer = this.WriterArr[0].name
+        }
+        console.log('Director = ', this.Director, ` Screenplay = `, this.Screenplay, ' Story =', this.Story)
+        this.cast = response.cast
+
         return {
           Director: this.Director,
           Screenplay: this.Screenplay,
-          Story: this.Story
+          Story: this.Story,
+          Writer: this.Writer,
+          Cast: this.cast
         }
       }))
   }

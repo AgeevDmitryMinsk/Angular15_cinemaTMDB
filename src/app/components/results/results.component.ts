@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Subject, Subscription, takeUntil} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {Utils} from "../Utils/utils";
+import {IMovieResults} from "../../interfaces/global";
 
 @Component({
   selector: 'app-results',
@@ -15,7 +16,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
   movie_tv: string;
   page: number
   name: string
-  allClickedMovies: any;
+  allClickedMovies: IMovieResults[];
   i: number;
   movieName: string
   moviesRequest: string;
@@ -58,7 +59,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
           this.dataService.movie = this.movie;
           console.log(58, this.movie)
           this.allClickedMovies = this.dataService.movie; // добавил для привязки получение данных к чендж роута и профит.
-          console.log(60, 'this.allClickedMovies in resultComponent = ', this.allClickedMovies) // correct movie or tv
+          console.log(60, '******* this.allClickedMovies in resultComponent = ', this.allClickedMovies) // correct movie or tv
         })
       }
     );

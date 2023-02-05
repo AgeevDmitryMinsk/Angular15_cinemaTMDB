@@ -31,6 +31,8 @@ import {MatInputModule} from "@angular/material/input";
 import {MaterialModule} from "../material/material.module";
 import {MatNativeDateModule} from "@angular/material/core";
 import {ToastrModule} from "ngx-toastr";
+import {MatButtonModule} from "@angular/material/button";
+import { TopBilledCastCardComponent } from './components/top-billed-cast-card/top-billed-cast-card.component';
 
 
 const appRoutes: Routes = [
@@ -57,7 +59,8 @@ const appRoutes: Routes = [
     TestCardDetailedComponent,
     CardDetailStringPipe,
     MinutesToHHMMPipe,
-    VoteToPercentPipe
+    VoteToPercentPipe,
+    TopBilledCastCardComponent
   ],
 	imports: [
 		BrowserModule,
@@ -86,6 +89,7 @@ const appRoutes: Routes = [
     MatNativeDateModule,
     FormsModule,
     ToastrModule.forRoot(),
+    MatButtonModule
 	],
   providers: [
     DataService, {

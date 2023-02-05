@@ -36,6 +36,13 @@ export class TestCardDetailedComponent {
 
   movieStory: string
 
+  movieWriter:string
+
+  imageTopActors: string[]
+
+  // cast: IMovieCastPeople
+  cast: any
+
   private routeSubscription: Subscription;
 
 
@@ -72,7 +79,7 @@ export class TestCardDetailedComponent {
     this.dataService.getMovieTrailer(this.cardDetailMovieID).subscribe((result) => {
       this.movieTrailer = result.movieTrailerFromDataService
       console.log('this.movieTrailer in TestCardDetailedComponent = ', this.movieTrailer)
-      if (!this.movieTrailer ) {
+      if (!this.movieTrailer) {
         this.showErrorToastr('Trailers not found')
         console.log(`Trailers not found!!!`)
       } else {
@@ -94,16 +101,21 @@ export class TestCardDetailedComponent {
       apiLoaded = true;
     }
 
-    this.dataService.getMovieDirector(this.cardDetailMovieID).subscribe(resultt=>{
+    this.dataService.getMovieDirector(this.cardDetailMovieID).subscribe(resultt => {
       this.movieDirector = resultt.Director
       console.log(this.movieDirector)
     })
 
-    this.dataService.getMovieCastAndCrew(this.cardDetailMovieID).subscribe(resultt=>{
+    this.dataService.getMovieCastAndCrew(this.cardDetailMovieID).subscribe(resultt => {
       this.movieDirector = resultt.Director
       console.log(this.movieDirector)
       this.movieScreenplay = resultt.Screenplay
       this.movieStory = resultt.Story
+      this.movieWriter = resultt.Writer
+      this.cast = resultt.Cast
+      console.log(`this.cast in TestCardDetailedComponent = `, this.cast)
+
+      //this.imageTopActors[0] = this.base_image_URL1920 + resultt;
     })
 
   }
@@ -166,6 +178,6 @@ export class TestCardDetailedComponent {
       verticalPosition: "top"
     });
 
-   }
+  }
 
 }
