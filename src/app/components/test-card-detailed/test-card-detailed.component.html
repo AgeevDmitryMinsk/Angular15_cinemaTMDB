@@ -1,4 +1,4 @@
-<div *ngIf="movieDetails" class="absolute">
+<div *ngIf="movieDetails" class="absolute container left-1/2 transform -translate-x-1/2 ">
   <div class="myGrayBackGround">
     <img src="{{imageBackGroundCard}}" alt="imageBackGroundCard"
          class="myBackGround h-[510px] w-[100vw] object-cover opacity-30">
@@ -76,24 +76,69 @@
       </div>
 
 
-      <p class="">cardDetailMovieID: {{cardDetailMovieID}}</p>
+
 
     </div>
   </div>
 
-  <div class="p-10 font-bold text-xl">
-    Top Billed Cast
+  <div class="flex">
 
-    <div class="flex text-base font-normal max-w-screen-xl overflow-x-scroll">
 
-      <app-top-billed-cast-card *ngFor="let castActor of cast"
-                                [castActor]="castActor"
-      ></app-top-billed-cast-card>
+  </div>
+
+  <div class="flex flex-col text-xl pt-10">
+    <div class="flex justify-between">
+      <div class="w-9/12">Top Billed Cast</div>
+      <div class="pl-5">You can visit this movie here:</div>
+    </div>
+
+
+    <div class="flex justify-between">
+      <div class="flex flex-col w-9/12 overflow-x-scroll max-h-[430px] overflow-hidden">
+        <div class="flex text-base">
+
+          <app-top-billed-cast-card *ngFor="let castActor of cast"
+                                    [castActor]="castActor"
+          ></app-top-billed-cast-card>
+
+        </div>
+      </div>
+
+
+      <div class="pl-10 text-xl">
+
+        <div class="flex pt-5">
+          <div class="hover:scale-110 duration-700">
+            <svg-icon src="./assets/facebook-rounded-svgrepo-com.svg"
+                      [svgStyle]="{ 'width.px':50, 'height.px':50, 'fill':'rgb(0,0,0)' }"></svg-icon>
+          </div>
+
+          <div class="hover:scale-110 duration-700">
+            <svg-icon src="./assets/twitter-rounded-svgrepo-com.svg"
+                      [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
+          </div>
+
+          <div class="hover:scale-110 duration-700">
+            <svg-icon src="./assets/instagram-rounded-svgrepo-com.svg"
+                      [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
+          </div>
+
+          <div class="hover:scale-110 duration-700">
+            <svg-icon src="./assets/home-svgrepo-com.svg"
+                      [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
+          </div>
+
+        </div>
+      </div>
+
 
     </div>
 
 
+
   </div>
+  <p class="pt-10">cardDetailMovieID: {{cardDetailMovieID}}</p>
+
 </div>
 
 <div *ngIf="showTrailer" class="flex justify-center relative pl-5">
@@ -114,3 +159,6 @@
   </youtube-player>
   <div class="text-black text-7xl leading-[0] h-3 cursor-pointer" (click)="closeTrailer()"> &times;</div>
 </div>
+
+
+
