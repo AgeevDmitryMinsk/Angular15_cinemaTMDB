@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {base_image_URL, base_image_URL1920, DataService} from "../../services/data.service";
 import {IMovieDetails, IMovieVideosResults} from "../../interfaces/global";
 import {Subscription} from "rxjs";
@@ -14,6 +14,8 @@ let apiLoaded = false;
   styleUrls: ['./test-card-detailed.component.scss']
 })
 export class TestCardDetailedComponent {
+  screenHeight: number;
+  screenWidth: number;
 
   cardDetailMovieID: number
   movieDetails: IMovieDetails
@@ -40,10 +42,16 @@ export class TestCardDetailedComponent {
   ) {
     this.routeSubscription = route.params.subscribe(params => this.cardDetailMovieID = Number(params['id'].split('-')[0]));
     console.log(35, `this.cardDetailMovieID =`, this.cardDetailMovieID)
-    // this.dataService.movieID.subscribe((result) => {
-    //   console.log(37, 'result in TestCardDetailedComponent = ', result)
-    //   this.cardDetailMovieID = result
-    // })
+
+    this.getScreenSize();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  getScreenSize() {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+    console.log('Высота экрана:', this.screenHeight, 'Ширина экрана:', this.screenWidth);
+
   }
 
   ngOnInit(): void {
@@ -61,7 +69,7 @@ export class TestCardDetailedComponent {
       console.log('this.movieTrailer in TestCardDetailedComponent = ', this.movieTrailer)
       if (!this.movieTrailer ) {
         this.showErrorToastr('Trailers not found')
-        console.log(`!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`)
+        console.log(`Trailers not found!!!`)
       } else {
         this.showSuccessToastr('Trailer found')
       }

@@ -48,8 +48,8 @@
 
 <div *ngIf="showTrailer" class="flex justify-center relative pl-5">
   <youtube-player class=" "
-                  [height]="900"
-                  [width]="1400"
+                  [height]="screenWidth/2"
+                  [width]="screenWidth/1.5"
                   (ready)="onPlayerReady($event)"
                   (apiChange)="onApiChange($event)"
                   (error)="onErrorYoutube($event)"
