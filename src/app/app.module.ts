@@ -33,6 +33,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {ToastrModule} from "ngx-toastr";
 import {MatButtonModule} from "@angular/material/button";
 import { TopBilledCastCardComponent } from './components/top-billed-cast-card/top-billed-cast-card.component';
+import {CustomerFeatureAModule} from "./customer-feature-a/customer-feature-a.module";
 
 
 const appRoutes: Routes = [
@@ -62,41 +63,45 @@ const appRoutes: Routes = [
     VoteToPercentPipe,
     TopBilledCastCardComponent
   ],
-	imports: [
-		BrowserModule,
-		HttpClientModule,
-		FormsModule,
-		AngularSvgIconModule.forRoot(),
-		RouterModule.forRoot(appRoutes),
-		BrowserAnimationsModule,
-		MatSlideToggleModule,
-		MatCardModule,
-		MatGridListModule,
-		// NgCircleProgressModule,
-		NgCircleProgressModule.forRoot({
-			// set defaults here
-			radius: 100,
-			outerStrokeWidth: 16,
-			innerStrokeWidth: 8,
-			outerStrokeColor: "#78C000",
-			innerStrokeColor: "#C7E596",
-			animationDuration: 300
-		}),
-		YouTubePlayerModule,
-		MatInputModule,
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    AngularSvgIconModule.forRoot(),
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    MatSlideToggleModule,
+    MatCardModule,
+    MatGridListModule,
+    // NgCircleProgressModule,
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300
+    }),
+    YouTubePlayerModule,
+    MatInputModule,
     ReactiveFormsModule,
     MaterialModule,
     MatNativeDateModule,
     FormsModule,
     ToastrModule.forRoot(),
-    MatButtonModule
-	],
+    MatButtonModule,
+    CustomerFeatureAModule
+  ],
   providers: [
     DataService, {
       provide: HTTP_INTERCEPTORS,
       useClass: ParamInterceptor,
       multi: true
     }],
+  exports: [
+    GenreComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
