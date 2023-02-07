@@ -4,7 +4,7 @@ import {BehaviorSubject, map, Observable} from "rxjs";
 import {
   IGenres, IMovieCastPeople,
   IMovieCrewPeople,
-  IMovieDetails,
+  IMovieDetails, IMovieExternalSourcesDetails,
   IMoviePeople,
   IMovieResults,
   IMoviesAllData,
@@ -79,6 +79,7 @@ export class DataService {
   movieTrailer: IMovieVideosResults[] | null
   movieTrailerKey: string | null
   allClickedMovies: IMovieResults[] = []
+  movieExternalSourcesDetails: IMovieExternalSourcesDetails
 
 
   constructor(
@@ -175,6 +176,17 @@ export class DataService {
         this.movieDetails = responsse
         return {
           movieDetailsFromDataService: this.movieDetails
+        }
+      }))
+  }
+
+  getMovieExternalSourcesDetails(movieID: number) {
+    return this.http.get<IMovieExternalSourcesDetails>(`${base_URL}/movie/${movieID}/external_ids`)
+      .pipe(map(response => {
+        console.log("_ _ _responsse in getMovieExternalSourcesDetails = ", response)
+        this.movieExternalSourcesDetails = response
+        return {
+          movieExternalSourcesDetailsFromDataService: this.movieExternalSourcesDetails
         }
       }))
   }

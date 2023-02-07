@@ -1,6 +1,6 @@
 import {Component, HostListener} from '@angular/core';
 import {base_image_URL, base_image_URL1920, DataService} from "../../services/data.service";
-import {IMovieDetails, IMovieVideosResults} from "../../interfaces/global";
+import {IMovieDetails, IMovieExternalSourcesDetails, IMovieVideosResults} from "../../interfaces/global";
 import {Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -36,12 +36,14 @@ export class TestCardDetailedComponent {
 
   movieStory: string
 
-  movieWriter:string
+  movieWriter: string
 
   imageTopActors: string[]
 
   // cast: IMovieCastPeople
   cast: any
+
+  movieExternalSourcesDetails: IMovieExternalSourcesDetails
 
   private routeSubscription: Subscription;
 
@@ -118,6 +120,12 @@ export class TestCardDetailedComponent {
       //this.imageTopActors[0] = this.base_image_URL1920 + resultt;
     })
 
+    this.dataService.getMovieExternalSourcesDetails(this.cardDetailMovieID).subscribe(result => {
+
+        this.movieExternalSourcesDetails = result.movieExternalSourcesDetailsFromDataService
+
+    })
+
   }
 
   showSuccessToastr(message: string) { // toastr для параллельного отображения сообщений в углу экрана
@@ -180,4 +188,7 @@ export class TestCardDetailedComponent {
 
   }
 
+  goToLink(url: string) {
+    window.open(url, "_blank");
+  }
 }

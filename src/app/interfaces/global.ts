@@ -126,6 +126,17 @@ export interface IMovieVideos {
 
 }
 
+export interface IMovieExternalSourcesDetails {
+  imdb_id: string,
+  facebook_id: string,
+  instagram_id: string,
+  twitter_id: string,
+  id: number
+
+}
+
+
+
 export enum numberToGenre {
   Action = 28,
   Adventure = 12,

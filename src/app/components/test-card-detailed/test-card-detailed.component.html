@@ -76,8 +76,6 @@
       </div>
 
 
-
-
     </div>
   </div>
 
@@ -107,33 +105,41 @@
 
       <div class="pl-10 text-xl">
 
-        <div class="flex pt-5">
-          <div class="hover:scale-110 duration-700">
-            <svg-icon src="./assets/facebook-rounded-svgrepo-com.svg"
-                      [svgStyle]="{ 'width.px':50, 'height.px':50, 'fill':'rgb(0,0,0)' }"></svg-icon>
-          </div>
 
+        <div class="flex pt-5">
+          <nav (click)="goToLink('https://www.facebook.com/' + movieExternalSourcesDetails.facebook_id)">
+            <div class="hover:scale-110 duration-700">
+              <svg-icon src="./assets/facebook-rounded-svgrepo-com.svg"
+                        [svgStyle]="{ 'width.px':50, 'height.px':50, 'fill':'rgb(0,0,0)' }"></svg-icon>
+            </div>
+          </nav>
+
+          <nav (click)="goToLink('https://twitter.com/' + movieExternalSourcesDetails.twitter_id)">
           <div class="hover:scale-110 duration-700">
             <svg-icon src="./assets/twitter-rounded-svgrepo-com.svg"
                       [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
           </div>
+          </nav>
 
+          <nav (click)="goToLink('https://twitter.com/' + movieExternalSourcesDetails.instagram_id)">
           <div class="hover:scale-110 duration-700">
             <svg-icon src="./assets/instagram-rounded-svgrepo-com.svg"
                       [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
           </div>
+          </nav>
 
-          <div class="hover:scale-110 duration-700">
-            <svg-icon src="./assets/home-svgrepo-com.svg"
-                      [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
-          </div>
+          <nav (click)="goToLink(movieDetails.homepage)">
+            <div class="hover:scale-110 duration-700">
+              <svg-icon src="./assets/home-svgrepo-com.svg"
+                        [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
+            </div>
+          </nav>
 
         </div>
       </div>
 
 
     </div>
-
 
 
   </div>
