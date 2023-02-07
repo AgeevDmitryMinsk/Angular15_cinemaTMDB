@@ -107,33 +107,92 @@
 
 
         <div class="flex pt-5">
-          <nav (click)="goToLink('https://www.facebook.com/' + movieExternalFacebook_id)" *ngIf="movieExternalFacebook_id">
-            <div class="hover:scale-110 duration-700">
-              <svg-icon src="./assets/facebook-rounded-svgrepo-com.svg"
-                        [svgStyle]="{ 'width.px':50, 'height.px':50, 'fill':'rgb(0,0,0)' }"></svg-icon>
-            </div>
-          </nav>
 
-          <nav (click)="goToLink('https://twitter.com/' + movieExternalTwitter_id)" *ngIf="movieExternalTwitter_id">
-          <div class="hover:scale-110 duration-700">
-            <svg-icon src="./assets/twitter-rounded-svgrepo-com.svg"
-                      [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
+
+
+
+          <div data-popover-target="popover1" data-popover-placement="bottom-start">
+
+            <nav (click)="goToLink('https://www.facebook.com/' + movieExternalFacebook_id)"
+                 *ngIf="movieExternalFacebook_id">
+              <div class="hover:scale-110 duration-700">
+                <svg-icon src="./assets/facebook-rounded-svgrepo-com.svg"
+                          [svgStyle]="{ 'width.px':50, 'height.px':50, 'fill':'rgb(0,0,0)' }"></svg-icon>
+              </div>
+            </nav>
+
           </div>
-          </nav>
-
-          <nav (click)="goToLink('https://twitter.com/' + movieExternalInstagram_id)" *ngIf="movieExternalInstagram_id">
-          <div class="hover:scale-110 duration-700">
-            <svg-icon src="./assets/instagram-rounded-svgrepo-com.svg"
-                      [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
-          </div>
-          </nav>
-
-          <nav (click)="goToLink(movieDetails.homepage)">
-            <div class="hover:scale-110 duration-700">
-              <svg-icon src="./assets/home-svgrepo-com.svg"
-                        [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
+          <div data-popover id="popover1" role="tooltip"
+               class="absolute z-10 invisible inline-block w-40 text-sm font-light text-white transition-opacity duration-300 bg-gray-500 border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 text-center">
+            <div class="px-3 py-2">
+              <p>Visit movie at Facebook, right?</p>
             </div>
-          </nav>
+            <div data-popper-arrow></div>
+          </div>
+
+
+
+          <div data-popover-target="popover2" data-popover-placement="bottom">
+
+            <nav (click)="goToLink('https://twitter.com/' + movieExternalTwitter_id)" *ngIf="movieExternalTwitter_id">
+              <div class="hover:scale-110 duration-700">
+                <svg-icon src="./assets/twitter-rounded-svgrepo-com.svg"
+                          [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
+              </div>
+            </nav>
+
+          </div>
+          <div data-popover id="popover2" role="tooltip"
+               class="absolute z-10 invisible inline-block w-40 text-sm font-light text-white transition-opacity duration-300 bg-gray-500 border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 text-center">
+            <div class="px-3 py-2">
+              <p>Visit movie at Twitter, right?</p>
+            </div>
+            <div data-popper-arrow></div>
+          </div>
+
+
+
+
+
+
+          <div data-popover-target="popover3" data-popover-placement="bottom">
+
+            <nav (click)="goToLink('https://twitter.com/' + movieExternalInstagram_id)"
+                 *ngIf="movieExternalInstagram_id">
+              <div class="hover:scale-110 duration-700">
+                <svg-icon src="./assets/instagram-rounded-svgrepo-com.svg"
+                          [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
+              </div>
+            </nav>
+
+          </div>
+          <div data-popover id="popover3" role="tooltip"
+               class="absolute z-10 invisible inline-block w-40 text-sm font-light text-white transition-opacity duration-300 bg-gray-500 border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 text-center">
+            <div class="px-3 py-2">
+              <p>Visit movie at Instagram, right?</p>
+            </div>
+            <div data-popper-arrow></div>
+          </div>
+
+
+          <div data-popover-target="popover4" data-popover-placement="bottom-end">
+
+            <nav (click)="goToLink(movieDetails.homepage)">
+              <div class="hover:scale-110 duration-700">
+                <svg-icon src="./assets/home-svgrepo-com.svg"
+                          [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
+              </div>
+            </nav>
+
+          </div>
+          <div data-popover id="popover4" role="tooltip"
+               class="absolute z-10 invisible inline-block w-40 text-sm font-light text-white transition-opacity duration-300 bg-gray-500 border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 text-center">
+            <div class="px-3 py-2">
+              <p>Visit movie homepage, right?</p>
+            </div>
+            <div data-popper-arrow></div>
+          </div>
+
 
         </div>
       </div>
