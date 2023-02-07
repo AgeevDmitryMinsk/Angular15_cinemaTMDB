@@ -45,6 +45,11 @@ export class TestCardDetailedComponent {
 
   movieExternalSourcesDetails: IMovieExternalSourcesDetails
 
+  movieExternalImdb_id: string
+  movieExternalFacebook_id: string
+  movieExternalInstagram_id: string
+  movieExternalTwitter_id: string
+
   private routeSubscription: Subscription;
 
 
@@ -122,7 +127,11 @@ export class TestCardDetailedComponent {
 
     this.dataService.getMovieExternalSourcesDetails(this.cardDetailMovieID).subscribe(result => {
 
-        this.movieExternalSourcesDetails = result.movieExternalSourcesDetailsFromDataService
+      this.movieExternalSourcesDetails = result.movieExternalSourcesDetailsFromDataService
+      this.movieExternalImdb_id = result.movieExternalSourcesDetailsFromDataService.imdb_id
+      this.movieExternalFacebook_id = result.movieExternalSourcesDetailsFromDataService.facebook_id
+      this.movieExternalInstagram_id = result.movieExternalSourcesDetailsFromDataService.instagram_id
+      this.movieExternalTwitter_id = result.movieExternalSourcesDetailsFromDataService.twitter_id
 
     })
 

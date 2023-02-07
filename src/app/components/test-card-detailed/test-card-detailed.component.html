@@ -107,21 +107,21 @@
 
 
         <div class="flex pt-5">
-          <nav (click)="goToLink('https://www.facebook.com/' + movieExternalSourcesDetails.facebook_id)">
+          <nav (click)="goToLink('https://www.facebook.com/' + movieExternalFacebook_id)" *ngIf="movieExternalFacebook_id">
             <div class="hover:scale-110 duration-700">
               <svg-icon src="./assets/facebook-rounded-svgrepo-com.svg"
                         [svgStyle]="{ 'width.px':50, 'height.px':50, 'fill':'rgb(0,0,0)' }"></svg-icon>
             </div>
           </nav>
 
-          <nav (click)="goToLink('https://twitter.com/' + movieExternalSourcesDetails.twitter_id)">
+          <nav (click)="goToLink('https://twitter.com/' + movieExternalTwitter_id)" *ngIf="movieExternalTwitter_id">
           <div class="hover:scale-110 duration-700">
             <svg-icon src="./assets/twitter-rounded-svgrepo-com.svg"
                       [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
           </div>
           </nav>
 
-          <nav (click)="goToLink('https://twitter.com/' + movieExternalSourcesDetails.instagram_id)">
+          <nav (click)="goToLink('https://twitter.com/' + movieExternalInstagram_id)" *ngIf="movieExternalInstagram_id">
           <div class="hover:scale-110 duration-700">
             <svg-icon src="./assets/instagram-rounded-svgrepo-com.svg"
                       [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
