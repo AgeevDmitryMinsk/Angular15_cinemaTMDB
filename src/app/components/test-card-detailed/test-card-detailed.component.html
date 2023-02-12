@@ -1,4 +1,6 @@
-<div *ngIf="movieDetails" class="absolute container left-1/2 transform -translate-x-1/2 ">
+<div *ngIf="movieDetails" class="absolute container left-1/2 transform -translate-x-1/2 border-green-600 top-[69px]">
+<!--<div *ngIf="movieDetails" class="absolute flex container left-1/2 transform -translate-x-1/2 border-green-600">-->
+<!--<div *ngIf="movieDetails" class="flex flex-row flex-wrap m-5 justify-center container">-->
   <div class="myGrayBackGround">
     <img src="{{imageBackGroundCard}}" alt="imageBackGroundCard"
          class="myBackGround h-[510px] w-[100vw] object-cover opacity-30">
@@ -84,10 +86,11 @@
 
   </div>
 
-  <div class="flex flex-col text-xl pt-10">
+  <div class="flex flex-col text-xl pt-10" >
     <div class="flex justify-between">
       <div class="w-9/12">Top Billed Cast</div>
-      <div class="pl-5">You can visit this movie here:</div>
+      <div class="pl-5" *ngIf="movieDetails.homepage">You can visit this movie here:</div>
+      <div class="pl-5 w-3/12" *ngIf="!movieDetails.homepage">No extra page (FaceBook, Twitter, Instagram, MovieHomePage)</div>
     </div>
 
 
@@ -175,7 +178,7 @@
           </div>
 
 
-          <div data-popover-target="popover4" data-popover-placement="bottom-end">
+          <div data-popover-target="popover4" data-popover-placement="bottom-end" *ngIf="movieDetails.homepage">
 
             <nav (click)="goToLink(movieDetails.homepage)">
               <div class="hover:scale-110 duration-700">
@@ -222,7 +225,7 @@
   >
 
   </youtube-player>
-  <div class="text-black text-7xl leading-[0] h-3 cursor-pointer" (click)="closeTrailer()"> &times;</div>
+  <div class="text-red-600 text-7xl leading-[0] h-3 cursor-pointer" (click)="closeTrailer()"> &times;</div>
 </div>
 
 
