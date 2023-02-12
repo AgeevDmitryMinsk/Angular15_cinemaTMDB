@@ -37,7 +37,8 @@ export class MovieGenreIdToNamePipe implements PipeTransform {
     if (value.includes(10767)) result.push('Talk')
     if (value.includes(10768)) result.push('War&Politics')
 
-    // console.log(value, ' -> ', result)
+    // transform Array of number into Array of strings for rendering
+    //console.log(value, ' -> MovieGenreIdToNamePipe -> ', result) // [28, 14, 10770] ' -> MovieGenreIdToNamePipe -> ' (3)['Action', 'Fantasy', 'TV Movie']
     return result.join(', ').split(' , ')
   }
 

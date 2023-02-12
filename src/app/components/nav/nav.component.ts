@@ -38,16 +38,20 @@ export class NavComponent {
     this.dataService.getGenresMovieData()
       .subscribe({
         next: (result) => {
-          // console.log(JSON.stringify(result))
+          //get genres from backend
+          //console.log(' JSON.stringify getGenresMovieData = ',JSON.stringify(result)) // {"genres":[{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]}
           this.genres = result.genres
           this.showSuccessToastr('Movie-genres are loaded from back')
         },
         error: (e) => {
-          console.log("ОШИБКА:", e.message)
+          console.log("ERROR in getGenresMovieData:", e.message)
           this.openSnackBar(e.message)
           this.showErrorToastr(e.message)
         },
-        complete: () => console.log('done')
+        complete: () => {
+          //inform that getGenresMovieData completed
+          console.log('getGenresMovieData done')
+        }
       })
 
     this.dataService.getGenresTV_Data()
@@ -57,11 +61,11 @@ export class NavComponent {
           this.showSuccessToastr('TV-genres are loaded from backend')
         },
         error: (e) => {
-          console.log("ОШИБКА:", e.message)
+          console.log("ERROR in getGenresTV_Data:", e.message)
           this.openSnackBar(e.message)
           this.showErrorToastr(e.message)
         },
-        complete: () => console.log('done2')
+        complete: () => console.log('getGenresTV_Data done')
       })
   }
 
