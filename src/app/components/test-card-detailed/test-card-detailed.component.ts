@@ -135,6 +135,14 @@ export class TestCardDetailedComponent {
 
     })
 
+    //reload a page once using localStorage for rendering popover invisible elements in TestCardDetailedComponent
+    if (!localStorage.getItem('rendering_popover')) {
+      localStorage.setItem('rendering_popover', 'no reload')
+      location.reload()
+    } else {
+      localStorage.removeItem('rendering_popover')
+    }
+
   }
 
   showSuccessToastr(message: string) { // toastr для параллельного отображения сообщений в углу экрана
