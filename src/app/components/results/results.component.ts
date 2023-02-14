@@ -5,6 +5,8 @@ import {Subject, Subscription, takeUntil} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {Utils} from "../Utils/utils";
 import {IMovieResults} from "../../interfaces/global";
+import {ToastrService} from "ngx-toastr";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-results',
@@ -34,7 +36,8 @@ export class ResultsComponent implements OnInit, OnDestroy {
     public dataService: DataService,
     private activatedRoute: ActivatedRoute,
     private route: ActivatedRoute,
-    public router: Router  ) {
+    public router: Router ,
+    private toastr: ToastrService) {
     this.routeSubscription = route.params.subscribe(params => this.id = params['id']);
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
@@ -47,7 +50,9 @@ export class ResultsComponent implements OnInit, OnDestroy {
         this.event_genre = queryParam['event_genre']
         console.log(46, 'this.event_genre =', this.event_genre)
 
-        this.dataService.getMovie('', this.clickedGenreID,  this.movie_tv).subscribe(response => {
+        this.dataService.getMovie('', this.clickedGenreID,  this.movie_tv).subscribe({
+          next: response => {
+          //if (this.movie_tv === undefined || this.clickedGenreID || this.dataService.page === undefined) this.router.navigate(['**'] )
           console.log(49, response.url)
           this.moviesRequest = `${response.url}&api_key=${environment.API_KEY}`;
           this.dataService.moviesRequest = this.moviesRequest
@@ -60,6 +65,17 @@ export class ResultsComponent implements OnInit, OnDestroy {
           console.log(58, this.movie)
           this.allClickedMovies = this.dataService.movie; // добавил для привязки получение данных к чендж роута и профит.
           console.log(60, '******* this.allClickedMovies in resultComponent = ', this.allClickedMovies) // correct movie or tv
+        },
+          error: (e: HttpErrorResponse)=> {
+            console.log("ERROR-message  in results getMovie", e.message)
+            console.log("ERROR-name in results getMovie", e.name)
+            console.log("ERROR-status in results getMovie", e.status)
+            if (e.status === 404) {
+              this.showErrorToastr('server cannot find the requested resource')
+            }
+            this.router.navigate(['PageNotFound'] )
+
+          }
         })
       }
     );
@@ -130,5 +146,12 @@ export class ResultsComponent implements OnInit, OnDestroy {
         }
       }
     )
+  }
+
+  showErrorToastr(message: string) { // toastr для параллельного отображения сообщений в углу экрана
+    this.toastr.error(message, '(Toastr ERROR: page not found)', {
+      timeOut: 4000,
+      positionClass: 'toast-bottom-right',
+    });
   }
 }

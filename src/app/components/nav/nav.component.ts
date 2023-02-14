@@ -17,11 +17,6 @@ export class NavComponent {
 
   genres: IGenre[]
   genresTV: IGenre[]
-
-  clickedGenre: string = ''
-  clickedGenreID?: number
-
-  clickedGenreMovie_TV: string = ''
   movie: any;
   page: number;
 
@@ -50,7 +45,7 @@ export class NavComponent {
         },
         complete: () => {
           //inform that getGenresMovieData completed
-          console.log('getGenresMovieData done')
+          //console.log('getGenresMovieData done')
         }
       })
 
@@ -65,23 +60,36 @@ export class NavComponent {
           this.openSnackBar(e.message)
           this.showErrorToastr(e.message)
         },
-        complete: () => console.log('getGenresTV_Data done')
+        complete: () => {
+          //inform that getGenresTV_Data completed
+          //console.log('getGenresTV_Data done')
+        }
       })
   }
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
-    console.log("click =", event_genre, ',', movie_tv, ',', event_genre_id);
+    //check "click =", event_genre, ',', movie_tv, ',', event_genre_id
+    //console.log("click =", event_genre, ',', movie_tv, ',', event_genre_id);
     this.dataService.getMovie('', event_genre_id, movie_tv).subscribe(response => {
-      console.log(response.url)
+      // check response.url -> https://api.themoviedb.org/3/discover/movie?with_genres=28
+      //console.log(response.url)
       this.moviesRequest = `${response.url}&api_key=${environment.API_KEY}`;
       this.dataService.moviesRequest = this.moviesRequest
       this.page = response.page
       this.dataService.page = this.page
-      console.log(51, this.page)
-      console.log(52, this.dataService.moviesRequest)
+      //check page
+      //console.log(this.page) // 1
+      //check dataService.moviesRequest ->  'https://api.themoviedb.org/3/discover/movie?with_genres=28&api_key=261986cbb51c934516a9889245136067'
+      //console.log(this.dataService.moviesRequest)
       this.movie = response.response;
       this.dataService.movie = this.movie;
-      console.log(55, this.movie)
+
+      //check this.movie // ->
+      //  (20) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
+      // {adult: false, backdrop_path: '/xDMIl84Qo5Tsu62c9DGWhmPI67A.jpg', genre_ids: Array(3), id: 505642, original_language: 'en', …}
+      // {adult: false, backdrop_path: '/9Rq14Eyrf7Tu1xk0Pl7VcNbNh1n.jpg', genre_ids: Array(3), id: 646389, original_language: 'en', …}
+      // {adult: false, backdrop_path: '/tGwO4xcBjhXC0p5qlkw37TrH6S6.jpg', genre_ids: Array(5), id: 315162, original_language: 'en', …}
+      // console.log(55, this.movie)
 
       this.router.navigate(
         [movie_tv === 'movie' ? 'movie-results' : 'tv-results', event_genre],
