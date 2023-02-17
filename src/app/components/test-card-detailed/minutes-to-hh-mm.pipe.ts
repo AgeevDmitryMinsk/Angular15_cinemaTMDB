@@ -6,7 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class MinutesToHHMMPipe implements PipeTransform {
 
   transform(value: number, ...args: unknown[]): unknown {
-    console.log('value in MinutesToHHMMPipe = ', value)
+    // check data
+    //console.log('value in MinutesToHHMMPipe = ', value)
 
     let hours = value/60;
 

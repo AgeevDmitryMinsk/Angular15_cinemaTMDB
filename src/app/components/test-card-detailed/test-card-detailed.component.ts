@@ -60,7 +60,8 @@ export class TestCardDetailedComponent {
     private toastr: ToastrService
   ) {
     this.routeSubscription = route.params.subscribe(params => this.cardDetailMovieID = Number(params['id'].split('-')[0]));
-    console.log(35, `this.cardDetailMovieID =`, this.cardDetailMovieID)
+    // check data
+    //console.log(35, `this.cardDetailMovieID =`, this.cardDetailMovieID)
 
     this.getScreenSize();
   }
@@ -69,15 +70,18 @@ export class TestCardDetailedComponent {
   getScreenSize() {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
-    console.log('Высота экрана:', this.screenHeight, 'Ширина экрана:', this.screenWidth);
+    // check data
+    //console.log('Высота экрана:', this.screenHeight, 'Ширина экрана:', this.screenWidth);
 
   }
 
   ngOnInit(): void {
     this.dataService.getMovieDetails(this.cardDetailMovieID).subscribe((result) => {
+      // check data
       // console.log(JSON.stringify(result))
       this.movieDetails = result.movieDetailsFromDataService
-      console.log('this.movieDetails in TestCardDetailedComponent = ', this.movieDetails)
+      // check data
+      //console.log('this.movieDetails in TestCardDetailedComponent = ', this.movieDetails)
       this.imageBackGroundCard = this.base_image_URL1920 + this.movieDetails.backdrop_path;
       this.imageCardPoster = this.base_image_URL + this.movieDetails.poster_path
       this.showSuccessToastr(`Movie details are loaded from back`)
@@ -85,7 +89,8 @@ export class TestCardDetailedComponent {
     })
     this.dataService.getMovieTrailer(this.cardDetailMovieID).subscribe((result) => {
       this.movieTrailer = result.movieTrailerFromDataService
-      console.log('this.movieTrailer in TestCardDetailedComponent = ', this.movieTrailer)
+      // check data
+      // console.log('this.movieTrailer in TestCardDetailedComponent = ', this.movieTrailer)
       if (!this.movieTrailer) {
         this.showErrorToastr('Trailers not found')
         console.log(`Trailers not found!!!`)
@@ -94,7 +99,8 @@ export class TestCardDetailedComponent {
       }
 
       this.movieTrailerKeyInCard = result.movieTrailerKeyFromDataService
-      console.log('this.movieTrailerKeyInCard in TestCardDetailedComponent = ', this.movieTrailerKeyInCard)
+      // check data
+      //console.log('this.movieTrailerKeyInCard in TestCardDetailedComponent = ', this.movieTrailerKeyInCard)
       // this.safeURL = `https://www.youtube.com/watch?v` +  this.movieTrailerKeyInCard
       // console.log('this.safeURL = ', this.safeURL)
     })
@@ -110,18 +116,20 @@ export class TestCardDetailedComponent {
 
     this.dataService.getMovieDirector(this.cardDetailMovieID).subscribe(resultt => {
       this.movieDirector = resultt.Director
-      console.log(this.movieDirector)
+      // check data
+      //console.log(this.movieDirector)
     })
 
     this.dataService.getMovieCastAndCrew(this.cardDetailMovieID).subscribe(resultt => {
       this.movieDirector = resultt.Director
-      console.log(this.movieDirector)
+      // check data
+      //console.log(this.movieDirector)
       this.movieScreenplay = resultt.Screenplay
       this.movieStory = resultt.Story
       this.movieWriter = resultt.Writer
       this.cast = resultt.Cast
-      console.log(`this.cast in TestCardDetailedComponent = `, this.cast)
-
+      // check data
+      //console.log(`this.cast in TestCardDetailedComponent = `, this.cast)
       //this.imageTopActors[0] = this.base_image_URL1920 + resultt;
     })
 
@@ -188,7 +196,8 @@ export class TestCardDetailedComponent {
   }
 
   onErrorYoutube($event: YT.OnErrorEvent) {
-    console.log('onErrorYoutube some error:', $event)
+    // check data
+    //console.log('onErrorYoutube some error:', $event)
     this.openSnackBar('onErrorYoutubeMessage', 'openSnackBar')
   }
 
