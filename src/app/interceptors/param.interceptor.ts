@@ -26,6 +26,7 @@ export class ParamInterceptor implements HttpInterceptor {
         )
       });
       return next.handle(paramReq)
+        //add check errors into interceptor
         .pipe(
           catchError((error: HttpErrorResponse) => {
             let errorMsg = '';
@@ -35,11 +36,12 @@ export class ParamInterceptor implements HttpInterceptor {
             } else {
               console.log('1 This is server side error');
               if (error.status ===0) errorMsg = `TrY To UsE V_P_N`
-              else errorMsg = `1 Error Code FROM HttpInterceptor: ${error.status},  Message: ${error.message}, Status: ${error.status}`;
+              else if (error.status ===404) errorMsg = `404 Page Not Found`
+              else errorMsg = `1 Error Code Status FROM HttpInterceptor: ${error.status},  Message: ${error.message}`;
               this.showErrorToastr(errorMsg)
             }
             console.log(errorMsg);
-            return throwError(errorMsg);
+            return  throwError(() => new Error(errorMsg));
           })
         );
 
@@ -56,7 +58,7 @@ export class ParamInterceptor implements HttpInterceptor {
               errorMsg = `2 Error Code FROM HttpInterceptor: ${error.status},  Message: ${error.message}`;
             }
           console.log(errorMsg);
-            return throwError(errorMsg);
+            return  throwError(() => new Error(errorMsg));
           })
         );
     }
