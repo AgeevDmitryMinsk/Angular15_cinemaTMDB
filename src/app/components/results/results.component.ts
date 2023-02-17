@@ -24,14 +24,11 @@ export class ResultsComponent implements OnInit, OnDestroy {
   moviesRequest: string;
   movie: any;
   event_genre:string
-
   private destroy: Subject<boolean> = new Subject<boolean>();
-
   id: number | undefined;
   private routeSubscription: Subscription;
   private querySubscription: Subscription;
   private queryState: Subscription;
-
   constructor(
     public dataService: DataService,
     private activatedRoute: ActivatedRoute,
@@ -50,7 +47,6 @@ export class ResultsComponent implements OnInit, OnDestroy {
         //console.log('this.page =', this.page)
         this.event_genre = queryParam['event_genre']
         //console.log(46, 'this.event_genre =', this.event_genre)
-
         this.dataService.getMovie('', this.clickedGenreID,  this.movie_tv).subscribe({
           next: response => {
           //if (this.movie_tv === undefined || this.clickedGenreID || this.dataService.page === undefined) this.router.navigate(['**'] )
@@ -78,7 +74,6 @@ export class ResultsComponent implements OnInit, OnDestroy {
               this.showErrorToastr('server cannot find the requested resource')
             }
             this.router.navigate(['PageNotFound'] )
-
           }
         })
       }
@@ -89,8 +84,6 @@ export class ResultsComponent implements OnInit, OnDestroy {
       //console.log('this.name =', this.name)
     })
   }
-
-
   public ngOnInit(): void {
     // check data
     // this.allClickedMovies = this.dataService.movie;
@@ -102,7 +95,6 @@ export class ResultsComponent implements OnInit, OnDestroy {
         // console.log(86, 'activatedRoute.data  from ResultsComponent', data) // {id: '1', name: 'Angular'}
       });
   }
-
   public ngOnDestroy(): void {
     this.destroy.next(true);
     this.destroy.unsubscribe();
@@ -113,14 +105,11 @@ export class ResultsComponent implements OnInit, OnDestroy {
     // check data
     //console.log(85, 'loadMore button clicked', 'And this.dataService.page = ', this.dataService.page)
     //console.log(93, ' in loadMore ')
-
-
     this.dataService.getMovie('', this.clickedGenreID, this.movie_tv).subscribe(responz=>{
       // check data
       //console.log('responz in resultComponent' , responz)
       // this.allClickedMovies = [...this.allClickedMovies, ...responz.response]
       this.dataService.allClickedMovies = this.allClickedMovies
-
       this.router.navigate(
         [this.movie_tv === 'movie' ? 'movie-results' : 'tv-results', this.event_genre],
         {
@@ -131,7 +120,6 @@ export class ResultsComponent implements OnInit, OnDestroy {
         }
       )
     })
-
   }
 
   getDetailedCard(movieId: number, ind:number) {
@@ -139,14 +127,10 @@ export class ResultsComponent implements OnInit, OnDestroy {
     //console.log('getDetailedCard movieId in ResultsComponent =', movieId )
     //console.log('ind in ResultsComponent =', ind )
     //console.log('this.allClickedMovies in ResultsComponent =', this.allClickedMovies[ind].title, this.allClickedMovies[ind].name )
-
     this.dataService.movieID.next(movieId) // кладу в переменную movieID новое значение movieId и потом отслеживаю его через this.dataService.movieID.subscribe в TestCardDetailedComponent
-
     this.movieName = this.allClickedMovies[ind].title || this.allClickedMovies[ind].name
-
     // this.movieName = `${movieId}-${this.movieName.toLowerCase().replace(/[^\w\s\']|_/g, '').trim().split(' ').join('-')}`
     this.movieName = `${movieId}-${new Utils(this.movieName).urlTransformName()}`
-
     this.router.navigate(
       ['movie', this.movieName],
       {

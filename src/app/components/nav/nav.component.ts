@@ -14,12 +14,10 @@ import {ToastrService} from "ngx-toastr";
 })
 export class NavComponent {
   moviesRequest: string;
-
   genres: IGenre[]
   genresTV: IGenre[]
   movie: any;
   page: number;
-
   constructor(
     public dataService: DataService,
     public router: Router,
@@ -27,8 +25,6 @@ export class NavComponent {
     private toastr: ToastrService
   ) {
   }
-
-
   ngOnInit() {
     this.dataService.getGenresMovieData()
       .subscribe({
@@ -83,7 +79,6 @@ export class NavComponent {
       //console.log(this.dataService.moviesRequest)
       this.movie = response.response;
       this.dataService.movie = this.movie;
-
       //check this.movie // ->
       //  (20) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
       // {adult: false, backdrop_path: '/xDMIl84Qo5Tsu62c9DGWhmPI67A.jpg', genre_ids: Array(3), id: 505642, original_language: 'en', …}
@@ -106,7 +101,6 @@ export class NavComponent {
     this.dataService.clickedGenre = event_genre
     this.dataService.clickedGenreID = event_genre_id
   }
-
   openSnackBar(message: string) { // openSnackBar для последовательного отображения сообщений в углу экрана
     this._snackBar.open(message, '_snackBar ERROR: try to use VPN ', {
       duration: 3000,
@@ -128,5 +122,4 @@ export class NavComponent {
       positionClass: 'toast-bottom-right',
     });
   }
-
 }

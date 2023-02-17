@@ -4,10 +4,7 @@ import {Pipe, PipeTransform} from '@angular/core';
   name: 'movieGenreIdToName'
 })
 export class MovieGenreIdToNamePipe implements PipeTransform {
-
-
   transform(value: number[], ...args: number[]): string[] {
-
     let result = []
     if (value.includes(28)) result.push('Action')
     if (value.includes(12)) result.push('Adventure')
@@ -41,5 +38,4 @@ export class MovieGenreIdToNamePipe implements PipeTransform {
     //console.log(value, ' -> MovieGenreIdToNamePipe -> ', result) // [28, 14, 10770] ' -> MovieGenreIdToNamePipe -> ' (3)['Action', 'Fantasy', 'TV Movie']
     return result.join(', ').split(' , ')
   }
-
 }

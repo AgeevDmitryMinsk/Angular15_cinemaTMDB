@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppComponent} from './app.component';
 import {NavComponent} from './components/nav/nav.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
@@ -42,7 +41,6 @@ const appRoutes: Routes = [
   {path: 'tv-results/:id', component: ResultsComponent, data: {id: '1', name: "Angular"}},
   {path: 'movie/:id', component: TestCardDetailedComponent, data: {id: '1', name: "Angular"}},
   {path: '**', component: NotFoundComponent},
-
 ]
 
 @NgModule({
@@ -99,9 +97,7 @@ const appRoutes: Routes = [
       useClass: ParamInterceptor,
       multi: true
     }],
-  exports: [
-    GenreComponent
-  ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

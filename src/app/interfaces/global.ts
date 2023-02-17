@@ -5,7 +5,6 @@ export interface IGenre {
 
 export interface IGenres {
   genres: IGenre[]
-
 }
 
 export interface IMoviesAllData {
@@ -113,19 +112,14 @@ export interface IMovieVideosResults {
 export interface IMovieVideos {
   id: number,
   results: IMovieVideosResults[]
-
 }
-
 export interface IMovieExternalSourcesDetails {
   imdb_id: string,
   facebook_id: string,
   instagram_id: string,
   twitter_id: string,
   id: number
-
 }
-
-
 
 export enum numberToGenre {
   Action = 28,

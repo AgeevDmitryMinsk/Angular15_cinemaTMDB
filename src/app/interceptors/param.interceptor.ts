@@ -1,22 +1,13 @@
-import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor, HttpErrorResponse
-} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
 import {environment} from "../../environments/environment";
 import {ToastrService} from "ngx-toastr";
 
-
 @Injectable()
 export class ParamInterceptor implements HttpInterceptor {
-
   constructor(private toastr: ToastrService) {}
-
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-
 
     if (request.url.includes('https://api.themoviedb.org/3')) {
       const paramReq = request.clone({
@@ -44,7 +35,6 @@ export class ParamInterceptor implements HttpInterceptor {
             return  throwError(() => new Error(errorMsg));
           })
         );
-
     } else {
       return next.handle(request)
         .pipe(
@@ -69,5 +59,4 @@ export class ParamInterceptor implements HttpInterceptor {
       positionClass: 'toast-bottom-left',
     });
   }
-
 }

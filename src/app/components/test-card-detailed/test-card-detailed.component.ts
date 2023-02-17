@@ -16,40 +16,25 @@ let apiLoaded = false;
 export class TestCardDetailedComponent {
   screenHeight: number;
   screenWidth: number;
-
   cardDetailMovieID: number
   movieDetails: IMovieDetails
   base_image_URL: string = base_image_URL
-
   base_image_URL1920: string = base_image_URL1920
   imageBackGroundCard: string
   imageCardPoster: string
   movieTrailer: IMovieVideosResults[] | null
   movieTrailerKeyInCard: string | null
-  safeURL: string
   showTrailer: boolean = false
-
-  timeOut = 1500;
-
   movieDirector: string
   movieScreenplay: string
-
   movieStory: string
-
   movieWriter: string
-
-  imageTopActors: string[]
-
-  // cast: IMovieCastPeople
   cast: any
-
   movieExternalSourcesDetails: IMovieExternalSourcesDetails
-
   movieExternalImdb_id: string
   movieExternalFacebook_id: string
   movieExternalInstagram_id: string
   movieExternalTwitter_id: string
-
   private routeSubscription: Subscription;
 
 
@@ -62,7 +47,6 @@ export class TestCardDetailedComponent {
     this.routeSubscription = route.params.subscribe(params => this.cardDetailMovieID = Number(params['id'].split('-')[0]));
     // check data
     //console.log(35, `this.cardDetailMovieID =`, this.cardDetailMovieID)
-
     this.getScreenSize();
   }
 
@@ -72,7 +56,6 @@ export class TestCardDetailedComponent {
     this.screenWidth = window.innerWidth;
     // check data
     //console.log('Высота экрана:', this.screenHeight, 'Ширина экрана:', this.screenWidth);
-
   }
 
   ngOnInit(): void {
@@ -97,14 +80,12 @@ export class TestCardDetailedComponent {
       } else {
         this.showSuccessToastr('Trailer found')
       }
-
       this.movieTrailerKeyInCard = result.movieTrailerKeyFromDataService
       // check data
       //console.log('this.movieTrailerKeyInCard in TestCardDetailedComponent = ', this.movieTrailerKeyInCard)
       // this.safeURL = `https://www.youtube.com/watch?v` +  this.movieTrailerKeyInCard
       // console.log('this.safeURL = ', this.safeURL)
     })
-
     if (!apiLoaded) {
       // This code loads the IFrame Player API code asynchronously, according to the instructions at
       // https://developers.google.com/youtube/iframe_api_reference#Getting_Started
@@ -113,13 +94,11 @@ export class TestCardDetailedComponent {
       document.body.appendChild(tag);
       apiLoaded = true;
     }
-
     this.dataService.getMovieDirector(this.cardDetailMovieID).subscribe(resultt => {
       this.movieDirector = resultt.Director
       // check data
       //console.log(this.movieDirector)
     })
-
     this.dataService.getMovieCastAndCrew(this.cardDetailMovieID).subscribe(resultt => {
       this.movieDirector = resultt.Director
       // check data
@@ -134,13 +113,11 @@ export class TestCardDetailedComponent {
     })
 
     this.dataService.getMovieExternalSourcesDetails(this.cardDetailMovieID).subscribe(result => {
-
       this.movieExternalSourcesDetails = result.movieExternalSourcesDetailsFromDataService
       this.movieExternalImdb_id = result.movieExternalSourcesDetailsFromDataService.imdb_id
       this.movieExternalFacebook_id = result.movieExternalSourcesDetailsFromDataService.facebook_id
       this.movieExternalInstagram_id = result.movieExternalSourcesDetailsFromDataService.instagram_id
       this.movieExternalTwitter_id = result.movieExternalSourcesDetailsFromDataService.twitter_id
-
     })
 
     //reload a page once using localStorage for rendering popover invisible elements in TestCardDetailedComponent
@@ -150,7 +127,6 @@ export class TestCardDetailedComponent {
     } else {
       localStorage.removeItem('rendering_popover')
     }
-
   }
 
   showSuccessToastr(message: string) { // toastr для параллельного отображения сообщений в углу экрана
@@ -167,12 +143,10 @@ export class TestCardDetailedComponent {
     });
   }
 
-
   playTrailer() {
     console.log('playTrayler ', this.cardDetailMovieID)
     this.dataService.getMovieTrailer(this.cardDetailMovieID)
     this.showTrailer = true
-
     this.openSnackBar('playTraylerMessage', 'openSnackBar')
     this.showSuccessToastr(`${this.movieDetails.title} Play Trailer Button clicked`)
   }
@@ -201,17 +175,12 @@ export class TestCardDetailedComponent {
     this.openSnackBar('onErrorYoutubeMessage', 'openSnackBar')
   }
 
-  // openSnackBar(message: string, action: string) {
-  //   this._snackBar.open(message, action);
-  // }
-
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 10_000,
       horizontalPosition: "right",
       verticalPosition: "top"
     });
-
   }
 
   goToLink(url: string) {

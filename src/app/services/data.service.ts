@@ -17,24 +17,18 @@ export const base_URL: string = "https://api.themoviedb.org/3";
 export const base_image_URL: string = "https://image.tmdb.org/t/p/w500"
 export const base_image_URL1920: string = "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces"
 
-export const base_director_URL: string = "https://api.themoviedb.org/3/movie"
-
-
 @Injectable({
   providedIn: 'root'
 })
-
 
 export class DataService {
   clickedGenre: string = ''
   clickedGenreMovie_TV: string = ''
   clickedGenreID?: number
-  my_request = ''
   moviesRequest: string;
   movieData: any
   movie: any;
   page: number = 1;
-  movieDirector: string
   DirectorArr: IMovieCrewPeople[]
   ScreenplayArr: IMovieCrewPeople[]
   StoryArr: IMovieCrewPeople[]
@@ -49,7 +43,6 @@ export class DataService {
   movieTrailerKey: string | null
   allClickedMovies: IMovieResults[] = []
   movieExternalSourcesDetails: IMovieExternalSourcesDetails
-
 
   constructor(
     private http: HttpClient
@@ -67,9 +60,7 @@ export class DataService {
     // return this.http.get<IGenres>(`${base_URL}/genre/tv/list?api_key=${API_KEY}&language=ru-RU`)
     return this.http.get<IGenres>(`${base_URL}/genre/tv/list`)
   }
-
   movieID = new BehaviorSubject<number>(0);
-
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
     // check data
@@ -189,7 +180,6 @@ export class DataService {
   }
 
   myData: number = 1;
-
 
   //train Observable)))
   searsh$ = new Observable(observer => {

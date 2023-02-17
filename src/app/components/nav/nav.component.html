@@ -4,44 +4,32 @@
   <button id="dropdownDefaultButton1" data-dropdown-toggle="dropdown" data-dropdown-trigger="hover"
           class="hover:scale-105 mr-3 justify-center shadow-lg shadow-cyan-500/50 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           type="button">
-
     Movie
-
     <div class=" hover:animate-bounce">
       <svg-icon src="../assets/down-arrow-in-a-circle-svgrepo-com.svg"
                 [svgStyle]="{ 'width.px':25, 'height.px':25, 'marginLeft.px':20, 'fill':'rgb(255,255,255)' }"></svg-icon>
-
     </div>
-
   </button>
   <div id="dropdown"
        class="relative z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-
     <app-genre-feature-a *ngFor="let genre of genres" [genre]="genre"
                (click)="getMovie(genre.name, genre.id, 'movie')"
     ></app-genre-feature-a>
-
   </div>
-
 
   <!--    button TV:-->
   <button id="dropdownDefaultButton2" data-dropdown-toggle="dropdown2" data-dropdown-trigger="hover"
           class="hover:scale-105 ease-in duration-300 mr-3 justify-center shadow-lg shadow-cyan-500/50 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           type="button">
-
     TV
-
     <div class=" hover:animate-bounce">
       <svg-icon src="../assets/down-arrow-in-a-circle-svgrepo-com.svg"
                 [svgStyle]="{ 'width.px':25, 'height.px':25, 'marginLeft.px':20, 'fill':'rgb(255,255,255)' }"></svg-icon>
     </div>
-
   </button>
   <div id="dropdown2"
        class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-
     <app-genre-feature-a *ngFor="let genre of genresTV" [genre]="genre"
                (click)="getMovie(genre.name, genre.id, 'tv')"></app-genre-feature-a>
   </div>
-
 </div>
