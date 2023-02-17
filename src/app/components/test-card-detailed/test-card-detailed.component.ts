@@ -1,6 +1,6 @@
 import {Component, HostListener} from '@angular/core';
 import {base_image_URL, base_image_URL1920, DataService} from "../../services/data.service";
-import {IMovieDetails, IMovieExternalSourcesDetails, IMovieVideosResults} from "../../interfaces/global";
+import {IMovieDetails, IMovieVideosResults} from "../../interfaces/global";
 import {Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -30,7 +30,6 @@ export class TestCardDetailedComponent {
   movieStory: string
   movieWriter: string
   cast: any
-  movieExternalSourcesDetails: IMovieExternalSourcesDetails
   movieExternalImdb_id: string
   movieExternalFacebook_id: string
   movieExternalInstagram_id: string
@@ -113,11 +112,15 @@ export class TestCardDetailedComponent {
     })
 
     this.dataService.getMovieExternalSourcesDetails(this.cardDetailMovieID).subscribe(result => {
-      this.movieExternalSourcesDetails = result.movieExternalSourcesDetailsFromDataService
-      this.movieExternalImdb_id = result.movieExternalSourcesDetailsFromDataService.imdb_id
-      this.movieExternalFacebook_id = result.movieExternalSourcesDetailsFromDataService.facebook_id
-      this.movieExternalInstagram_id = result.movieExternalSourcesDetailsFromDataService.instagram_id
-      this.movieExternalTwitter_id = result.movieExternalSourcesDetailsFromDataService.twitter_id
+      [this.movieExternalImdb_id,
+        this.movieExternalFacebook_id,
+        this.movieExternalInstagram_id,
+        this.movieExternalTwitter_id ] = [
+        result.movieExternalImdb_id,
+        result.movieExternalFacebook_id,
+        result.movieExternalInstagram_id,
+        result.movieExternalTwitter_id
+      ]
     })
 
     //reload a page once using localStorage for rendering popover invisible elements in TestCardDetailedComponent
@@ -183,6 +186,7 @@ export class TestCardDetailedComponent {
     });
   }
 
+  //link to external resource of selected film (facebook, instagram, twitter, homeFilmPage)
   goToLink(url: string) {
     window.open(url, "_blank");
   }

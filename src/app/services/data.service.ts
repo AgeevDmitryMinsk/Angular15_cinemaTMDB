@@ -60,6 +60,7 @@ export class DataService {
     // return this.http.get<IGenres>(`${base_URL}/genre/tv/list?api_key=${API_KEY}&language=ru-RU`)
     return this.http.get<IGenres>(`${base_URL}/genre/tv/list`)
   }
+
   movieID = new BehaviorSubject<number>(0);
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
@@ -136,7 +137,7 @@ export class DataService {
   getMovieDetails(movieID: number) {
     return this.http.get<IMovieDetails>(`${base_URL}/movie/${movieID}`)
       .pipe(map(responsse => {
-       // console.log(responsse)
+        // console.log(responsse)
         this.movieDetails = responsse
         return {
           movieDetailsFromDataService: this.movieDetails
@@ -147,10 +148,14 @@ export class DataService {
   getMovieExternalSourcesDetails(movieID: number) {
     return this.http.get<IMovieExternalSourcesDetails>(`${base_URL}/movie/${movieID}/external_ids`)
       .pipe(map(response => {
-       // console.log("_ _ _responsse in getMovieExternalSourcesDetails = ", response)
+        // console.log("_ _ _responsse in getMovieExternalSourcesDetails = ", response)
         this.movieExternalSourcesDetails = response
         return {
-          movieExternalSourcesDetailsFromDataService: this.movieExternalSourcesDetails
+          movieExternalSourcesDetailsFromDataService: this.movieExternalSourcesDetails,
+          movieExternalImdb_id: this.movieExternalSourcesDetails.imdb_id,
+          movieExternalFacebook_id: this.movieExternalSourcesDetails.facebook_id,
+          movieExternalInstagram_id: this.movieExternalSourcesDetails.instagram_id,
+          movieExternalTwitter_id: this.movieExternalSourcesDetails.twitter_id,
         }
       }))
   }
@@ -183,7 +188,7 @@ export class DataService {
 
   //train Observable)))
   searsh$ = new Observable(observer => {
-   // console.log('start in Observable')
+    // console.log('start in Observable')
     observer.next(1);
     observer.next(2);
     observer.next(3);
