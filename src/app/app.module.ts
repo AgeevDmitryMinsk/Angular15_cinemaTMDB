@@ -19,7 +19,6 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import { MovieGenreIdToNamePipe } from './components/movie-card/movie-genre-id-to-name.pipe';
-import { GenreComponent } from './components/genre/genre.component';
 import {NgCircleProgressModule} from "ng-circle-progress";
 import {YouTubePlayerModule} from "@angular/youtube-player";
 import {MatInputModule} from "@angular/material/input";
@@ -52,7 +51,6 @@ const appRoutes: Routes = [
     FooterComponent,
     MovieCardComponent,
     MovieGenreIdToNamePipe,
-    GenreComponent,
     TopBilledCastCardComponent
   ],
   imports: [
