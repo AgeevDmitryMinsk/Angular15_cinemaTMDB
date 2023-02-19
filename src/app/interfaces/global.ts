@@ -5,7 +5,6 @@ export interface IGenre {
 
 export interface IGenres {
   genres: IGenre[]
-
 }
 
 export interface IMoviesAllData {
@@ -15,20 +14,10 @@ export interface IMoviesAllData {
 
 export interface IMovieResults {
   adult: boolean,
-  // backdrop_path: string,
-  // genre_ids: number[],
-  // id: number,
-  // original_language: string,
   original_title: string,
-  // overview: string,
-  // popularity: number,
-  // poster_path: string,
   release_date: string,
   title: string,
   video: boolean,
-  // vote_average: number,
-  // vote_count: number,
-
   backdrop_path: string,
   first_air_date: string,
   genre_ids: number[],
@@ -123,7 +112,13 @@ export interface IMovieVideosResults {
 export interface IMovieVideos {
   id: number,
   results: IMovieVideosResults[]
-
+}
+export interface IMovieExternalSourcesDetails {
+  imdb_id: string,
+  facebook_id: string,
+  instagram_id: string,
+  twitter_id: string,
+  id: number
 }
 
 export enum numberToGenre {
@@ -147,5 +142,3 @@ export enum numberToGenre {
   War = 10752,
   Western = 37
 }
-
-

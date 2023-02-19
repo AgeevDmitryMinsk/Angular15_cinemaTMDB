@@ -5,7 +5,6 @@
     <mat-card-title class="text-red-700">{{movie.title || movie.name}} ({{movie.release_date|| movie.first_air_date | date: 'yyyy'}})</mat-card-title>
     <mat-card-subtitle>
       Genre:  {{movie.genre_ids | movieGenreIdToName}}
-
     </mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image src="{{base_image_URL}}{{movie.poster_path}}"
@@ -16,15 +15,9 @@
   <mat-card-content class="bg-gray-50 min-h-[270px] rounded-lg">
     <p class="text-2xl pb-2 ">Overview</p>
     <p class="line-clamp-7">
-     {{movie.overview}}
+      {{movie.overview}}
     </p>
-
     <p class="text-xl pt-1.5">User Score: <b>{{movie.vote_average * 10}}</b> %</p>
-
-<!--    получаю имя режиссера фильма (но только для movie, т.к. у tv нет такого свойства в объекте и падает ошибка):-->
-<!--    <p class="text-xl pt-1.5">Director: <b>{{MovieDirectorName}}</b> </p>-->
-
   </mat-card-content>
 </mat-card>
-
 

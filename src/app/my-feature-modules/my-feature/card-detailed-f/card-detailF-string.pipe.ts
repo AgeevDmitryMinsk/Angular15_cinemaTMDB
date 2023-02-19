@@ -6,9 +6,8 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class CardDetailStringPipe implements PipeTransform {
 
   transform(value: any, ...args: unknown[]): unknown {
-    console.log("value in cardDetailString =", value)
-
+    // check data
+    // console.log("value in cardDetailString =", value)
     return value.map((item:any) => item['name']).join(', ')
   }
-
 }

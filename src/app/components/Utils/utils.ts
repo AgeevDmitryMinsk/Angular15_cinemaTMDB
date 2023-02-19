@@ -8,7 +8,6 @@ export class Utils {
   urlTransformName(){
     return this.someString.toLowerCase().replace(/[^\w\s']|_/g, '').trim().split(' ').join('-')
   }
-
 }
 
 

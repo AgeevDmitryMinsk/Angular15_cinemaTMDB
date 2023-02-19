@@ -1,0 +1,13 @@
+<div class="flex flex-row flex-wrap m-5 justify-center">
+  <app-movie-card-f *ngFor="let movie of allClickedMovies; let i = index" [attr.data-index]="i" [movie]="movie" (click)="getDetailedCard(movie.id, i)"></app-movie-card-f>
+</div>
+<div class="animate-bounce w-6 h-6 flex flex mx-auto pr-20">
+  <svg-icon src="../assets/down-arrow-in-a-circle-svgrepo-com.svg"
+            [svgStyle]="{ 'width.px':25, 'height.px':25, 'marginLeft.px':20, 'fill':'rgb(255,255,255)' }"></svg-icon>
+</div>
+<div class="flex justify-center m-[20px]">
+  <button class="text-5xl text-white hover:text-black p-4 rounded-lg bg-[#1da1f2]/90 shadow-lg shadow-fuchsia-600/50"
+          (click)="loadMore()"
+  >Load More
+  </button>
+</div>

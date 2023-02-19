@@ -1,24 +1,27 @@
 .myBackGround {
-  -webkit-animation: 5s linear 1s infinite alternate myBackground;
+  -webkit-animation: 15s linear 1s infinite alternate myBackground;
 }
 
 @keyframes myBackground {
   0% {
+    background-color: antiquewhite;
+  }
+  50% {
     background-color: #808080;
   }
-  20% {
+  60% {
     background-color: #6a6a6a;
   }
-  40% {
+  70% {
     background-color: #545454;
   }
-  60% {
+  80% {
     background-color: #3f3f3f;
   }
-  80% {
+  85% {
     background-color: #2c2c2c;
   }
-  100% {
+  90% {
     background-color: #191919;
   }
 }
