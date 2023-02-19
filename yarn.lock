@@ -16,7 +16,7 @@
   integrity sha512-n1L3Q2d7HoWFRRqihu3BAUB5xZFfz8LqQoHpVNl6HN1ugtmvqDUDoKrpYVH9LCKCqfJW2Cxssy+FERiDsihIJQ==
   dependencies:
     "@angular-devkit/core" "15.0.5"
-    rxjs "6.6.7"
+    rxjs "6.6.7" 
 
 "@angular-devkit/build-angular@^15.0.3":
   version "15.0.5"
