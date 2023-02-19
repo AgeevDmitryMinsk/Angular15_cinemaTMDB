@@ -12,9 +12,8 @@
   </button>
   <div id="dropdown"
        class="relative z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-    <app-genre-feature-a *ngFor="let genre of genres" [genre]="genre"
-               (click)="getMovie(genre.name, genre.id, 'movie')"
-    ></app-genre-feature-a>
+    <app-genre-f *ngFor="let genre of genresTV" [genre]="genre"
+                 (click)="getMovie(genre.name, genre.id, 'tv')"></app-genre-f>
   </div>
 
   <!--    button TV:-->
@@ -29,7 +28,7 @@
   </button>
   <div id="dropdown2"
        class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-    <app-genre-feature-a *ngFor="let genre of genresTV" [genre]="genre"
-               (click)="getMovie(genre.name, genre.id, 'tv')"></app-genre-feature-a>
+    <app-genre-f *ngFor="let genre of genresTV" [genre]="genre"
+               (click)="getMovie(genre.name, genre.id, 'tv')"></app-genre-f>
   </div>
 </div>

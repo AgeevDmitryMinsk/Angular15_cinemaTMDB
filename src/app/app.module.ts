@@ -32,13 +32,14 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {ToastrModule} from "ngx-toastr";
 import {MatButtonModule} from "@angular/material/button";
 import { TopBilledCastCardComponent } from './components/top-billed-cast-card/top-billed-cast-card.component';
-import {CustomerFeatureAModule} from "./customer-feature-a/customer-feature-a.module";
+import {MyFeatureModule} from "./my-feature-modules/my-feature/my-feature.module";
+import {ResultsFComponent} from "./my-feature-modules/my-feature/results-f/results-f.component";
 
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'movie-results/:id', component: ResultsComponent, data: {id: '1', name: "Angular"}},
-  {path: 'tv-results/:id', component: ResultsComponent, data: {id: '1', name: "Angular"}},
+  {path: 'movie-results/:id', component: ResultsFComponent, data: {id: '1', name: "Angular"}},
+  {path: 'tv-results/:id', component: ResultsFComponent, data: {id: '1', name: "Angular"}},
   {path: 'movie/:id', component: TestCardDetailedComponent, data: {id: '1', name: "Angular"}},
   {path: '**', component: NotFoundComponent},
 ]
@@ -89,7 +90,7 @@ const appRoutes: Routes = [
     FormsModule,
     ToastrModule.forRoot(),
     MatButtonModule,
-    CustomerFeatureAModule
+    MyFeatureModule // добавляем сюда функциональный модуль
   ],
   providers: [
     DataService, {
@@ -97,7 +98,9 @@ const appRoutes: Routes = [
       useClass: ParamInterceptor,
       multi: true
     }],
-  exports: [],
+  exports: [
+    MovieCardComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
