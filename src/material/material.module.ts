@@ -101,4 +101,5 @@ import {MatDividerModule} from "@angular/material/divider";
   ]
 })
 
-export class MaterialModule { }
+export class MaterialModule {
+}
