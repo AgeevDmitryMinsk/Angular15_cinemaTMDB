@@ -4,7 +4,6 @@ import {AppComponent} from './app.component';
 import {NavComponent} from './components/nav/nav.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ResultsComponent} from './components/results/results.component';
 import {AngularSvgIconModule} from "angular-svg-icon";
 import {DataService} from "./services/data.service";
 import {ParamInterceptor} from "./interceptors/param.interceptor";
@@ -13,12 +12,10 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import {HomeComponent} from './components/home/home/home.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
-import { MovieCardComponent } from './components/movie-card/movie-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
-import { MovieGenreIdToNamePipe } from './components/movie-card/movie-genre-id-to-name.pipe';
 import {NgCircleProgressModule} from "ng-circle-progress";
 import {YouTubePlayerModule} from "@angular/youtube-player";
 import {MatInputModule} from "@angular/material/input";
@@ -44,13 +41,11 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NavComponent,
-    ResultsComponent,
     NotFoundComponent,
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    MovieCardComponent,
-    MovieGenreIdToNamePipe,
+
     TopBilledCastCardComponent
   ],
   imports: [
@@ -90,7 +85,6 @@ const appRoutes: Routes = [
       multi: true
     }],
   exports: [
-    MovieCardComponent
   ],
   bootstrap: [AppComponent]
 })
