@@ -12,18 +12,15 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
 import {HomeComponent} from './components/home/home/home.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
-import {NgCircleProgressModule} from "ng-circle-progress";
-import {YouTubePlayerModule} from "@angular/youtube-player";
 import {MatInputModule} from "@angular/material/input";
 import {MaterialModule} from "../material/material.module";
 import {MatNativeDateModule} from "@angular/material/core";
 import {ToastrModule} from "ngx-toastr";
 import {MatButtonModule} from "@angular/material/button";
-import { TopBilledCastCardComponent } from './components/top-billed-cast-card/top-billed-cast-card.component';
 import {MyFeatureModule} from "./my-feature-modules/my-feature/my-feature.module";
 import {ResultsFComponent} from "./my-feature-modules/my-feature/results-f/results-f.component";
 import {CardDetailedFComponent} from "./my-feature-modules/my-feature/card-detailed-f/card-detailed-f.component";
@@ -45,8 +42,6 @@ const appRoutes: Routes = [
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-
-    TopBilledCastCardComponent
   ],
   imports: [
     BrowserModule,
@@ -58,17 +53,6 @@ const appRoutes: Routes = [
     MatSlideToggleModule,
     MatCardModule,
     MatGridListModule,
-    // NgCircleProgressModule,
-    NgCircleProgressModule.forRoot({
-      // set defaults here
-      radius: 100,
-      outerStrokeWidth: 16,
-      innerStrokeWidth: 8,
-      outerStrokeColor: "#78C000",
-      innerStrokeColor: "#C7E596",
-      animationDuration: 300
-    }),
-    YouTubePlayerModule,
     MatInputModule,
     ReactiveFormsModule,
     MaterialModule,
@@ -76,7 +60,7 @@ const appRoutes: Routes = [
     FormsModule,
     ToastrModule.forRoot(),
     MatButtonModule,
-    MyFeatureModule // добавляем сюда функциональный модуль
+    MyFeatureModule // <- add a function module here
   ],
   providers: [
     DataService, {
