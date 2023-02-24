@@ -43,6 +43,7 @@ export class DataService {
   movieTrailerKey: string | null
   allClickedMovies: IMovieResults[] = []
   movieExternalSourcesDetails: IMovieExternalSourcesDetails
+  actorDetails: any
 
   constructor(
     private http: HttpClient
@@ -62,6 +63,7 @@ export class DataService {
   }
 
   movieID = new BehaviorSubject<number>(0);
+  actorID = new BehaviorSubject<number>(0);
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
     // check data
@@ -130,6 +132,17 @@ export class DataService {
           Story: this.Story,
           Writer: this.Writer,
           Cast: this.cast
+        }
+      }))
+  }
+
+  getActorDetails(actorID: number) {
+    return this.http.get<any>(`${base_URL}/person/${actorID}`)
+      .pipe(map(responsse => {
+         console.log("getActorDetails response", responsse)
+        this.actorDetails = responsse
+        return {
+          actorDetailsFromDataService: this.actorDetails
         }
       }))
   }

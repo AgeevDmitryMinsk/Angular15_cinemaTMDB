@@ -189,4 +189,10 @@ export class CardDetailedFComponent {
   goToLink(url: string) {
     window.open(url, "_blank");
   }
+
+  getDetailedActor(actorID: number) {
+    console.log("getDetailedActor id:", actorID)
+    this.dataService.actorID.next(actorID) // кладу в переменную actorID новое значение actorID и потом отслеживаю его через this.dataService.actorID.subscribe в другом Component-е
+
+  }
 }

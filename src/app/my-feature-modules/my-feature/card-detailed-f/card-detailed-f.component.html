@@ -76,6 +76,7 @@
         <div class="flex text-base">
           <app-top-billed-cast-card-f *ngFor="let castActor of cast"
                                     [castActor]="castActor"
+                                      (click)="getDetailedActor(castActor.id)"
           ></app-top-billed-cast-card-f>
         </div>
       </div>
