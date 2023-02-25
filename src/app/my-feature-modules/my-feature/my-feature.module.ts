@@ -12,6 +12,8 @@ import {MinutesToHHMMPipe} from "./card-detailed-f/minutesF-to-hh-mm.pipe";
 import {NgCircleProgressModule} from "ng-circle-progress";
 import { TopBilledCastCardFComponent } from './top-billed-cast-card-f/top-billed-cast-card-f.component';
 import {YouTubePlayerModule} from "@angular/youtube-player";
+import { PersonDetailedFComponent } from './person-detailed-f/person-detailed-f.component';
+import { KnownForMoviesComponent } from './known-for-movies/known-for-movies.component';
 
 
 
@@ -24,7 +26,9 @@ import {YouTubePlayerModule} from "@angular/youtube-player";
     CardDetailedFComponent,
     CardDetailStringPipe,
     MinutesToHHMMPipe,
-    TopBilledCastCardFComponent
+    TopBilledCastCardFComponent,
+    PersonDetailedFComponent,
+    KnownForMoviesComponent
   ],
   imports: [
     CommonModule,

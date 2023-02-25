@@ -1,8 +1,8 @@
 import {Component, HostListener} from '@angular/core';
-import {IMovieDetails, IMovieVideosResults} from "../../../interfaces/global";
+import {IMovieDetails, IMovieVideosResults, IPersonDetails} from "../../../interfaces/global";
 import {Subscription} from "rxjs";
 import {base_image_URL, base_image_URL1920, DataService} from "../../../services/data.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ToastrService} from "ngx-toastr";
 
@@ -34,13 +34,15 @@ export class CardDetailedFComponent {
   movieExternalInstagram_id: string
   movieExternalTwitter_id: string
   private routeSubscription: Subscription;
+  actorDetailsFromDataService:IPersonDetails
 
 
   constructor(
     public dataService: DataService,
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public router: Router ,
   ) {
     this.routeSubscription = route.params.subscribe(params => this.cardDetailMovieID = Number(params['id'].split('-')[0]));
     // check data
@@ -191,8 +193,20 @@ export class CardDetailedFComponent {
   }
 
   getDetailedActor(actorID: number) {
-    console.log("getDetailedActor id:", actorID)
-    this.dataService.actorID.next(actorID) // кладу в переменную actorID новое значение actorID и потом отслеживаю его через this.dataService.actorID.subscribe в другом Component-е
+    // console.log("getDetailedActor id:", actorID)
+    // this.dataService.actorID.next(actorID) // кладу в переменную actorID новое значение actorID и потом отслеживаю его через this.dataService.actorID.subscribe в другом Component-е
+    // this.dataService.getActorDetails(actorID).subscribe(value => {
+    //   console.log(value)
+    //   value})
+
+    this.router.navigate(
+      ['person', actorID],
+      {
+        state: {id: '990909090', name: "что-то другое"},
+        queryParams: {
+        }
+      }
+    )
 
   }
 }

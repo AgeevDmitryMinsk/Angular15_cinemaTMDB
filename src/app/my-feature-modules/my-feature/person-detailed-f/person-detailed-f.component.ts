@@ -1,0 +1,69 @@
+import {Component} from '@angular/core';
+import {Subscription} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
+import {base_image_URL, DataService} from "../../../services/data.service";
+
+@Component({
+  selector: 'app-person-detailed-f',
+  templateUrl: './person-detailed-f.component.html',
+  styleUrls: ['./person-detailed-f.component.scss']
+})
+export class PersonDetailedFComponent {
+
+  private routeSubscription: Subscription;
+  adult: boolean
+  also_known_as: string[]
+  biography: string
+  birthday:  string
+  deathday? :  string
+  gender: number
+  homepage?: string
+  personID: number
+  imdb_id  : string
+  known_for_department: string
+  name: string
+  place_of_birth: string
+  popularity: number
+  profile_path: string
+  base_image_URL: string = base_image_URL
+  imageCardPoster:string
+
+
+
+  cast: any
+
+  constructor(
+    private route: ActivatedRoute,
+    public dataService: DataService,
+  ) {
+    this.routeSubscription = route.params.subscribe(params => this.personID = Number(params['id']));
+    //console.log("this.personID: ",this.personID) // this.personID:  1305610
+  }
+
+
+  ngOnInit(): void {
+    this.dataService.actorID.next(this.personID) // кладу в переменную actorID новое значение actorID и потом отслеживаю его через this.dataService.actorID.subscribe в другом Component-е
+    this.dataService.getActorDetails(this.personID).subscribe(value => {
+      console.log(value.actorDetailsFromDataService)
+      this.name = value.actorDetailsFromDataService.name
+      this.gender = value.actorDetailsFromDataService.gender
+      this.biography = value.actorDetailsFromDataService.biography
+      this.also_known_as = value.actorDetailsFromDataService.also_known_as
+      this.birthday = value.actorDetailsFromDataService.birthday
+      this.deathday = value.actorDetailsFromDataService.deathday
+      this.homepage = value.actorDetailsFromDataService.homepage
+      this.known_for_department = value.actorDetailsFromDataService.known_for_department
+      this.imdb_id = value.actorDetailsFromDataService.imdb_id
+      this.place_of_birth = value.actorDetailsFromDataService.place_of_birth
+      this.popularity = value.actorDetailsFromDataService.popularity
+      this.profile_path = value.actorDetailsFromDataService.profile_path
+      this.adult = value.actorDetailsFromDataService.adult
+      this.imageCardPoster = this.base_image_URL + this.profile_path
+      value})
+    this.dataService.getActorDetailsKnownFor(this.personID).subscribe(valuE=>{
+      console.log(valuE)
+      this.cast = valuE.actorDetailsKnownForFromDataService.cast
+      valuE
+    })
+  }
+}
