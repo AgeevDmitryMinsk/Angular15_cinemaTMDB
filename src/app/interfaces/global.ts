@@ -159,6 +159,7 @@ export interface IMovieVideos {
   id: number,
   results: IMovieVideosResults[]
 }
+
 export interface IMovieExternalSourcesDetails {
   imdb_id: string,
   facebook_id: string,
@@ -167,21 +168,33 @@ export interface IMovieExternalSourcesDetails {
   id: number
 }
 
-export interface IPersonDetails{
-  adult : boolean
-  also_known_as : string[]
-  biography  : string
-  birthday:  string
-  deathday? :  string
+export interface IPersonDetails {
+  adult: boolean
+  also_known_as: string[]
+  biography: string
+  birthday: string
+  deathday?: string
   gender: number
   homepage?: string
-  id  : number
+  id: number
+  imdb_id: string
+  known_for_department: string
+  name: string
+  place_of_birth: string
+  popularity: number
+  profile_path: string
+}
+
+export interface IPersonDetailsExternal_ids {
+  facebook_id: string
+  freebase_id?: string
+  freebase_mid: string
+  id: number
   imdb_id  : string
-  known_for_department  : string
-  name : string
-  place_of_birth  : string
-  popularity : number
-  profile_path : string
+  instagram_id  : string
+  tvrage_id    : number
+  twitter_id  : string
+  wikidata_id   : string
 }
 
 export enum numberToGenre {

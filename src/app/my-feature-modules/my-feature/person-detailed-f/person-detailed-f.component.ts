@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {base_image_URL, DataService} from "../../../services/data.service";
+import {IPersonDetailsExternal_ids} from "../../../interfaces/global";
 
 @Component({
   selector: 'app-person-detailed-f',
@@ -27,10 +28,8 @@ export class PersonDetailedFComponent {
   profile_path: string
   base_image_URL: string = base_image_URL
   imageCardPoster:string
-
-
-
   cast: any
+  actorDetailsExternal_ids: IPersonDetailsExternal_ids
 
   constructor(
     private route: ActivatedRoute,
@@ -44,7 +43,7 @@ export class PersonDetailedFComponent {
   ngOnInit(): void {
     this.dataService.actorID.next(this.personID) // кладу в переменную actorID новое значение actorID и потом отслеживаю его через this.dataService.actorID.subscribe в другом Component-е
     this.dataService.getActorDetails(this.personID).subscribe(value => {
-      console.log(value.actorDetailsFromDataService)
+      //console.log(value.actorDetailsFromDataService)
       this.name = value.actorDetailsFromDataService.name
       this.gender = value.actorDetailsFromDataService.gender
       this.biography = value.actorDetailsFromDataService.biography
@@ -61,9 +60,19 @@ export class PersonDetailedFComponent {
       this.imageCardPoster = this.base_image_URL + this.profile_path
       value})
     this.dataService.getActorDetailsKnownFor(this.personID).subscribe(valuE=>{
-      console.log(valuE)
+      //console.log(valuE)
       this.cast = valuE.actorDetailsKnownForFromDataService.cast
       valuE
     })
+    this.dataService.getActorDetailsExternal_ids(this.personID).subscribe(value=>{
+      console.log(value)
+      this.actorDetailsExternal_ids = value.actorDetailsExternal_idsFromDataService
+    })
   }
+
+  //link to external resource of selected film (facebook, instagram, twitter, homeFilmPage)
+  goToLink(url: string) {
+    window.open(url, "_blank");
+  }
+
 }

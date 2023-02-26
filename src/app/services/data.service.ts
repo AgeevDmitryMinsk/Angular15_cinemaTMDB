@@ -9,7 +9,7 @@ import {
   IMovieResults,
   IMoviesAllData,
   IMovieVideos,
-  IMovieVideosResults, IPersonDetails
+  IMovieVideosResults, IPersonDetails, IPersonDetailsExternal_ids
 } from "../interfaces/global";
 
 // export const API_KEY: string = ""; перенес в interceptor
@@ -45,6 +45,7 @@ export class DataService {
   movieExternalSourcesDetails: IMovieExternalSourcesDetails
   actorDetails: IPersonDetails
   actorDetailsKnownFor: IMoviePeopleCredits
+  actorDetailsExternal_ids: any
 
   constructor(
     private http: HttpClient
@@ -141,7 +142,7 @@ export class DataService {
     //console.log('getActorDetails ***', actorID)
     return this.http.get<IPersonDetails>(`${base_URL}/person/${actorID}`)
       .pipe(map(responsse => {
-      //   console.log("getActorDetails response", responsse)
+         //console.log("getActorDetails response", responsse)
         this.actorDetails = responsse
         return {
           actorDetailsFromDataService: this.actorDetails
@@ -152,10 +153,21 @@ export class DataService {
   getActorDetailsKnownFor(actorID: number){
     return this.http.get<IMoviePeopleCredits>(`${base_URL}/person/${actorID}/movie_credits`)
       .pipe(map(responz => {
-        //console.log("getActorDetailsKnownFor responz", responz)
+        // console.log("getActorDetailsKnownFor responz", responz)
         this.actorDetailsKnownFor = responz
         return {
           actorDetailsKnownForFromDataService: this.actorDetailsKnownFor
+        }
+      }))
+  }
+
+  getActorDetailsExternal_ids(actorID: number){
+    return this.http.get<IPersonDetailsExternal_ids>(`${base_URL}/person/${actorID}/external_ids`)
+      .pipe(map(responzs => {
+        console.log("getActorDetailsExternal_ids responzs", responzs)
+        this.actorDetailsExternal_ids = responzs
+        return {
+          actorDetailsExternal_idsFromDataService: this.actorDetailsExternal_ids
         }
       }))
   }
