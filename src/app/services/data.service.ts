@@ -45,7 +45,7 @@ export class DataService {
   movieExternalSourcesDetails: IMovieExternalSourcesDetails
   actorDetails: IPersonDetails
   actorDetailsKnownFor: IMoviePeopleCredits
-  actorDetailsExternal_ids: any
+  actorDetailsExternal_ids: IPersonDetailsExternal_ids
 
   constructor(
     private http: HttpClient

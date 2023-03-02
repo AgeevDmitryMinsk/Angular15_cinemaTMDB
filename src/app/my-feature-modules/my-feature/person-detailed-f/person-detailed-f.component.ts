@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {base_image_URL, DataService} from "../../../services/data.service";
-import {IPersonDetailsExternal_ids} from "../../../interfaces/global";
+import {IMoviePeopleCredits, IPersonDetails, IPersonDetailsExternal_ids} from "../../../interfaces/global";
 
 @Component({
   selector: 'app-person-detailed-f',
@@ -31,6 +31,10 @@ export class PersonDetailedFComponent {
   cast: any
   actorDetailsExternal_ids: IPersonDetailsExternal_ids
 
+  actorDetails: IPersonDetails
+  actorDetailsKnownFor: IMoviePeopleCredits
+
+
   constructor(
     private route: ActivatedRoute,
     public dataService: DataService,
@@ -44,24 +48,27 @@ export class PersonDetailedFComponent {
     this.dataService.actorID.next(this.personID) // кладу в переменную actorID новое значение actorID и потом отслеживаю его через this.dataService.actorID.subscribe в другом Component-е
     this.dataService.getActorDetails(this.personID).subscribe(value => {
       //console.log(value.actorDetailsFromDataService)
-      this.name = value.actorDetailsFromDataService.name
-      this.gender = value.actorDetailsFromDataService.gender
-      this.biography = value.actorDetailsFromDataService.biography
-      this.also_known_as = value.actorDetailsFromDataService.also_known_as
-      this.birthday = value.actorDetailsFromDataService.birthday
-      this.deathday = value.actorDetailsFromDataService.deathday
-      this.homepage = value.actorDetailsFromDataService.homepage
-      this.known_for_department = value.actorDetailsFromDataService.known_for_department
-      this.imdb_id = value.actorDetailsFromDataService.imdb_id
-      this.place_of_birth = value.actorDetailsFromDataService.place_of_birth
-      this.popularity = value.actorDetailsFromDataService.popularity
-      this.profile_path = value.actorDetailsFromDataService.profile_path
-      this.adult = value.actorDetailsFromDataService.adult
-      this.imageCardPoster = this.base_image_URL + this.profile_path
+      this.actorDetails = value.actorDetailsFromDataService
+      // this.name = value.actorDetailsFromDataService.name
+      // this.gender = value.actorDetailsFromDataService.gender
+      // this.biography = value.actorDetailsFromDataService.biography
+      // this.also_known_as = value.actorDetailsFromDataService.also_known_as
+      // this.birthday = value.actorDetailsFromDataService.birthday
+      // this.deathday = value.actorDetailsFromDataService.deathday
+      // this.homepage = value.actorDetailsFromDataService.homepage
+      // this.known_for_department = value.actorDetailsFromDataService.known_for_department
+      // this.imdb_id = value.actorDetailsFromDataService.imdb_id
+      // this.place_of_birth = value.actorDetailsFromDataService.place_of_birth
+      // this.popularity = value.actorDetailsFromDataService.popularity
+      // this.profile_path = value.actorDetailsFromDataService.profile_path
+      // this.adult = value.actorDetailsFromDataService.adult
+      // this.imageCardPoster = this.base_image_URL + this.profile_path
+      this.imageCardPoster = this.base_image_URL + this.actorDetails.profile_path
       value})
     this.dataService.getActorDetailsKnownFor(this.personID).subscribe(valuE=>{
       //console.log(valuE)
       this.cast = valuE.actorDetailsKnownForFromDataService.cast
+      this.actorDetailsKnownFor = valuE.actorDetailsKnownForFromDataService
       valuE
     })
     this.dataService.getActorDetailsExternal_ids(this.personID).subscribe(value=>{
