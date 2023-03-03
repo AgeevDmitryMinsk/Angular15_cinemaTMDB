@@ -214,7 +214,9 @@ export class DataService {
           }
 
           //console.log(`videoResponse.results in DataService after filter= `, this.movieTrailer)
-          this.movieTrailerKey = this.movieTrailer[0].key
+          if (this.movieTrailer[0]) {
+            this.movieTrailerKey = this.movieTrailer[0].key
+          }
           //console.log(`this.movieTrailerKey in DataService =`, this.movieTrailerKey)
         } else {
           this.movieTrailer = null

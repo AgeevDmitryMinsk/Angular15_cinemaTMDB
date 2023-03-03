@@ -6,10 +6,10 @@
     <img src="{{imageCardPoster}}" alt="imageCardPoster"
          class="rounded-xl w-3/12 object-contain object-top">
 
-    <div class="pl-10">
-      <p class="text-4xl font-bold">{{actorDetails?.name}}</p>
+    <div class="pl-10" *ngIf="actorDetails">
+      <p class="text-4xl font-bold">{{actorDetails.name}}</p>
       <p class="text-2xl">Biography</p>
-      <p class="text-xl">{{actorDetails?.biography}}</p>
+      <p class="text-xl">{{actorDetails.biography}}</p>
     </div>
 
   </div>
@@ -17,13 +17,13 @@
 
   <div class="flex justify-between">
 
-    <div class="pl-10 text-xl">
+    <div class="pl-10 text-xl" *ngIf="actorDetailsExternal_ids">
 
       <div class="pl-10 text-xl">
         <div class="flex pt-5">
           <div data-popover-target="popover1" data-popover-placement="bottom-start">
-            <nav (click)="goToLink('https://www.facebook.com/' + actorDetailsExternal_ids?.facebook_id)"
-                 *ngIf="actorDetailsExternal_ids?.facebook_id">
+            <nav (click)="goToLink('https://www.facebook.com/' + actorDetailsExternal_ids.facebook_id)"
+                 *ngIf="actorDetailsExternal_ids.facebook_id">
               <div class="hover:scale-110 duration-700">
                 <svg-icon src="./assets/facebook-rounded-svgrepo-com.svg"
                           [svgStyle]="{ 'width.px':50, 'height.px':50, 'fill':'rgb(0,0,0)' }"></svg-icon>
@@ -40,8 +40,8 @@
           </div>
 
           <div data-popover-target="popover2" data-popover-placement="bottom">
-            <nav (click)="goToLink('https://twitter.com/' + actorDetailsExternal_ids?.twitter_id)"
-                 *ngIf="actorDetailsExternal_ids?.twitter_id">
+            <nav (click)="goToLink('https://twitter.com/' + actorDetailsExternal_ids.twitter_id)"
+                 *ngIf="actorDetailsExternal_ids.twitter_id">
               <div class="hover:scale-110 duration-700">
                 <svg-icon src="./assets/twitter-rounded-svgrepo-com.svg"
                           [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
@@ -56,8 +56,8 @@
             <div data-popper-arrow></div>
           </div>
           <div data-popover-target="popover3" data-popover-placement="bottom">
-            <nav (click)="goToLink('https://twitter.com/' + actorDetailsExternal_ids?.instagram_id)"
-                 *ngIf="actorDetailsExternal_ids?.instagram_id">
+            <nav (click)="goToLink('https://twitter.com/' + actorDetailsExternal_ids.instagram_id)"
+                 *ngIf="actorDetailsExternal_ids.instagram_id">
               <div class="hover:scale-110 duration-700">
                 <svg-icon src="./assets/instagram-rounded-svgrepo-com.svg"
                           [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
@@ -71,8 +71,8 @@
             </div>
             <div data-popper-arrow></div>
           </div>
-                    <div data-popover-target="popover4" data-popover-placement="bottom-end" *ngIf="actorDetails?.homepage">
-                      <nav (click)="goToLink(' '+ actorDetails?.homepage)" >
+                    <div data-popover-target="popover4" data-popover-placement="bottom-end" *ngIf="actorDetails.homepage">
+                      <nav (click)="goToLink(' '+ actorDetails.homepage)" >
                         <div class="hover:scale-110 duration-700">
                           <svg-icon src="./assets/home-svgrepo-com.svg"
                                     [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
@@ -88,7 +88,7 @@
                     </div>
         </div>
       </div>
-    </div>
+    </div >
 
     <div class="flex flex-col w-9/12 overflow-x-scroll max-h-[430px] overflow-hidden p-10">
       <div>Known For</div>
