@@ -4,6 +4,8 @@ import {ActivatedRoute} from "@angular/router";
 import {base_image_URL, DataService} from "../../../services/data.service";
 import {IMoviePeopleCredits, IPersonDetails, IPersonDetailsExternal_ids} from "../../../interfaces/global";
 
+const today = new Date();
+
 @Component({
   selector: 'app-person-detailed-f',
   templateUrl: './person-detailed-f.component.html',
@@ -33,6 +35,12 @@ export class PersonDetailedFComponent {
 
   actorDetails: IPersonDetails
   actorDetailsKnownFor: IMoviePeopleCredits
+  age:number
+  nowYear: number
+  currentMonth: number
+  birthdayMonth:number
+
+
 
 
   constructor(
@@ -41,6 +49,7 @@ export class PersonDetailedFComponent {
   ) {
     this.routeSubscription = route.params.subscribe(params => this.personID = Number(params['id']));
     //console.log("this.personID: ",this.personID) // this.personID:  1305610
+    this.nowYear = today.getFullYear();
   }
 
 
@@ -64,6 +73,9 @@ export class PersonDetailedFComponent {
       // this.adult = value.actorDetailsFromDataService.adult
       // this.imageCardPoster = this.base_image_URL + this.profile_path
       this.imageCardPoster = this.base_image_URL + this.actorDetails.profile_path
+      this.currentMonth = today.getMonth();
+      this.birthdayMonth = Number(this.actorDetails.birthday?.slice(5,7))
+      this.age = this.nowYear - Number(this.actorDetails.birthday?.slice(0,4)) - ((this.birthdayMonth>this.currentMonth)?1:0)
       value})
     this.dataService.getActorDetailsKnownFor(this.personID).subscribe(valuE=>{
       //console.log(valuE)
