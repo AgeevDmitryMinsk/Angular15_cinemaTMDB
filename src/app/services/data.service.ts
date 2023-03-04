@@ -92,7 +92,9 @@ export class DataService {
         //console.log(`response in getMovieDirector`, response)
         this.DirectorArr = response.crew.filter(({job}) => job === 'Director')
         //console.log(this.DirectorArr[0])
-        this.Director = this.DirectorArr[0].name
+        if (this.DirectorArr[0]) {
+          this.Director = this.DirectorArr[0].name
+        }
         //console.log(this.Director)
         return {
           Director: this.Director
@@ -110,7 +112,9 @@ export class DataService {
         this.StoryArr = response.crew.filter(({job}) => job === 'Story')
         this.WriterArr = response.crew.filter(({job}) => job === 'Writer')
         //console.log(this.DirectorArr[0])
-        this.Director = this.DirectorArr[0].name
+        if(this.DirectorArr[0]) {
+          this.Director = this.DirectorArr[0].name
+        }
         if (this.ScreenplayArr[0]) {
           this.Screenplay = this.ScreenplayArr[0].name
         }

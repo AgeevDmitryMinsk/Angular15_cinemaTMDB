@@ -63,7 +63,7 @@ export class ResultsFComponent implements OnInit, OnDestroy  {
             this.dataService.movie = this.movie;
             //console.log(58, this.movie)
             this.allClickedMovies = this.dataService.movie; // добавил для привязки получение данных к чендж роута и профит.
-            //console.log(60, '******* this.allClickedMovies in resultComponent = ', this.allClickedMovies) // correct movie or tv
+            //console.log(66, '******* this.allClickedMovies in resultComponent = ', this.allClickedMovies) // correct movie or tv
           },
           error: (e: HttpErrorResponse)=> {
             // check data
@@ -131,6 +131,7 @@ export class ResultsFComponent implements OnInit, OnDestroy  {
     this.movieName = this.allClickedMovies[ind].title || this.allClickedMovies[ind].name
     // this.movieName = `${movieId}-${this.movieName.toLowerCase().replace(/[^\w\s\']|_/g, '').trim().split(' ').join('-')}`
     this.movieName = `${movieId}-${new Utils(this.movieName).urlTransformName()}`
+    console.log("this.movieName in ResultsFComponent: ", this.movieName)
     this.router.navigate(
       ['movie', this.movieName],
       {

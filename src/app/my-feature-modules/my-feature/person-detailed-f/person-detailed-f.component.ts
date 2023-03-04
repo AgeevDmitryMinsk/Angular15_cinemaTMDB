@@ -1,8 +1,14 @@
 import {Component} from '@angular/core';
 import {Subscription} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {base_image_URL, DataService} from "../../../services/data.service";
-import {IMoviePeopleCredits, IPersonDetails, IPersonDetailsExternal_ids} from "../../../interfaces/global";
+import {
+  IMovieCastPeopleCredits,
+  IMoviePeopleCredits,
+  IPersonDetails,
+  IPersonDetailsExternal_ids
+} from "../../../interfaces/global";
+import {Utils} from "../../../components/Utils/utils";
 
 const today = new Date();
 
@@ -30,7 +36,7 @@ export class PersonDetailedFComponent {
   profile_path: string
   base_image_URL: string = base_image_URL
   imageCardPoster:string
-  cast: any
+  cast: IMovieCastPeopleCredits[]
   actorDetailsExternal_ids: IPersonDetailsExternal_ids
 
   actorDetails: IPersonDetails
@@ -39,6 +45,9 @@ export class PersonDetailedFComponent {
   nowYear: number
   currentMonth: number
   birthdayMonth:number
+  deathMonth:number
+  actorDetailsKnownForCastNow:IMovieCastPeopleCredits[]
+  movieName: string
 
 
 
@@ -46,6 +55,8 @@ export class PersonDetailedFComponent {
   constructor(
     private route: ActivatedRoute,
     public dataService: DataService,
+    public router: Router ,
+
   ) {
     this.routeSubscription = route.params.subscribe(params => this.personID = Number(params['id']));
     //console.log("this.personID: ",this.personID) // this.personID:  1305610
@@ -76,11 +87,19 @@ export class PersonDetailedFComponent {
       this.currentMonth = today.getMonth();
       this.birthdayMonth = Number(this.actorDetails.birthday?.slice(5,7))
       this.age = this.nowYear - Number(this.actorDetails.birthday?.slice(0,4)) - ((this.birthdayMonth>this.currentMonth)?1:0)
+      if (this.actorDetails.deathday) {
+        this.deathMonth = Number(this.actorDetails.deathday.slice(5,7))
+        this.age = Number(this.actorDetails.deathday?.slice(0,4)) - Number(this.actorDetails.birthday?.slice(0,4)) - ((this.birthdayMonth>this.deathMonth)?1:0)
+      }
       value})
     this.dataService.getActorDetailsKnownFor(this.personID).subscribe(valuE=>{
       //console.log(valuE)
       this.cast = valuE.actorDetailsKnownForFromDataService.cast
+      console.log("this.cast=", this.cast)
       this.actorDetailsKnownFor = valuE.actorDetailsKnownForFromDataService
+      this.actorDetailsKnownForCastNow = this.actorDetailsKnownFor.cast.filter(el=> !el.release_date)
+      this.actorDetailsKnownFor.cast = this.actorDetailsKnownFor.cast
+        .sort((a,b)=>Number(b.release_date.slice(0,4))-Number(a.release_date.slice(0,4))).filter(el=> el.release_date)
       valuE
     })
     this.dataService.getActorDetailsExternal_ids(this.personID).subscribe(value=>{
@@ -92,6 +111,19 @@ export class PersonDetailedFComponent {
   //link to external resource of selected film (facebook, instagram, twitter, homeFilmPage)
   goToLink(url: string) {
     window.open(url, "_blank");
+  }
+
+  getDetailedCard(movieId: number, movieTitle: string) {
+    this.movieName = movieTitle
+    this.movieName = `${movieId}-${new Utils(this.movieName).urlTransformName()}`
+    this.router.navigate(
+      ['movie', this.movieName],
+      {
+        state: {id: '990909090', name: "что-то другое"},
+        queryParams: {
+        }
+      }
+    )
   }
 
 }

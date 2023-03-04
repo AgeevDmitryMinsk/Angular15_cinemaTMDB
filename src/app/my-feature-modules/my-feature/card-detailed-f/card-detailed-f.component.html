@@ -150,7 +150,7 @@
   </div>
   <p class="pt-10">cardDetailMovieID: {{cardDetailMovieID}}</p>
 </div>
-<div *ngIf="showTrailer" class="flex justify-center relative pl-5">
+<div *ngIf="showTrailer" class="absolute left-1/2 transform -translate-x-1/2 top-[100px] flex text-xl pt-10">
   <youtube-player class=" "
                   [height]="screenWidth/2"
                   [width]="screenWidth/1.5"
@@ -163,5 +163,5 @@
                   videoId="{{movieTrailerKeyInCard}}"
   >
   </youtube-player>
-  <div class="text-red-600 text-7xl leading-[0] h-3 cursor-pointer" (click)="closeTrailer()"> &times;</div>
+  <div class="text-red-900 text-7xl leading-[0] h-3 cursor-pointer hover:text-red-600" (click)="closeTrailer()"> &times;</div>
 </div>

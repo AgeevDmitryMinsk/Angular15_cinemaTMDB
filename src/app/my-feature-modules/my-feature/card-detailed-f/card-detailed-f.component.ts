@@ -65,7 +65,10 @@ export class CardDetailedFComponent {
       this.movieDetails = result.movieDetailsFromDataService
       // check data
       //console.log('this.movieDetails in TestCardDetailedComponent = ', this.movieDetails)
-      this.imageBackGroundCard = this.base_image_URL1920 + this.movieDetails.backdrop_path;
+      this.imageBackGroundCard = this.base_image_URL + this.movieDetails.poster_path
+      if (this.movieDetails.backdrop_path) {
+        this.imageBackGroundCard = this.base_image_URL1920 + this.movieDetails.backdrop_path;
+      }
       this.imageCardPoster = this.base_image_URL + this.movieDetails.poster_path
       this.showSuccessToastr(`Movie details are loaded from back`)
       this.showSuccessToastr(`You chose: ${this.movieDetails.title}`)

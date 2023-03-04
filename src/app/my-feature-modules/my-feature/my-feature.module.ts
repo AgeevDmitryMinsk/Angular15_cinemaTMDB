@@ -28,7 +28,7 @@ import { KnownForMoviesComponent } from './known-for-movies/known-for-movies.com
     MinutesToHHMMPipe,
     TopBilledCastCardFComponent,
     PersonDetailedFComponent,
-    KnownForMoviesComponent
+    KnownForMoviesComponent,
   ],
   imports: [
     CommonModule,
