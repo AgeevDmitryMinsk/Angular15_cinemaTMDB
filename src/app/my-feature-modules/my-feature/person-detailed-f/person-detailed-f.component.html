@@ -127,14 +127,14 @@
         </div>
       </div>
 
-      <div class="text-xs sm:text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-bold p-10 pl-0 border border-blue-600" *ngIf="actorDetailsKnownFor">
+      <div class="text-xs sm:text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-bold p-10 pl-0 " *ngIf="actorDetailsKnownFor">
         Acting
-        <div class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl  font-thin flex border border-red-500" *ngFor="let film of actorDetailsKnownForCastNow" >
+        <div class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl  font-thin flex " *ngFor="let film of actorDetailsKnownForCastNow" >
 
           <div class="pl-3 sm:pl-4 md:pl-5 lg:pl-6" >  - </div> <b class="font-bold pl-4 sm:pl-5 md:pl-6 lg:pl-7 pr-1">{{film.original_title}}</b>  <div *ngIf="film.character"> as {{film.character}}</div>
         </div>
 
-        <div class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl  font-thin flex border border-green-600" *ngFor="let film of actorDetailsKnownFor.cast" >
+        <div class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl  font-thin flex" *ngFor="let film of actorDetailsKnownFor.cast" >
 
           {{film.release_date.slice(0,4)}} -
           <b class="font-bold pl-1 pr-1 hover:text-blue-600 cursor-pointer" (click)="getDetailedCard(film.id, film.original_title)">{{film.original_title}}</b>
