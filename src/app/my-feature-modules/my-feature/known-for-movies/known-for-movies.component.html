@@ -1,13 +1,13 @@
-
-
-<mat-card class="flex m-5 min-h-[360px] max-w-[150px] shadow-cyan-500/50 hover:scale-105 ease-in duration-300" *ngIf="castDetails.poster_path">
+<div class="flex flex-col rounded-lg m-0.5 sm:m-1 md:m-1.5 lg:m-2 xl:m-2.5 2xl:m-3
+            min-w-[100px]  shadow-cyan-500/50 hover:scale-105 ease-in duration-300 break-words text-ellipsis overflow-hidden"
+     [ngStyle]="{'width.px':(screenWidth/10)}" *ngIf="castDetails.poster_path">
   <img mat-card-image
        src="{{base_image_URL}}{{castDetails.poster_path}}"
-       alt="Photo of Actor" class="min-h-[200px] min-w-[150px] content-v">
+       alt="Photo of Actor" class="content-v rounded-lg min-w-[100px] min-h-[150px]" [ngStyle]="{'width.px':(screenWidth/10)}">
 
-  <mat-card-content>
-    <p class="font-bold p-0 pt-3">
+
+    <p class="p-0 pt-3 text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl text-ellipsis overflow-hidden">
       {{castDetails.original_title}}
     </p>
-  </mat-card-content>
-</mat-card>
+
+</div>

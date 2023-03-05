@@ -16,10 +16,12 @@
                    *ngIf="actorDetailsExternal_ids.facebook_id">
                 <div class="hover:scale-110 duration-700">
                   <svg-icon src="./assets/facebook-rounded-svgrepo-com.svg"
-                            [svgStyle]="{ 'width.px':50, 'height.px':50, 'fill':'rgb(0,0,0)' }"></svg-icon>
+                            [svgStyle]="{ 'width.px': (screenWidth/20), 'height.px': (screenWidth/20), 'fill':'rgb(0,0,0)', 'maxWidth.px':100, 'maxHeight.px':100 }"></svg-icon>
                 </div>
               </nav>
             </div>
+
+<!--            [height]="screenWidth/2"-->
 
             <div data-popover id="popover1" role="tooltip"
                  class="absolute z-10 invisible inline-block w-40 text-sm font-light text-white transition-opacity duration-300 bg-gray-500 border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 text-center">
@@ -34,7 +36,7 @@
                    *ngIf="actorDetailsExternal_ids.twitter_id">
                 <div class="hover:scale-110 duration-700">
                   <svg-icon src="./assets/twitter-rounded-svgrepo-com.svg"
-                            [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
+                            [svgStyle]="{ 'width.px':(screenWidth/20), 'height.px':(screenWidth/20), 'marginLeft.px':(screenWidth/100), 'fill':'rgb(0,0,0)', 'maxWidth.px':100, 'maxHeight.px':100  }"></svg-icon>
                 </div>
               </nav>
             </div>
@@ -50,7 +52,7 @@
                    *ngIf="actorDetailsExternal_ids.instagram_id">
                 <div class="hover:scale-110 duration-700">
                   <svg-icon src="./assets/instagram-rounded-svgrepo-com.svg"
-                            [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
+                            [svgStyle]="{ 'width.px':(screenWidth/20), 'height.px':(screenWidth/20), 'marginLeft.px':(screenWidth/100), 'fill':'rgb(0,0,0)', 'maxWidth.px':100, 'maxHeight.px':100  }"></svg-icon>
                 </div>
               </nav>
             </div>
@@ -65,7 +67,7 @@
               <nav (click)="goToLink(' '+ actorDetails.homepage)">
                 <div class="hover:scale-110 duration-700">
                   <svg-icon src="./assets/home-svgrepo-com.svg"
-                            [svgStyle]="{ 'width.px':50, 'height.px':50, 'marginLeft.px':20, 'fill':'rgb(0,0,0)' }"></svg-icon>
+                            [svgStyle]="{ 'width.px':(screenWidth/20), 'height.px':(screenWidth/20), 'marginLeft.px':(screenWidth/100), 'fill':'rgb(0,0,0)', 'maxWidth.px':100, 'maxHeight.px':100  }"></svg-icon>
                 </div>
               </nav>
             </div>
@@ -79,30 +81,30 @@
           </div>
         </div>
       </div>
-      <p class="text-2xl pt-5 font-bold">Personal Info</p>
-      <div class="text-xl">Known For</div>
-      <div class="text-sm">{{actorDetails.known_for_department}}</div>
+      <p class="text-xs sm:text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-bold pt-5">Personal Info</p>
+      <div class="text-xs sm:text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl">Known For</div>
+      <div class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl">{{actorDetails.known_for_department}}</div>
 
-      <div class="text-xl pt-5">Known Cast Credits</div>
-      <div class="text-sm">{{actorDetailsKnownFor.cast.length}}</div>
+      <div class="text-xs sm:text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl pt-5">Known Cast Credits</div>
+      <div class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl">{{actorDetailsKnownFor.cast.length}}</div>
 
-      <div class="text-xl pt-5">Gender</div>
-      <div class="text-sm">{{actorDetails.gender === 1 ? "Female" : "Male"}}</div>
+      <div class="text-xs sm:text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl  pt-5">Gender</div>
+      <div class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl">{{actorDetails.gender === 1 ? "Female" : "Male"}}</div>
 
-      <div class="text-xl pt-5">Birthdate</div>
-      <div class="text-sm" *ngIf="age">{{actorDetails.birthday}} ({{age}} years old)</div>
-      <div class="text-sm" *ngIf="!age"> -</div>
+      <div class="text-xs sm:text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl  pt-5">Birthdate</div>
+      <div class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl" *ngIf="age">{{actorDetails.birthday}} ({{age}} years old)</div>
+      <div class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl" *ngIf="!age"> -</div>
 
       <div *ngIf="actorDetails.deathday">
-      <div class="text-xl pt-5">Day of Death</div>
-      <div class="text-sm" *ngIf="age">{{actorDetails.deathday}}</div>
+      <div class="text-xs sm:text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl  pt-5">Day of Death</div>
+      <div class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl" *ngIf="age">{{actorDetails.deathday}}</div>
       </div>
 
-      <div class="text-xl pt-5">Place of Birth</div>
-      <div class="text-sm">{{actorDetails.place_of_birth}}</div>
+      <div class="text-xs sm:text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl  pt-5">Place of Birth</div>
+      <div class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl">{{actorDetails.place_of_birth}}</div>
 
-      <div class="text-xl pt-5" *ngIf="actorDetails.also_known_as">Also Known As
-          <div class="text-sm " *ngFor="let personName of actorDetails.also_known_as">
+      <div class="text-xs sm:text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl  pt-5" *ngIf="actorDetails.also_known_as">Also Known As
+          <div class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl " *ngFor="let personName of actorDetails.also_known_as">
             {{personName}}
           </div>
         <div class="text-sm" *ngIf="actorDetails.also_known_as.length===0"> - </div>
@@ -110,14 +112,14 @@
     </div>
 
     <div class="pl-10 pb-10 rounded-xl w-9/12" *ngIf="actorDetails">
-      <p class="text-4xl font-bold">{{actorDetails.name}}</p>
-      <p class="text-2xl font-bold">Biography</p>
-      <p class="text-xl">{{actorDetails.biography}}</p>
+      <p class="text-xs sm:text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-bold">{{actorDetails.name}}</p>
+      <p class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl font-bold">Biography</p>
+      <p class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl">{{actorDetails.biography}}</p>
       <p class="text-xl" *ngIf="!actorDetails.biography">We don't have a biography for {{actorDetails.name}}.</p>
 
-      <div class="flex flex-col overflow-x-scroll max-h-[430px] overflow-hidden p-10 pl-0">
-        <div class="text-2xl font-bold">Known For</div>
-        <div class="flex text-base p-2">
+      <div class="flex flex-col overflow-x-scroll overflow-hidden">
+        <div class="text-xs sm:text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-bold ">Known For</div>
+        <div class="flex text-base ">
 
           <app-known-for-movies *ngFor="let castDetails of cast"
                                 [castDetails]="castDetails" (click)="getDetailedCard(castDetails.id, castDetails.original_title)"
@@ -125,14 +127,14 @@
         </div>
       </div>
 
-      <div class="text-2xl font-bold p-10 pl-0" *ngIf="actorDetailsKnownFor">
+      <div class="text-xs sm:text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-bold p-10 pl-0 border border-blue-600" *ngIf="actorDetailsKnownFor">
         Acting
-        <div class="text-sm font-thin flex" *ngFor="let film of actorDetailsKnownForCastNow" >
+        <div class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl  font-thin flex border border-red-500" *ngFor="let film of actorDetailsKnownForCastNow" >
 
-          <div class="pl-4" > - </div> <b class="font-bold pl-6 pr-1">{{film.original_title}}</b>  <div *ngIf="film.character"> as {{film.character}}</div>
+          <div class="pl-3 sm:pl-4 md:pl-5 lg:pl-6" >  - </div> <b class="font-bold pl-4 sm:pl-5 md:pl-6 lg:pl-7 pr-1">{{film.original_title}}</b>  <div *ngIf="film.character"> as {{film.character}}</div>
         </div>
 
-        <div class="text-sm font-thin flex" *ngFor="let film of actorDetailsKnownFor.cast" >
+        <div class="text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl  font-thin flex border border-green-600" *ngFor="let film of actorDetailsKnownFor.cast" >
 
           {{film.release_date.slice(0,4)}} -
           <b class="font-bold pl-1 pr-1 hover:text-blue-600 cursor-pointer" (click)="getDetailedCard(film.id, film.original_title)">{{film.original_title}}</b>

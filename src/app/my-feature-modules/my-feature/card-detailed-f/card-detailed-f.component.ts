@@ -55,7 +55,7 @@ export class CardDetailedFComponent {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     // check data
-    //console.log('Высота экрана:', this.screenHeight, 'Ширина экрана:', this.screenWidth);
+    console.log('Высота экрана:', this.screenHeight, 'Ширина экрана:', this.screenWidth);
   }
 
   ngOnInit(): void {

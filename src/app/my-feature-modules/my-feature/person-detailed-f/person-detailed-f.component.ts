@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {Subscription} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {base_image_URL, DataService} from "../../../services/data.service";
@@ -48,8 +48,8 @@ export class PersonDetailedFComponent {
   deathMonth:number
   actorDetailsKnownForCastNow:IMovieCastPeopleCredits[]
   movieName: string
-
-
+  screenHeight: number
+  screenWidth: number
 
 
   constructor(
@@ -61,7 +61,18 @@ export class PersonDetailedFComponent {
     this.routeSubscription = route.params.subscribe(params => this.personID = Number(params['id']));
     //console.log("this.personID: ",this.personID) // this.personID:  1305610
     this.nowYear = today.getFullYear();
+    this.getScreenSize();
   }
+
+  @HostListener('window:resize', ['$event'])
+  getScreenSize() {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+
+    //check data
+    console.log('Высота экрана PersonDetailedFComponent:', this.screenHeight, 'Ширина экрана:', this.screenWidth);
+  }
+
 
 
   ngOnInit(): void {
@@ -94,7 +105,7 @@ export class PersonDetailedFComponent {
       value})
     this.dataService.getActorDetailsKnownFor(this.personID).subscribe(valuE=>{
       //console.log(valuE)
-      this.cast = valuE.actorDetailsKnownForFromDataService.cast
+      this.cast = valuE.actorDetailsKnownForFromDataService.cast.filter(el=> el.vote_average>6.5 && el.original_title.length<20)
       console.log("this.cast=", this.cast)
       this.actorDetailsKnownFor = valuE.actorDetailsKnownForFromDataService
       this.actorDetailsKnownForCastNow = this.actorDetailsKnownFor.cast.filter(el=> !el.release_date)
@@ -106,6 +117,14 @@ export class PersonDetailedFComponent {
       console.log(value)
       this.actorDetailsExternal_ids = value.actorDetailsExternal_idsFromDataService
     })
+
+    //reload a page once using localStorage for rendering popover invisible elements in TestCardDetailedComponent
+    if (!localStorage.getItem('rendering_popover_2')) {
+      localStorage.setItem('rendering_popover_2', 'no reload')
+      location.reload()
+    } else {
+      localStorage.removeItem('rendering_popover_2)')
+    }
   }
 
   //link to external resource of selected film (facebook, instagram, twitter, homeFilmPage)
