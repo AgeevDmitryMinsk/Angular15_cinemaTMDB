@@ -10,12 +10,16 @@ export class ParamInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
     if (request.url.includes('https://api.themoviedb.org/3')) {
-      const paramReq = request.clone({
+      let paramReq = request.clone({
         params: request.params.set(
           'api_key',
           environment.API_KEY
-        )
+        // ).append('language', 'ru')
+      ).append('language', 'en')
       });
+      paramReq = paramReq.clone({
+
+      })
       return next.handle(paramReq)
         //add check errors into interceptor
         .pipe(

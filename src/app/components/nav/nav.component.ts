@@ -18,6 +18,7 @@ export class NavComponent {
   genresTV: IGenre[]
   movie: any;
   page: number;
+  languages: any
   constructor(
     public dataService: DataService,
     public router: Router,
@@ -49,6 +50,7 @@ export class NavComponent {
       .subscribe({
         next: (result) => {
           this.genresTV = result.genres
+          console.log('this.genresTV in NavComponent', this.genresTV)
           this.showSuccessToastr('TV-genres are loaded from backend')
         },
         error: (e) => {
@@ -59,6 +61,15 @@ export class NavComponent {
         complete: () => {
           //inform that getGenresTV_Data completed
           //console.log('getGenresTV_Data done')
+        }
+      })
+
+    this.dataService.getConfigurationLanguage()
+      .subscribe({
+        next: (result) => {
+          this.languages = result.filter(el=> el.name.length>0 && el.iso_639_1==="en" ||  el.iso_639_1=== "ru" || el.iso_639_1=== "de" || el.iso_639_1=== "be")
+
+            console.log('this.languages in NavComponent = ',this.languages)
         }
       })
   }

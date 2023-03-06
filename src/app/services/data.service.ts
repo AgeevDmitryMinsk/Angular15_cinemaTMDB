@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {
+  IConfigurationLanguages,
   IGenres, IMovieCastPeople,
   IMovieCrewPeople,
   IMovieDetails, IMovieExternalSourcesDetails,
@@ -55,6 +56,7 @@ export class DataService {
   getGenresMovieData(): Observable<IGenres> { // Observable - конструктор источника событий
     //remove API_KEY into interceptor
     // return this.http.get<IGenres>(`${base_URL}/genre/movie/list?api_key=${API_KEY}&language=ru-RU`)
+    // return this.http.get<IGenres>(`${base_URL}/genre/movie/list?language=ru`)
     return this.http.get<IGenres>(`${base_URL}/genre/movie/list`)
   }
 
@@ -62,6 +64,10 @@ export class DataService {
     //remove API_KEY into interceptor
     // return this.http.get<IGenres>(`${base_URL}/genre/tv/list?api_key=${API_KEY}&language=ru-RU`)
     return this.http.get<IGenres>(`${base_URL}/genre/tv/list`)
+  }
+
+  getConfigurationLanguage(): Observable<IConfigurationLanguages[]>{
+    return this.http.get<IConfigurationLanguages[]>(`${base_URL}/configuration/languages`)
   }
 
   movieID = new BehaviorSubject<number>(0);
