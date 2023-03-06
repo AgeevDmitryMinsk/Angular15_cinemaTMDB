@@ -13,7 +13,9 @@
 
   <div id="dropdown_0"
        class="relative z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-    <app-genre-f *ngFor="let language of languages" [genre]="language"></app-genre-f>
+    <app-genre-f *ngFor="let language of languages" [genre]="language"
+                 (click)="setAppLanguage(language.iso_639_1)"
+    ></app-genre-f>
   </div>
 
   <!--    button Movie:-->

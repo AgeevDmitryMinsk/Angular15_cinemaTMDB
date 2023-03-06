@@ -6,6 +6,7 @@ import {environment} from "../../../environments/environment";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ToastrService} from "ngx-toastr";
 
+export const languageSelected = {language : 'en'}
 
 @Component({
   selector: 'app-nav',
@@ -72,6 +73,12 @@ export class NavComponent {
             console.log('this.languages in NavComponent = ',this.languages)
         }
       })
+  }
+
+  setAppLanguage(iso_639_1: string){
+    console.log(iso_639_1)
+    languageSelected.language = iso_639_1
+    this.router.navigate(['/'])
   }
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {

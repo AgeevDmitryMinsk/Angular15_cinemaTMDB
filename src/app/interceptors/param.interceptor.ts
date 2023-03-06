@@ -3,7 +3,9 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest}
 import {catchError, Observable, throwError} from 'rxjs';
 import {environment} from "../../environments/environment";
 import {ToastrService} from "ngx-toastr";
+import {languageSelected} from "../components/nav/nav.component";
 
+console.log("languageSelected.language in ParamInterceptor", languageSelected.language)
 @Injectable()
 export class ParamInterceptor implements HttpInterceptor {
   constructor(private toastr: ToastrService) {}
@@ -15,7 +17,7 @@ export class ParamInterceptor implements HttpInterceptor {
           'api_key',
           environment.API_KEY
         // ).append('language', 'ru')
-      ).append('language', 'en')
+      ).append('language', languageSelected.language)
       });
       paramReq = paramReq.clone({
 
