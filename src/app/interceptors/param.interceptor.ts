@@ -11,23 +11,23 @@ import {DataService} from "../services/data.service";
 export class ParamInterceptor implements HttpInterceptor {
   languageInInterceptor: string
   constructor(private toastr: ToastrService,
-              public dataService: DataService) {}
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-
-
-    this.dataService.languageSelected.subscribe({
-      next(x) {
+              public dataService: DataService) {
+    this.dataService.languageSelected.subscribe(
+      (x) => {
         // @ts-ignore
         this.languageInInterceptor = x.language
         console.log('got value ' + x.language);
       },
-      error(err) {
-        console.error('something wrong occurred: ' + err);
-      },
-      complete() {
-        console.log('done');
-      },
-    });
+      // error(err) {
+      //   console.error('something wrong occurred: ' + err);
+      // },
+      // complete() {
+      //   console.log('done');
+      // },
+    );
+  }
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+
 
     if (request.url.includes('https://api.themoviedb.org/3')) {
       let paramReq = request.clone({
