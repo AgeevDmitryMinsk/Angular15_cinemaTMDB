@@ -72,6 +72,7 @@ export class DataService {
 
   movieID = new BehaviorSubject<number>(0);
   actorID = new BehaviorSubject<number>(0);
+  languageSelected = new BehaviorSubject({language : 'en'})
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
     // check data

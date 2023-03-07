@@ -3,13 +3,31 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest}
 import {catchError, Observable, throwError} from 'rxjs';
 import {environment} from "../../environments/environment";
 import {ToastrService} from "ngx-toastr";
-import {languageSelected} from "../components/nav/nav.component";
+import {DataService} from "../services/data.service";
 
-console.log("languageSelected.language in ParamInterceptor", languageSelected.language)
+
+
 @Injectable()
 export class ParamInterceptor implements HttpInterceptor {
-  constructor(private toastr: ToastrService) {}
+  languageInInterceptor: string
+  constructor(private toastr: ToastrService,
+              public dataService: DataService) {}
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+
+
+    this.dataService.languageSelected.subscribe({
+      next(x) {
+        // @ts-ignore
+        this.languageInInterceptor = x.language
+        console.log('got value ' + x.language);
+      },
+      error(err) {
+        console.error('something wrong occurred: ' + err);
+      },
+      complete() {
+        console.log('done');
+      },
+    });
 
     if (request.url.includes('https://api.themoviedb.org/3')) {
       let paramReq = request.clone({
@@ -17,7 +35,7 @@ export class ParamInterceptor implements HttpInterceptor {
           'api_key',
           environment.API_KEY
         // ).append('language', 'ru')
-      ).append('language', languageSelected.language)
+      ).append('language', this.languageInInterceptor)
       });
       paramReq = paramReq.clone({
 
