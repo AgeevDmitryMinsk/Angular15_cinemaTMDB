@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {IGenre} from "../../../interfaces/global";
+import {IConfigurationLanguages, IGenre} from "../../../interfaces/global";
 
 @Component({
   selector: 'app-genre-f',
@@ -7,5 +7,5 @@ import {IGenre} from "../../../interfaces/global";
   styleUrls: ['./genre-f.component.scss']
 })
 export class GenreFComponent {
-  @Input() genre: IGenre
+  @Input() genre: IGenre | IConfigurationLanguages
 }
