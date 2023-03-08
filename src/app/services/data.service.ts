@@ -74,7 +74,7 @@ export class DataService {
   actorID = new BehaviorSubject<number>(0);
   languageSelected = new BehaviorSubject({language : 'en'})
 
-  getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
+  getMovie(event_genre: string, event_genre_id: number, movie_tv: string): Observable<any> {
     // check data
     //console.log("click =", event_genre, ',', movie_tv, ',', event_genre_id)
     return this.movieData = this.http.get<IMoviesAllData>(`${base_URL}/discover/${movie_tv}?with_genres=${event_genre_id}&page=${this.page}`)

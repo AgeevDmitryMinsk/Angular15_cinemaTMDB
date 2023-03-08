@@ -61,7 +61,7 @@ export class ResultsFComponent implements OnInit, OnDestroy  {
             // console.log(55, this.dataService.moviesRequest)
             this.movie = response.response;
             this.dataService.movie = this.movie;
-            //console.log(58, this.movie)
+            console.log(64, this.movie)
             this.allClickedMovies = this.dataService.movie; // добавил для привязки получение данных к чендж роута и профит.
             //console.log(66, '******* this.allClickedMovies in resultComponent = ', this.allClickedMovies) // correct movie or tv
           },

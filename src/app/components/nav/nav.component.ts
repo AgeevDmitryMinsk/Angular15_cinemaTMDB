@@ -1,10 +1,12 @@
-import {Component, SimpleChanges} from '@angular/core';
+import {Component} from '@angular/core';
 import {IConfigurationLanguages, IGenre} from "../../interfaces/global";
 import {DataService} from "../../services/data.service";
 import {Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ToastrService} from "ngx-toastr";
+import {LocalService} from "../../services/local.service";
+import {Observable} from "rxjs";
 
 // export const languageSelected = {language : 'en'}
 
@@ -17,23 +19,44 @@ export class NavComponent {
   moviesRequest: string;
   genres: IGenre[]
   genresTV: IGenre[]
-  movie: any;
+  movie: Observable<any>;
   page: number;
   languages: IConfigurationLanguages[]
+  languageInLocalStorage: string | null
+
   constructor(
     public dataService: DataService,
     public router: Router,
     private _snackBar: MatSnackBar,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private localStore: LocalService
   ) {
   }
+
   ngOnInit() {
+
+    this.languageInLocalStorage = this.localStore.getData("languageInLocalStorage")
+    console.log("this.languageInLocalStorage in NavComponent", this.languageInLocalStorage)
+
+    if (this.languageInLocalStorage) {
+      console.log(`this.languageInLocalStorage exist`)
+      this.dataService.languageSelected.next({language: this.languageInLocalStorage})
+    } else {
+      console.log(`this.languageInLocalStorage NOT exist`)
+      this.dataService.languageSelected.subscribe({
+        next: (result) => {
+          console.log("languageSelected result in NavComponent", result)
+        }
+      })
+    }
+
     this.dataService.getGenresMovieData()
       .subscribe({
         next: (result) => {
           //get genres from backend
           //console.log(' JSON.stringify getGenresMovieData = ',JSON.stringify(result)) // {"genres":[{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]}
           this.genres = result.genres
+          console.log('this.genresMovie in NavComponent', this.genres)
           this.showSuccessToastr('Movie-genres are loaded from back')
         },
         error: (e) => {
@@ -68,7 +91,7 @@ export class NavComponent {
     this.dataService.getConfigurationLanguage()
       .subscribe({
         next: (result) => {
-          this.languages = result.filter(el=> el.name.length>0 && el.iso_639_1==="en" ||  el.iso_639_1=== "ru" || el.iso_639_1=== "de" || el.iso_639_1=== "be")
+          this.languages = result.filter(el => el.name.length > 0 && el.iso_639_1 === "en" || el.iso_639_1 === "ru" || el.iso_639_1 === "de" || el.iso_639_1 === "be")
           // it's possible to sort and show a limited number of languages for translation:
           // this.languages = result.filter(el=> el.name.length>0 && !el.name.includes("?")).slice(0,30)
           // this.languages = this.languages.sort(( a, b ) =>{
@@ -83,26 +106,25 @@ export class NavComponent {
           // this.languages = this.languages
           //   .sort((a,b) => (b.name > a.name)?1:(a.name>b.name)?-1:0)
 
-            console.log('this.languages in NavComponent = ',this.languages)
+          console.log('this.languages in NavComponent = ', this.languages)
         }
       })
 
-    this.dataService.languageSelected.subscribe({
-      next: (result) => {
-        console.log("languageSelected result in NavComponent", result)
-      }
-    })
+
+
+
   }
 
   // ngOnChanges(changes: SimpleChanges) {
   //   console.log("changes in ngOnChanges = ",changes)
   // }
 
-  setAppLanguage(iso_639_1: string){
+  setAppLanguage(iso_639_1: string) {
     console.log(iso_639_1)
     // languageSelected.language = iso_639_1
     // this.router.navigate(['/'])
     this.dataService.languageSelected.next({language: iso_639_1}) // кладу в переменную languageSelected новое значение iso_639_1 и потом отслеживаю его через this.dataService.languageSelected.subscribe в TestCardDetailedComponent
+    this.localStore.saveData("languageInLocalStorage", iso_639_1)
 
     this.dataService.getGenresMovieData()
       .subscribe({
@@ -110,6 +132,7 @@ export class NavComponent {
           //get genres from backend
           //console.log(' JSON.stringify getGenresMovieData = ',JSON.stringify(result)) // {"genres":[{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]}
           this.genres = result.genres
+          console.log('this.genresMovie in NavComponent', this.genres)
           this.showSuccessToastr('Movie-genres are loaded from back')
         },
         error: (e) => {
@@ -140,11 +163,43 @@ export class NavComponent {
           //console.log('getGenresTV_Data done')
         }
       })
+
+    if (
+      this.localStore.getData('event_genre_id_IN_localStorage') &&
+      this.localStore.getData('movie_tv_IN_localStorage')
+    ) {
+      this.dataService.getMovie('',
+        Number(this.localStore.getData('event_genre_id_IN_localStorage')),
+        this.localStore.getData('movie_tv_IN_localStorage') ||''
+      ).subscribe({
+        next: (result) => {
+          this.movie = result.response
+          console.log("this.movie in NavComponent", this.movie)
+
+          this.router.navigate(
+            [this.localStore.getData('movie_tv_IN_localStorage') === 'movie' ? 'movie-results' : 'tv-results',
+              this.localStore.getData('event_genre_id_IN_localStorage')],
+            {
+              state: {id: '990909090', name: "что-то другое"},
+              queryParams: {
+                'movie_tv': this.localStore.getData('movie_tv_IN_localStorage'),
+                'clickedGenreID': this.localStore.getData('event_genre_id_IN_localStorage')
+              }
+            }
+          )
+        }
+      })
+
+
+    }
+
   }
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {
     //check "click =", event_genre, ',', movie_tv, ',', event_genre_id
     //console.log("click =", event_genre, ',', movie_tv, ',', event_genre_id);
+    this.localStore.saveData("event_genre_id_IN_localStorage", String(event_genre_id))
+    this.localStore.saveData("movie_tv_IN_localStorage", movie_tv)
     this.dataService.getMovie('', event_genre_id, movie_tv).subscribe(response => {
       // check response.url -> https://api.themoviedb.org/3/discover/movie?with_genres=28
       //console.log(response.url)
@@ -180,6 +235,7 @@ export class NavComponent {
     this.dataService.clickedGenre = event_genre
     this.dataService.clickedGenreID = event_genre_id
   }
+
   openSnackBar(message: string) { // openSnackBar для последовательного отображения сообщений в углу экрана
     this._snackBar.open(message, '_snackBar ERROR: try to use VPN ', {
       duration: 3000,
