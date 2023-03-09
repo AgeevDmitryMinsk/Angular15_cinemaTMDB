@@ -57,7 +57,7 @@ export class NavComponent {
           //console.log(' JSON.stringify getGenresMovieData = ',JSON.stringify(result)) // {"genres":[{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]}
           this.genres = result.genres
           console.log('this.genresMovie in NavComponent', this.genres)
-          this.showSuccessToastr('Movie-genres are loaded from back')
+          //this.showSuccessToastr('Movie-genres are loaded from back')
         },
         error: (e) => {
           console.log("ERROR in getGenresMovieData:", e.message)
@@ -75,7 +75,7 @@ export class NavComponent {
         next: (result) => {
           this.genresTV = result.genres
           console.log('this.genresTV in NavComponent', this.genresTV)
-          this.showSuccessToastr('TV-genres are loaded from backend')
+          //this.showSuccessToastr('TV-genres are loaded from backend')
         },
         error: (e) => {
           console.log("ERROR in getGenresTV_Data:", e.message)
@@ -111,20 +111,21 @@ export class NavComponent {
       })
 
 
-
-
   }
 
   // ngOnChanges(changes: SimpleChanges) {
   //   console.log("changes in ngOnChanges = ",changes)
   // }
 
-  setAppLanguage(iso_639_1: string) {
+  setAppLanguage(iso_639_1: string, language_english_name: string) {
     console.log(iso_639_1)
+    console.log("this.router.url.split('/')[1] in NavComponent", this.router.url.split('/')[1])
+    console.log("this.router.url.split('/')[1] in NavComponent ==='' ", this.router.url.split('/')[1] === "")
     // languageSelected.language = iso_639_1
     // this.router.navigate(['/'])
     this.dataService.languageSelected.next({language: iso_639_1}) // кладу в переменную languageSelected новое значение iso_639_1 и потом отслеживаю его через this.dataService.languageSelected.subscribe в TestCardDetailedComponent
     this.localStore.saveData("languageInLocalStorage", iso_639_1)
+    this.showSuccessToastr(`Selected: ${language_english_name} language`)
 
     this.dataService.getGenresMovieData()
       .subscribe({
@@ -133,7 +134,7 @@ export class NavComponent {
           //console.log(' JSON.stringify getGenresMovieData = ',JSON.stringify(result)) // {"genres":[{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]}
           this.genres = result.genres
           console.log('this.genresMovie in NavComponent', this.genres)
-          this.showSuccessToastr('Movie-genres are loaded from back')
+          //this.showSuccessToastr('Movie-genres are loaded from back')
         },
         error: (e) => {
           console.log("ERROR in getGenresMovieData:", e.message)
@@ -151,7 +152,7 @@ export class NavComponent {
         next: (result) => {
           this.genresTV = result.genres
           console.log('this.genresTV in NavComponent', this.genresTV)
-          this.showSuccessToastr('TV-genres are loaded from backend')
+          //this.showSuccessToastr('TV-genres are loaded from backend')
         },
         error: (e) => {
           console.log("ERROR in getGenresTV_Data:", e.message)
@@ -170,24 +171,26 @@ export class NavComponent {
     ) {
       this.dataService.getMovie('',
         Number(this.localStore.getData('event_genre_id_IN_localStorage')),
-        this.localStore.getData('movie_tv_IN_localStorage') ||''
+        this.localStore.getData('movie_tv_IN_localStorage') || ''
       ).subscribe({
         next: (result) => {
           this.movie = result.response
           console.log("this.movie in NavComponent", this.movie)
 
-          this.router.navigate(
-            [this.localStore.getData('movie_tv_IN_localStorage') === 'movie' ? 'movie-results' : 'tv-results',
-              this.localStore.getData('event_genre_id_IN_localStorage')],
-            {
-              state: {id: '990909090', name: "что-то другое"},
-              queryParams: {
-                'movie_tv': this.localStore.getData('movie_tv_IN_localStorage'),
-                'clickedGenreID': this.localStore.getData('event_genre_id_IN_localStorage'),
-                'language': this.localStore.getData("languageInLocalStorage")
+          if (this.router.url.split('/')[1] === "movie-results" || this.router.url.split('/')[1] === "tv-results") {
+            this.router.navigate(
+              [this.localStore.getData('movie_tv_IN_localStorage') === 'movie' ? 'movie-results' : 'tv-results',
+                this.localStore.getData('event_genre_id_IN_localStorage')],
+              {
+                state: {id: '990909090', name: "что-то другое"},
+                queryParams: {
+                  'movie_tv': this.localStore.getData('movie_tv_IN_localStorage'),
+                  'clickedGenreID': this.localStore.getData('event_genre_id_IN_localStorage'),
+                  'language': this.localStore.getData("languageInLocalStorage")
+                }
               }
-            }
-          )
+            )
+          }
         }
       })
 
