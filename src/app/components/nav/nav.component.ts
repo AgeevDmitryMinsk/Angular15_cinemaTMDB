@@ -117,7 +117,32 @@ export class NavComponent {
   //   console.log("changes in ngOnChanges = ",changes)
   // }
 
-  setAppLanguage(iso_639_1: string, language_english_name: string) {
+  setAppLanguage(iso_639_1: string, language_name: string) {
+
+
+    this.dataService.getConfigurationLanguage()
+      .subscribe({
+        next: (result) => {
+          this.languages = result.filter(el => el.name.length > 0 && el.iso_639_1 === "en" || el.iso_639_1 === "ru" || el.iso_639_1 === "de" || el.iso_639_1 === "be" || el.iso_639_1 === "fr" ||  el.iso_639_1 === "ja" ||  el.iso_639_1 === "pl" ||  el.iso_639_1 === "uk" )
+          // it's possible to sort and show a limited number of languages for translation:
+          //this.languages = result.filter(el=> el.name.length>0 && !el.name.includes("?")).slice(0,80)
+          this.languages = this.languages.sort(( a,b ) =>{
+            if ( a.name < b.name ){
+              return -1;
+            }
+            if ( a.name > b.name ){
+              return 1;
+            }
+            return 0;
+          })
+          // this.languages = this.languages
+          //   .sort((a,b) => (b.name > a.name)?1:(a.name>b.name)?-1:0)
+
+          console.log('this.languages in NavComponent = ', this.languages)
+        }
+      })
+
+
     console.log(iso_639_1)
     console.log("this.router.url.split('/')[1] in NavComponent", this.router.url.split('/')[1])
     console.log("this.router.url.split('/')[1] in NavComponent ==='' ", this.router.url.split('/')[1] === "")
@@ -125,7 +150,8 @@ export class NavComponent {
     // this.router.navigate(['/'])
     this.dataService.languageSelected.next({language: iso_639_1}) // кладу в переменную languageSelected новое значение iso_639_1 и потом отслеживаю его через this.dataService.languageSelected.subscribe в TestCardDetailedComponent
     this.localStore.saveData("languageInLocalStorage", iso_639_1)
-    this.showSuccessToastr(`Selected: ${language_english_name} language`)
+    this.localStore.saveData("language_english_nameInLocalStorage", language_name)
+    this.showSuccessToastr(`Selected: ${language_name} language`)
 
     this.dataService.getGenresMovieData()
       .subscribe({

@@ -35,13 +35,12 @@ export class ResultsFComponent implements OnInit, OnDestroy  {
     private route: ActivatedRoute,
     public router: Router ,
     private toastr: ToastrService) {
-    console.log("router.url in ResultsFComponent=", router.url) // /movie-results/16?movie_tv=movie&clickedGenreID=16&language=en
-
     this.routeSubscription = route.params.subscribe(params => this.id = params['id']);
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
         console.log("router.url in ResultsFComponent=", router.url) // /movie-results/16?movie_tv=movie&clickedGenreID=16&language=en
         console.log("queryParam in ResultsFComponent=" , queryParam) // {movie_tv: 'movie', clickedGenreID: '16', page: '1', event_genre: 'мультфильм'}
+        console.log("router.url in ResultsFComponent=", router.url) // /movie-results/16?movie_tv=movie&clickedGenreID=16&language=en
         console.log(router.url.split('/')[1]) // movie-results
         this.movie_tv = queryParam['movie_tv'];
         // check data
