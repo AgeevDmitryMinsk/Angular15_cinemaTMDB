@@ -91,20 +91,20 @@ export class NavComponent {
     this.dataService.getConfigurationLanguage()
       .subscribe({
         next: (result) => {
-          this.languages = result.filter(el => el.name.length > 0 && el.iso_639_1 === "en" || el.iso_639_1 === "ru" || el.iso_639_1 === "de" || el.iso_639_1 === "be")
+          this.languages = result.filter(el => el.name.length > 0 && el.iso_639_1 === "en" || el.iso_639_1 === "ru" || el.iso_639_1 === "de" || el.iso_639_1 === "be" || el.iso_639_1 === "fr" ||  el.iso_639_1 === "ja" ||  el.iso_639_1 === "pl" ||  el.iso_639_1 === "uk" )
           // it's possible to sort and show a limited number of languages for translation:
-          // this.languages = result.filter(el=> el.name.length>0 && !el.name.includes("?")).slice(0,30)
-          // this.languages = this.languages.sort(( a, b ) =>{
-          //   if ( a.name < b.name ){
-          //     return -1;
-          //   }
-          //   if ( a.name > b.name ){
-          //     return 1;
-          //   }
-          //   return 0;
-          // })
-          // this.languages = this.languages
-          //   .sort((a,b) => (b.name > a.name)?1:(a.name>b.name)?-1:0)
+          //this.languages = result.filter(el=> el.name.length>0 && !el.name.includes("?")).slice(0,80)
+          this.languages = this.languages.sort(( a, b ) =>{
+            if ( a.name < b.name ){
+              return -1;
+            }
+            if ( a.name > b.name ){
+              return 1;
+            }
+            return 0;
+          })
+          this.languages = this.languages
+            .sort((a,b) => (b.name > a.name)?1:(a.name>b.name)?-1:0)
 
           console.log('this.languages in NavComponent = ', this.languages)
         }
