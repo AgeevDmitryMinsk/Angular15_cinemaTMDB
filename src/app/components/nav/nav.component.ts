@@ -183,7 +183,8 @@ export class NavComponent {
               state: {id: '990909090', name: "что-то другое"},
               queryParams: {
                 'movie_tv': this.localStore.getData('movie_tv_IN_localStorage'),
-                'clickedGenreID': this.localStore.getData('event_genre_id_IN_localStorage')
+                'clickedGenreID': this.localStore.getData('event_genre_id_IN_localStorage'),
+                'language': this.localStore.getData("languageInLocalStorage")
               }
             }
           )
