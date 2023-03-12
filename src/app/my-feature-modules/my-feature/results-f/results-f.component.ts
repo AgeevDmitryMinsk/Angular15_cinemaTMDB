@@ -13,7 +13,8 @@ import {Utils} from "../../../components/Utils/utils";
   templateUrl: './results-f.component.html',
   styleUrls: ['./results-f.component.scss']
 })
-export class ResultsFComponent implements OnInit, OnDestroy  {
+// export class ResultsFComponent implements OnInit, OnDestroy  {
+export class ResultsFComponent implements OnInit   {
   clickedGenreID: number
   movie_tv: string;
   page: number
@@ -24,6 +25,7 @@ export class ResultsFComponent implements OnInit, OnDestroy  {
   moviesRequest: string;
   movie: any;
   event_genre:string
+  res_ID: number
   private destroy: Subject<boolean> = new Subject<boolean>();
   id: number | undefined;
   private routeSubscription: Subscription;
@@ -99,10 +101,10 @@ export class ResultsFComponent implements OnInit, OnDestroy  {
         // console.log(86, 'activatedRoute.data  from ResultsComponent', data) // {id: '1', name: 'Angular'}
       });
   }
-  public ngOnDestroy(): void {
-    this.destroy.next(true);
-    this.destroy.unsubscribe();
-  }
+  // public ngOnDestroy(): void {
+  //   this.destroy.next(true);
+  //   this.destroy.unsubscribe();
+  // }
 
   loadMore(){
     this.dataService.page++
@@ -131,7 +133,10 @@ export class ResultsFComponent implements OnInit, OnDestroy  {
     //console.log('getDetailedCard movieId in ResultsComponent =', movieId )
     //console.log('ind in ResultsComponent =', ind )
     //console.log('this.allClickedMovies in ResultsComponent =', this.allClickedMovies[ind].title, this.allClickedMovies[ind].name )
-    this.dataService.movieID.next(movieId) // кладу в переменную movieID новое значение movieId и потом отслеживаю его через this.dataService.movieID.subscribe в TestCardDetailedComponent
+    this.dataService.movieID.next({value_ID: movieId}) // кладу в переменную movieID новое значение movieId и потом отслеживаю его через this.dataService.movieID.subscribe в TestCardDetailedComponent
+    //this.dataService.movieID.subscribe(res=>this.res_ID = res )
+    //console.log("res movieId in ResultsFComponent", this.res_ID)
+    //debugger
     this.movieName = this.allClickedMovies[ind].title || this.allClickedMovies[ind].name
     // this.movieName = `${movieId}-${this.movieName.toLowerCase().replace(/[^\w\s\']|_/g, '').trim().split(' ').join('-')}`
     this.movieName = `${movieId}-${new Utils(this.movieName).urlTransformName()}`

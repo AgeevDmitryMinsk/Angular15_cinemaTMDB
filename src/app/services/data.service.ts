@@ -70,7 +70,7 @@ export class DataService {
     return this.http.get<IConfigurationLanguages[]>(`${base_URL}/configuration/languages`)
   }
 
-  movieID = new BehaviorSubject<number>(0);
+  movieID = new BehaviorSubject({value_ID: 0});
   actorID = new BehaviorSubject<number>(0);
   languageSelected = new BehaviorSubject({language : 'en'})
 

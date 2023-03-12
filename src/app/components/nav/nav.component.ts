@@ -24,6 +24,8 @@ export class NavComponent {
   languages: IConfigurationLanguages[]
   languageInLocalStorage: string | null
 
+  movie_ID: any
+
   constructor(
     public dataService: DataService,
     public router: Router,
@@ -191,6 +193,14 @@ export class NavComponent {
         }
       })
 
+    this.dataService.movieID.subscribe(
+      result_ID => {
+        this.movie_ID = result_ID.value_ID
+        console.log("result_ID in navComponent", this.movie_ID)
+        debugger
+        return result_ID
+      })
+
     if (
       this.localStore.getData('event_genre_id_IN_localStorage') &&
       this.localStore.getData('movie_tv_IN_localStorage')
@@ -217,6 +227,19 @@ export class NavComponent {
               }
             )
           }
+
+          if (this.router.url.split('/')[1] === "movie") {
+            this.router.navigate(
+              ["movie", this.movie_ID], //!!!!!!!!!!!!!!!!!
+              {
+                state: {id: '990909090', name: "что-то другое"},
+                queryParams: {
+                }
+              }
+            )
+          }
+
+
         }
       })
 
