@@ -250,6 +250,7 @@ export class NavComponent {
                     }
                   }
                 )
+                location.reload() // The location.reload() method reloads the current URL, like the Refresh button.
               }
             })
           }
