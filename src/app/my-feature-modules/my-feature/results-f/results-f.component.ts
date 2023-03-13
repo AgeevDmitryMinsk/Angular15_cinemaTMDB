@@ -134,6 +134,10 @@ export class ResultsFComponent implements OnInit   {
     //console.log('ind in ResultsComponent =', ind )
     //console.log('this.allClickedMovies in ResultsComponent =', this.allClickedMovies[ind].title, this.allClickedMovies[ind].name )
     this.dataService.movieID.next({value_ID: movieId}) // кладу в переменную movieID новое значение movieId и потом отслеживаю его через this.dataService.movieID.subscribe в TestCardDetailedComponent
+    this.dataService.searsh$.next(5)
+    console.log("this.dataService.movieID.value in result-F", this.dataService.movieID.value)
+    console.log("this.dataService.searsh$.value in result-F", this.dataService.searsh$.value)
+    //debugger
     //this.dataService.movieID.subscribe(res=>this.res_ID = res )
     //console.log("res movieId in ResultsFComponent", this.res_ID)
     //debugger

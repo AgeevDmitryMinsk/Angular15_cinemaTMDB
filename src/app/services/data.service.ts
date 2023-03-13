@@ -66,13 +66,13 @@ export class DataService {
     return this.http.get<IGenres>(`${base_URL}/genre/tv/list`)
   }
 
-  getConfigurationLanguage(): Observable<IConfigurationLanguages[]>{
+  getConfigurationLanguage(): Observable<IConfigurationLanguages[]> {
     return this.http.get<IConfigurationLanguages[]>(`${base_URL}/configuration/languages`)
   }
 
   movieID = new BehaviorSubject({value_ID: 0});
   actorID = new BehaviorSubject<number>(0);
-  languageSelected = new BehaviorSubject({language : 'en'})
+  languageSelected = new BehaviorSubject({language: 'en'})
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string): Observable<any> {
     // check data
@@ -119,7 +119,7 @@ export class DataService {
         this.StoryArr = response.crew.filter(({job}) => job === 'Story')
         this.WriterArr = response.crew.filter(({job}) => job === 'Writer')
         //console.log(this.DirectorArr[0])
-        if(this.DirectorArr[0]) {
+        if (this.DirectorArr[0]) {
           this.Director = this.DirectorArr[0].name
         }
         if (this.ScreenplayArr[0]) {
@@ -153,7 +153,7 @@ export class DataService {
     //console.log('getActorDetails ***', actorID)
     return this.http.get<IPersonDetails>(`${base_URL}/person/${actorID}`)
       .pipe(map(responsse => {
-         console.log("getActorDetails response", responsse)
+        console.log("getActorDetails response", responsse)
         this.actorDetails = responsse
         return {
           actorDetailsFromDataService: this.actorDetails
@@ -161,7 +161,7 @@ export class DataService {
       }))
   }
 
-  getActorDetailsKnownFor(actorID: number){
+  getActorDetailsKnownFor(actorID: number) {
     return this.http.get<IMoviePeopleCredits>(`${base_URL}/person/${actorID}/movie_credits`)
       .pipe(map(responz => {
         console.log("getActorDetailsKnownFor responz", responz)
@@ -172,7 +172,7 @@ export class DataService {
       }))
   }
 
-  getActorDetailsExternal_ids(actorID: number){
+  getActorDetailsExternal_ids(actorID: number) {
     return this.http.get<IPersonDetailsExternal_ids>(`${base_URL}/person/${actorID}/external_ids`)
       .pipe(map(responzs => {
         console.log("getActorDetailsExternal_ids responzs", responzs)
@@ -219,7 +219,7 @@ export class DataService {
           this.movieTrailer = videoResponse.results.filter(({name}) => name.includes(``))
 
           //Checking to see if there is an official trailer
-          if (videoResponse.results.filter(({name}) => name.includes(`Trailer`))){
+          if (videoResponse.results.filter(({name}) => name.includes(`Trailer`))) {
             //console.log("YES Trailer exist")
             this.movieTrailer = videoResponse.results.filter(({name}) => name.includes(`Trailer`))
           }
@@ -244,13 +244,13 @@ export class DataService {
   myData: number = 1;
 
   //train Observable)))
-  searsh$ = new Observable(observer => {
-    // console.log('start in Observable')
-    observer.next(1);
-    observer.next(2);
-    observer.next(3);
-    // console.log('end in Observable')
-  })
+  // searsh$ = new Observable(observer => {
+  //   // console.log('start in Observable')
+  //   // observer.next(1);
+  //   // observer.next(2);
+  //   observer.next(3);
+  //   // console.log('end in Observable')
+  // })
+
+  searsh$ = new BehaviorSubject(3)
 }
-
-

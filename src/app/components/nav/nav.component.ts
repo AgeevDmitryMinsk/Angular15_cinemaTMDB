@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IConfigurationLanguages, IGenre} from "../../interfaces/global";
+import {IConfigurationLanguages, IGenre, IMovieDetails} from "../../interfaces/global";
 import {DataService} from "../../services/data.service";
 import {Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
@@ -25,6 +25,7 @@ export class NavComponent {
   languageInLocalStorage: string | null
 
   movie_ID: any
+  movieDetails: IMovieDetails
 
   constructor(
     public dataService: DataService,
@@ -193,11 +194,16 @@ export class NavComponent {
         }
       })
 
+    this.dataService.searsh$.subscribe((x) => {
+      console.log("searsh$ in navComponent =", x);
+      //debugger
+    })
+
     this.dataService.movieID.subscribe(
       result_ID => {
         this.movie_ID = result_ID.value_ID
         console.log("result_ID in navComponent", this.movie_ID)
-        debugger
+        //debugger
         return result_ID
       })
 
@@ -229,23 +235,27 @@ export class NavComponent {
           }
 
           if (this.router.url.split('/')[1] === "movie") {
-            this.router.navigate(
-              ["movie", this.movie_ID], //!!!!!!!!!!!!!!!!!
-              {
-                state: {id: '990909090', name: "что-то другое"},
-                queryParams: {
-                }
+            console.log("Изменен язык выбранного фильма на:", this.languageInLocalStorage)
+            this.dataService.getMovieDetails(this.movie_ID).subscribe({
+              next: value => {
+                this.movieDetails = value.movieDetailsFromDataService
+                console.log("this.movieDetails in NavComponent = ", this.movieDetails)
+
+                this.router.navigate(
+                  ["movie", this.movie_ID],
+                  {
+                    state: {id: '990909090', name: "что-то другое"},
+                    queryParams: {
+                      'language': this.localStore.getData("languageInLocalStorage")
+                    }
+                  }
+                )
               }
-            )
+            })
           }
-
-
         }
       })
-
-
     }
-
   }
 
   getMovie(event_genre: string, event_genre_id: number, movie_tv: string) {

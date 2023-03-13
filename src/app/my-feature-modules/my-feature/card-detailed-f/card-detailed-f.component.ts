@@ -45,6 +45,7 @@ export class CardDetailedFComponent {
     public router: Router ,
   ) {
     this.routeSubscription = route.params.subscribe(params => this.cardDetailMovieID = Number(params['id'].split('-')[0]));
+    this.dataService.movieID.next({value_ID: this.cardDetailMovieID})
     // check data
     //console.log(35, `this.cardDetailMovieID =`, this.cardDetailMovieID)
     this.getScreenSize();
