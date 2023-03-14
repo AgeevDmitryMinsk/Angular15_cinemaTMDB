@@ -184,7 +184,7 @@ export class DataService {
   }
 
 
-  getMovieDetails(movieID: number) {
+  getMovieDetails(movieID: number):Observable<any> {
     return this.http.get<IMovieDetails>(`${base_URL}/movie/${movieID}`)
       .pipe(map(responsse => {
         // console.log(responsse)

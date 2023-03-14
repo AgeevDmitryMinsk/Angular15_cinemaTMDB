@@ -25,7 +25,7 @@ export class NavComponent {
   languageInLocalStorage: string | null
 
   movie_ID: any
-  movieDetails: IMovieDetails
+  movieDetails: Observable<IMovieDetails>
 
   constructor(
     public dataService: DataService,
@@ -37,6 +37,8 @@ export class NavComponent {
   }
 
   ngOnInit() {
+
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false; // use the Router and override the shouldReuseRoute from the routeReuseStrategy  method which returns false statement
 
     this.languageInLocalStorage = this.localStore.getData("languageInLocalStorage")
     console.log("this.languageInLocalStorage in NavComponent", this.languageInLocalStorage)
@@ -250,7 +252,7 @@ export class NavComponent {
                     }
                   }
                 )
-                location.reload() // The location.reload() method reloads the current URL, like the Refresh button.
+               // location.reload() // The location.reload() method reloads the current URL, like the Refresh button.
               }
             })
           }
