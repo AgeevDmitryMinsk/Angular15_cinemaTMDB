@@ -1,4 +1,6 @@
-export const FR = {
+import {ILanguageString} from "../../interfaces/global";
+
+export const FR:ILanguageString = {
   navigation: {
     home: 'Page d\'accueil',
     language: 'Langue',

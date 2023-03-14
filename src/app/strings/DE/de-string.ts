@@ -1,4 +1,6 @@
-export const DE = {
+import {ILanguageString} from "../../interfaces/global";
+
+export const DE:ILanguageString = {
   navigation: {
     home: 'Hauptseite',
     language: 'Sprache',

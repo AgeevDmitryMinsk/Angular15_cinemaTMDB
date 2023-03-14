@@ -7,7 +7,7 @@ export interface IGenres {
   genres: IGenre[]
 }
 
-export interface IConfigurationLanguages{
+export interface IConfigurationLanguages {
   iso_639_1: string
   english_name: string
   name: string
@@ -201,6 +201,17 @@ export interface IPersonDetailsExternal_ids {
   tvrage_id?: number
   twitter_id?: string
   wikidata_id?: string
+}
+
+export interface ILanguageString {
+  navigation: INavigationLanguage
+}
+
+export interface INavigationLanguage {
+  home: string,
+  language: string,
+  movie: string,
+  tv: string
 }
 
 export enum numberToGenre {

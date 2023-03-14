@@ -1,12 +1,20 @@
 import {Component} from '@angular/core';
-import {IConfigurationLanguages, IGenre, IMovieDetails} from "../../interfaces/global";
+import {IConfigurationLanguages, IGenre, IMovieDetails, INavigationLanguage} from "../../interfaces/global";
 import {DataService} from "../../services/data.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ToastrService} from "ngx-toastr";
 import {LocalService} from "../../services/local.service";
 import {Observable} from "rxjs";
+import {DE} from "../../strings/DE/de-string";
+import {ENG} from "../../strings/ENG/eng-string";
+import {FR} from "../../strings/FR/fr-string";
+import {PL} from "../../strings/PL/pl-string";
+import {RU} from "../../strings/RU/ru-string";
+import {UKR} from "../../strings/UK/ukr-string";
+import {BLR} from "../../strings/BLR/blr-string";
+import {JA} from "../../strings/JA/jpn-string";
 
 // export const languageSelected = {language : 'en'}
 
@@ -27,6 +35,7 @@ export class NavComponent {
   movie_ID: any
   movieDetails: Observable<IMovieDetails>
   languageFromQueryParams: string;
+  public navPageString:INavigationLanguage;
 
   constructor(
     public dataService: DataService,
@@ -34,15 +43,88 @@ export class NavComponent {
     private _snackBar: MatSnackBar,
     private toastr: ToastrService,
     private localStore: LocalService,
-    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false; // use the Router and override the shouldReuseRoute from the routeReuseStrategy  method which returns false statement
+    //this.router.routeReuseStrategy.shouldReuseRoute = () => false; // use the Router and override the shouldReuseRoute from the routeReuseStrategy  method which returns false statement
 
     this.languageInLocalStorage = this.localStore.getData("languageInLocalStorage")
     console.log("this.languageInLocalStorage in NavComponent", this.languageInLocalStorage)
+
+    if (this.languageInLocalStorage) {
+      console.log(`this.languageInLocalStorage exist`)
+      this.dataService.languageSelected.next({language: this.languageInLocalStorage})
+      switch (this.languageInLocalStorage) {
+        case "de":
+          this.navPageString = DE.navigation
+          break;
+        case "en":
+          this.navPageString = ENG.navigation
+          break;
+        case "fr":
+          this.navPageString = FR.navigation
+          break;
+        case "pl":
+          this.navPageString = PL.navigation
+          break;
+        case "ru":
+          this.navPageString = RU.navigation
+          break;
+        case "uk":
+          this.navPageString = UKR.navigation
+          break;
+        case "be":
+          this.navPageString = BLR.navigation
+          break;
+        case "ja":
+          this.navPageString = JA.navigation
+          break;
+        default:
+          this.navPageString = ENG.navigation
+      }
+    } else {
+      this.dataService.languageSelected.subscribe(
+        {
+          next: (result) => {
+            console.log("languageSelected result in HeaderComponent", result.language)
+            this.languageFromQueryParams = result.language
+
+            switch (result.language) {
+              case "de":
+                this.navPageString = DE.navigation
+                break;
+              case "en":
+                this.navPageString = ENG.navigation
+                break;
+              case "fr":
+                this.navPageString = FR.navigation
+                break;
+              case "pl":
+                this.navPageString = PL.navigation
+                break;
+              case "ru":
+                this.navPageString = RU.navigation
+                break;
+              case "uk":
+                this.navPageString = UKR.navigation
+                break;
+              case "be":
+                this.navPageString = BLR.navigation
+                break;
+              case "ja":
+                this.navPageString = JA.navigation
+                break;
+              default:
+                this.navPageString = ENG.navigation
+            }
+          }
+        }
+      )
+    }
+
+    // this.languageInLocalStorage = this.localStore.getData("languageInLocalStorage")
+    // console.log("this.languageInLocalStorage in NavComponent", this.languageInLocalStorage)
 
     if (this.languageInLocalStorage) {
       console.log(`this.languageInLocalStorage exist`)
@@ -97,14 +179,14 @@ export class NavComponent {
     this.dataService.getConfigurationLanguage()
       .subscribe({
         next: (result) => {
-          this.languages = result.filter(el => el.name.length > 0 && el.iso_639_1 === "en" || el.iso_639_1 === "ru" || el.iso_639_1 === "de" || el.iso_639_1 === "be" || el.iso_639_1 === "fr" ||  el.iso_639_1 === "ja" ||  el.iso_639_1 === "pl" ||  el.iso_639_1 === "uk" )
+          this.languages = result.filter(el => el.name.length > 0 && el.iso_639_1 === "en" || el.iso_639_1 === "ru" || el.iso_639_1 === "de" || el.iso_639_1 === "be" || el.iso_639_1 === "fr" || el.iso_639_1 === "ja" || el.iso_639_1 === "pl" || el.iso_639_1 === "uk")
           // it's possible to sort and show a limited number of languages for translation:
           //this.languages = result.filter(el=> el.name.length>0 && !el.name.includes("?")).slice(0,80)
-          this.languages = this.languages.sort(( a,b ) =>{
-            if ( a.name < b.name ){
+          this.languages = this.languages.sort((a, b) => {
+            if (a.name < b.name) {
               return -1;
             }
-            if ( a.name > b.name ){
+            if (a.name > b.name) {
               return 1;
             }
             return 0;
@@ -129,14 +211,14 @@ export class NavComponent {
     this.dataService.getConfigurationLanguage()
       .subscribe({
         next: (result) => {
-          this.languages = result.filter(el => el.name.length > 0 && el.iso_639_1 === "en" || el.iso_639_1 === "ru" || el.iso_639_1 === "de" || el.iso_639_1 === "be" || el.iso_639_1 === "fr" ||  el.iso_639_1 === "ja" ||  el.iso_639_1 === "pl" ||  el.iso_639_1 === "uk" )
+          this.languages = result.filter(el => el.name.length > 0 && el.iso_639_1 === "en" || el.iso_639_1 === "ru" || el.iso_639_1 === "de" || el.iso_639_1 === "be" || el.iso_639_1 === "fr" || el.iso_639_1 === "ja" || el.iso_639_1 === "pl" || el.iso_639_1 === "uk")
           // it's possible to sort and show a limited number of languages for translation:
           //this.languages = result.filter(el=> el.name.length>0 && !el.name.includes("?")).slice(0,80)
-          this.languages = this.languages.sort(( a,b ) =>{
-            if ( a.name < b.name ){
+          this.languages = this.languages.sort((a, b) => {
+            if (a.name < b.name) {
               return -1;
             }
-            if ( a.name > b.name ){
+            if (a.name > b.name) {
               return 1;
             }
             return 0;
@@ -244,6 +326,8 @@ export class NavComponent {
                 this.movieDetails = value.movieDetailsFromDataService
                 console.log("this.movieDetails in NavComponent = ", this.movieDetails)
 
+                debugger
+
                 this.router.navigate(
                   ["movie", this.movie_ID],
                   {
@@ -253,7 +337,7 @@ export class NavComponent {
                     }
                   }
                 )
-               // location.reload() // The location.reload() method reloads the current URL, like the Refresh button.
+                // location.reload() // The location.reload() method reloads the current URL, like the Refresh button.
               }
             })
           }

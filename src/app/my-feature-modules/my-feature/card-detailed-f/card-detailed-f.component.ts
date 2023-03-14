@@ -7,6 +7,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {ToastrService} from "ngx-toastr";
 
 let apiLoaded = false;
+
 @Component({
   selector: 'app-card-detailed-f',
   templateUrl: './card-detailed-f.component.html',
@@ -34,7 +35,7 @@ export class CardDetailedFComponent {
   movieExternalInstagram_id: string
   movieExternalTwitter_id: string
   private routeSubscription: Subscription;
-  actorDetailsFromDataService:IPersonDetails
+  actorDetailsFromDataService: IPersonDetails
 
 
   constructor(
@@ -42,7 +43,7 @@ export class CardDetailedFComponent {
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar,
     private toastr: ToastrService,
-    public router: Router ,
+    public router: Router,
   ) {
     this.routeSubscription = route.params.subscribe(params => this.cardDetailMovieID = Number(params['id'].split('-')[0]));
     this.dataService.movieID.next({value_ID: this.cardDetailMovieID})
@@ -60,81 +61,88 @@ export class CardDetailedFComponent {
   }
 
   ngOnInit(): void {
-    this.dataService.getMovieDetails(this.cardDetailMovieID).subscribe((result) => {
-      // check data
-      // console.log(JSON.stringify(result))
-      this.movieDetails = result.movieDetailsFromDataService
-      // check data
-      //console.log('this.movieDetails in TestCardDetailedComponent = ', this.movieDetails)
-      this.imageBackGroundCard = this.base_image_URL + this.movieDetails.poster_path
-      if (this.movieDetails.backdrop_path) {
-        this.imageBackGroundCard = this.base_image_URL1920 + this.movieDetails.backdrop_path;
-      }
-      this.imageCardPoster = this.base_image_URL + this.movieDetails.poster_path
-      this.showSuccessToastr(`Movie details are loaded from back`)
-      this.showSuccessToastr(`You chose: ${this.movieDetails.title}`)
-    })
-    this.dataService.getMovieTrailer(this.cardDetailMovieID).subscribe((result) => {
-      this.movieTrailer = result.movieTrailerFromDataService
-      // check data
-      // console.log('this.movieTrailer in TestCardDetailedComponent = ', this.movieTrailer)
-      if (!this.movieTrailer) {
-        this.showErrorToastr('Trailers not found')
-        console.log(`Trailers not found!!!`)
-      } else {
-        this.showSuccessToastr('Trailer found')
-      }
-      this.movieTrailerKeyInCard = result.movieTrailerKeyFromDataService
-      // check data
-      //console.log('this.movieTrailerKeyInCard in TestCardDetailedComponent = ', this.movieTrailerKeyInCard)
-      // this.safeURL = `https://www.youtube.com/watch?v` +  this.movieTrailerKeyInCard
-      // console.log('this.safeURL = ', this.safeURL)
-    })
-    if (!apiLoaded) {
-      // This code loads the IFrame Player API code asynchronously, according to the instructions at
-      // https://developers.google.com/youtube/iframe_api_reference#Getting_Started
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      document.body.appendChild(tag);
-      apiLoaded = true;
-    }
-    this.dataService.getMovieDirector(this.cardDetailMovieID).subscribe(resultt => {
-      this.movieDirector = resultt.Director
-      // check data
-      //console.log(this.movieDirector)
-    })
-    this.dataService.getMovieCastAndCrew(this.cardDetailMovieID).subscribe(resultt => {
-      this.movieDirector = resultt.Director
-      // check data
-      //console.log(this.movieDirector)
-      this.movieScreenplay = resultt.Screenplay
-      this.movieStory = resultt.Story
-      this.movieWriter = resultt.Writer
-      this.cast = resultt.Cast
-      // check data
-      //console.log(`this.cast in TestCardDetailedComponent = `, this.cast)
-      //this.imageTopActors[0] = this.base_image_URL1920 + resultt;
-    })
+    this.dataService.languageSelected.subscribe(
+      {
+        next: (result) => {
+          console.log("languageSelected result in CardDetailedFComponent", result.language)
 
-    this.dataService.getMovieExternalSourcesDetails(this.cardDetailMovieID).subscribe(result => {
-      [this.movieExternalImdb_id,
-        this.movieExternalFacebook_id,
-        this.movieExternalInstagram_id,
-        this.movieExternalTwitter_id ] = [
-        result.movieExternalImdb_id,
-        result.movieExternalFacebook_id,
-        result.movieExternalInstagram_id,
-        result.movieExternalTwitter_id
-      ]
-    })
+          this.dataService.getMovieDetails(this.cardDetailMovieID).subscribe((result) => {
+            // check data
+            //console.log('getMovieDetails result in CardDetailedFComponent =', JSON.stringify(result))
+            this.movieDetails = result.movieDetailsFromDataService
+            // check data
+            //console.log('this.movieDetails in TestCardDetailedComponent = ', this.movieDetails)
+            this.imageBackGroundCard = this.base_image_URL + this.movieDetails.poster_path
+            if (this.movieDetails.backdrop_path) {
+              this.imageBackGroundCard = this.base_image_URL1920 + this.movieDetails.backdrop_path;
+            }
+            this.imageCardPoster = this.base_image_URL + this.movieDetails.poster_path
+            this.showSuccessToastr(`Movie details are loaded from back`)
+            this.showSuccessToastr(`You chose: ${this.movieDetails.title}`)
+          })
+          this.dataService.getMovieTrailer(this.cardDetailMovieID).subscribe((result) => {
+            this.movieTrailer = result.movieTrailerFromDataService
+            // check data
+            // console.log('this.movieTrailer in TestCardDetailedComponent = ', this.movieTrailer)
+            if (!this.movieTrailer) {
+              this.showErrorToastr('Trailers not found')
+              console.log(`Trailers not found!!!`)
+            } else {
+              this.showSuccessToastr('Trailer found')
+            }
+            this.movieTrailerKeyInCard = result.movieTrailerKeyFromDataService
+            // check data
+            //console.log('this.movieTrailerKeyInCard in TestCardDetailedComponent = ', this.movieTrailerKeyInCard)
+            // this.safeURL = `https://www.youtube.com/watch?v` +  this.movieTrailerKeyInCard
+            // console.log('this.safeURL = ', this.safeURL)
+          })
+          if (!apiLoaded) {
+            // This code loads the IFrame Player API code asynchronously, according to the instructions at
+            // https://developers.google.com/youtube/iframe_api_reference#Getting_Started
+            const tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            document.body.appendChild(tag);
+            apiLoaded = true;
+          }
+          this.dataService.getMovieDirector(this.cardDetailMovieID).subscribe(resultt => {
+            this.movieDirector = resultt.Director
+            // check data
+            //console.log(this.movieDirector)
+          })
+          this.dataService.getMovieCastAndCrew(this.cardDetailMovieID).subscribe(resultt => {
+            this.movieDirector = resultt.Director
+            // check data
+            //console.log(this.movieDirector)
+            this.movieScreenplay = resultt.Screenplay
+            this.movieStory = resultt.Story
+            this.movieWriter = resultt.Writer
+            this.cast = resultt.Cast
+            // check data
+            //console.log(`this.cast in TestCardDetailedComponent = `, this.cast)
+            //this.imageTopActors[0] = this.base_image_URL1920 + resultt;
+          })
 
-    //reload a page once using localStorage for rendering popover invisible elements in TestCardDetailedComponent
-    if (!localStorage.getItem('rendering_popover')) {
-      localStorage.setItem('rendering_popover', 'no reload')
-      location.reload()
-    } else {
-      localStorage.removeItem('rendering_popover')
-    }
+          this.dataService.getMovieExternalSourcesDetails(this.cardDetailMovieID).subscribe(result => {
+            [this.movieExternalImdb_id,
+              this.movieExternalFacebook_id,
+              this.movieExternalInstagram_id,
+              this.movieExternalTwitter_id] = [
+              result.movieExternalImdb_id,
+              result.movieExternalFacebook_id,
+              result.movieExternalInstagram_id,
+              result.movieExternalTwitter_id
+            ]
+          })
+
+          //reload a page once using localStorage for rendering popover invisible elements in TestCardDetailedComponent
+          if (!localStorage.getItem('rendering_popover')) {
+            localStorage.setItem('rendering_popover', 'no reload')
+            location.reload()
+          } else {
+            localStorage.removeItem('rendering_popover')
+          }
+        }
+      })
   }
 
   showSuccessToastr(message: string) { // toastr для параллельного отображения сообщений в углу экрана
@@ -207,8 +215,7 @@ export class CardDetailedFComponent {
       ['person', actorID],
       {
         state: {id: '990909090', name: "что-то другое"},
-        queryParams: {
-        }
+        queryParams: {}
       }
     )
 
