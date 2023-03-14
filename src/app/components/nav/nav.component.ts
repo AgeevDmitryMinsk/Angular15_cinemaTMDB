@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {IConfigurationLanguages, IGenre, IMovieDetails} from "../../interfaces/global";
 import {DataService} from "../../services/data.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ToastrService} from "ngx-toastr";
@@ -26,18 +26,19 @@ export class NavComponent {
 
   movie_ID: any
   movieDetails: Observable<IMovieDetails>
+  languageFromQueryParams: string;
 
   constructor(
     public dataService: DataService,
     public router: Router,
     private _snackBar: MatSnackBar,
     private toastr: ToastrService,
-    private localStore: LocalService
+    private localStore: LocalService,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
-
     this.router.routeReuseStrategy.shouldReuseRoute = () => false; // use the Router and override the shouldReuseRoute from the routeReuseStrategy  method which returns false statement
 
     this.languageInLocalStorage = this.localStore.getData("languageInLocalStorage")
