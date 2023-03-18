@@ -7,4 +7,10 @@ export const PL:ILanguageString = {
     movie: 'Film',
     tv: 'Telewizor'
   },
+  movieCardF: {
+    genre: "Gatunek",
+    overview: "Przegląd",
+    user_score:  "Wynik Użytkownika",
+    dont_have_an_overview: "Niestety nie mamy jeszcze recenzji dla"
+  }
 }

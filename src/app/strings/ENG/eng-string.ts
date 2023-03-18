@@ -7,4 +7,10 @@ export const ENG:ILanguageString = {
     movie: 'Movie',
     tv: 'TV'
   },
+  movieCardF: {
+    genre: "Genre",
+    overview: "Overview",
+    user_score:  "User Score",
+    dont_have_an_overview: "Unfortunately, we don't have a review yet for"
+  }
 }

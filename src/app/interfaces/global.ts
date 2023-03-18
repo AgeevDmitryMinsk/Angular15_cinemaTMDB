@@ -205,6 +205,7 @@ export interface IPersonDetailsExternal_ids {
 
 export interface ILanguageString {
   navigation: INavigationLanguage
+  movieCardF: ImovieCardFLanguage
 }
 
 export interface INavigationLanguage {
@@ -212,6 +213,13 @@ export interface INavigationLanguage {
   language: string,
   movie: string,
   tv: string
+}
+
+export interface ImovieCardFLanguage {
+  genre: string
+  overview: string
+  user_score: string
+  dont_have_an_overview : string
 }
 
 export enum numberToGenre {
