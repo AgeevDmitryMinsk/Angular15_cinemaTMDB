@@ -206,6 +206,7 @@ export interface IPersonDetailsExternal_ids {
 export interface ILanguageString {
   navigation: INavigationLanguage
   movieCardF: ImovieCardFLanguage
+  movieCardDetailedF: IcardDetailPageLanguage
 }
 
 export interface INavigationLanguage {
@@ -220,6 +221,28 @@ export interface ImovieCardFLanguage {
   overview: string
   user_score: string
   dont_have_an_overview : string
+}
+
+export interface IcardDetailPageLanguage {
+  user: string
+  score: string
+  rating: string
+  overview: string
+  play_trailer: string
+  no_trailers : string
+  director:string
+  screenplay:string
+  story :string
+  writer:string
+  topBilledCast : string
+  you_can_visit_this_movie_here: string
+  no_extra_page :string
+  visit_movie_at_Facebook_right : string
+  visit_movie_at_Twitter_right : string
+  visit_movie_at_Instagram_right : string
+  visit_movie_homepage_right : string
+
+
 }
 
 export enum numberToGenre {

@@ -1,10 +1,24 @@
 import {Component, HostListener} from '@angular/core';
-import {IMovieDetails, IMovieVideosResults, IPersonDetails} from "../../../interfaces/global";
+import {
+  IcardDetailPageLanguage,
+  IMovieDetails,
+  IMovieVideosResults,
+  IPersonDetails
+} from "../../../interfaces/global";
 import {Subscription} from "rxjs";
 import {base_image_URL, base_image_URL1920, DataService} from "../../../services/data.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ToastrService} from "ngx-toastr";
+import {LocalService} from "../../../services/local.service";
+import {DE} from "../../../strings/DE/de-string";
+import {ENG} from "../../../strings/ENG/eng-string";
+import {FR} from "../../../strings/FR/fr-string";
+import {PL} from "../../../strings/PL/pl-string";
+import {RU} from "../../../strings/RU/ru-string";
+import {UKR} from "../../../strings/UK/ukr-string";
+import {BLR} from "../../../strings/BLR/blr-string";
+import {JA} from "../../../strings/JA/jpn-string";
 
 let apiLoaded = false;
 
@@ -37,6 +51,10 @@ export class CardDetailedFComponent {
   private routeSubscription: Subscription;
   actorDetailsFromDataService: IPersonDetails
 
+  languageFromQueryParams: string;
+  languageInLocalStorage: string | null
+  public cardDetailPageString:IcardDetailPageLanguage;
+
 
   constructor(
     public dataService: DataService,
@@ -44,6 +62,7 @@ export class CardDetailedFComponent {
     private _snackBar: MatSnackBar,
     private toastr: ToastrService,
     public router: Router,
+    private localStore: LocalService,
   ) {
     this.routeSubscription = route.params.subscribe(params => this.cardDetailMovieID = Number(params['id'].split('-')[0]));
     this.dataService.movieID.next({value_ID: this.cardDetailMovieID})
@@ -61,6 +80,81 @@ export class CardDetailedFComponent {
   }
 
   ngOnInit(): void {
+
+    this.languageInLocalStorage = this.localStore.getData("languageInLocalStorage")
+    console.log("this.languageInLocalStorage in CardDetailedFComponent", this.languageInLocalStorage)
+
+    if (this.languageInLocalStorage) {
+      console.log(`this.languageInLocalStorage exist`)
+      this.dataService.languageSelected.next({language: this.languageInLocalStorage})
+      switch (this.languageInLocalStorage) {
+        case "de":
+          this.cardDetailPageString = DE.movieCardDetailedF
+          break;
+        case "en":
+          this.cardDetailPageString = ENG.movieCardDetailedF
+          break;
+        case "fr":
+          this.cardDetailPageString = FR.movieCardDetailedF
+          break;
+        case "pl":
+          this.cardDetailPageString = PL.movieCardDetailedF
+          break;
+        case "ru":
+          this.cardDetailPageString = RU.movieCardDetailedF
+          break;
+        case "uk":
+          this.cardDetailPageString = UKR.movieCardDetailedF
+          break;
+        case "be":
+          this.cardDetailPageString = BLR.movieCardDetailedF
+          break;
+        case "ja":
+          this.cardDetailPageString = JA.movieCardDetailedF
+          break;
+        default:
+          this.cardDetailPageString = ENG.movieCardDetailedF
+      }
+    }
+
+    this.dataService.languageSelected.subscribe(
+      {
+        next: (result) => {
+          console.log("languageSelected result in HeaderComponent", result.language)
+          this.languageFromQueryParams = result.language
+
+          switch (result.language) {
+            case "de":
+              this.cardDetailPageString = DE.movieCardDetailedF
+              break;
+            case "en":
+              this.cardDetailPageString = ENG.movieCardDetailedF
+              break;
+            case "fr":
+              this.cardDetailPageString = FR.movieCardDetailedF
+              break;
+            case "pl":
+              this.cardDetailPageString = PL.movieCardDetailedF
+              break;
+            case "ru":
+              this.cardDetailPageString = RU.movieCardDetailedF
+              break;
+            case "uk":
+              this.cardDetailPageString = UKR.movieCardDetailedF
+              break;
+            case "be":
+              this.cardDetailPageString = BLR.movieCardDetailedF
+              break;
+            case "ja":
+              this.cardDetailPageString = JA.movieCardDetailedF
+              break;
+            default:
+              this.cardDetailPageString = ENG.movieCardDetailedF
+          }
+        }
+      }
+    )
+
     this.dataService.languageSelected.subscribe(
       {
         next: (result) => {

@@ -35,7 +35,7 @@ export class NavComponent {
   movie_ID: any
   movieDetails: Observable<IMovieDetails>
   languageFromQueryParams: string;
-  public navPageString:INavigationLanguage;
+  public navPageString: INavigationLanguage;
 
   constructor(
     public dataService: DataService,
@@ -83,45 +83,46 @@ export class NavComponent {
         default:
           this.navPageString = ENG.navigation
       }
-    } else {
-      this.dataService.languageSelected.subscribe(
-        {
-          next: (result) => {
-            console.log("languageSelected result in HeaderComponent", result.language)
-            this.languageFromQueryParams = result.language
+    }
 
-            switch (result.language) {
-              case "de":
-                this.navPageString = DE.navigation
-                break;
-              case "en":
-                this.navPageString = ENG.navigation
-                break;
-              case "fr":
-                this.navPageString = FR.navigation
-                break;
-              case "pl":
-                this.navPageString = PL.navigation
-                break;
-              case "ru":
-                this.navPageString = RU.navigation
-                break;
-              case "uk":
-                this.navPageString = UKR.navigation
-                break;
-              case "be":
-                this.navPageString = BLR.navigation
-                break;
-              case "ja":
-                this.navPageString = JA.navigation
-                break;
-              default:
-                this.navPageString = ENG.navigation
-            }
+    this.dataService.languageSelected.subscribe(
+      {
+        next: (result) => {
+          console.log("languageSelected result in HeaderComponent", result.language)
+          this.languageFromQueryParams = result.language
+
+          switch (result.language) {
+            case "de":
+              this.navPageString = DE.navigation
+              break;
+            case "en":
+              this.navPageString = ENG.navigation
+              break;
+            case "fr":
+              this.navPageString = FR.navigation
+              break;
+            case "pl":
+              this.navPageString = PL.navigation
+              break;
+            case "ru":
+              this.navPageString = RU.navigation
+              break;
+            case "uk":
+              this.navPageString = UKR.navigation
+              break;
+            case "be":
+              this.navPageString = BLR.navigation
+              break;
+            case "ja":
+              this.navPageString = JA.navigation
+              break;
+            default:
+              this.navPageString = ENG.navigation
           }
         }
-      )
-    }
+      }
+    )
+
 
     // this.languageInLocalStorage = this.localStore.getData("languageInLocalStorage")
     // console.log("this.languageInLocalStorage in NavComponent", this.languageInLocalStorage)
