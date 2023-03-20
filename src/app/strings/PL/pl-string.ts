@@ -19,7 +19,7 @@ export const PL:ILanguageString = {
     rating: "Ocena",
     overview: "Przegląd",
     play_trailer: "Obejrzyj zwiastun",
-    no_trailers : "Brak przyczep",
+    no_trailers : "Brak trailera po polsku",
     director: "Reżyser",
     screenplay: "Scenariusz",
     story : "Historia",

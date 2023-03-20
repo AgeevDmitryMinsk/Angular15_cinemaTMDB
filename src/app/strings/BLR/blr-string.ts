@@ -19,7 +19,7 @@ export const BLR: ILanguageString = {
     rating: "Рэйтынг",
     overview: "Агляд",
     play_trailer: "Глядзець трэйлер",
-    no_trailers : "Няма трэйлера",
+    no_trailers : "Няма трэйлера на беларускай мове",
     director: "Рэжысёр",
     screenplay: "Кінасцэнарст",
     story : "сюжэт",

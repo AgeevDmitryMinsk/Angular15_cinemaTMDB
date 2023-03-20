@@ -24,6 +24,7 @@ import {PL} from "../strings/PL/pl-string";
 import {RU} from "../strings/RU/ru-string";
 import {UKR} from "../strings/UK/ukr-string";
 import {BLR} from "../strings/BLR/blr-string";
+import {JA} from "../strings/JA/jpn-string";
 
 // export const API_KEY: string = ""; перенес в interceptor
 export const base_URL: string = "https://api.themoviedb.org/3";
@@ -226,21 +227,29 @@ export class DataService {
     return this.http.get<IMovieVideos>(`${base_URL}/movie/${movieID}/videos`)
       .pipe(map(videoResponse => {
         if (videoResponse.results.length > 0) {
-          //console.log(`videoResponse.results in DataService = `, videoResponse.results)
+          console.log(`videoResponse.results in DataService = `, videoResponse.results)
 
           this.movieTrailer = videoResponse.results.filter(({name}) => name.includes(``))
 
           //Checking to see if there is an official trailer
           if (videoResponse.results.filter(({name}) => name.includes(`Trailer`))) {
-            //console.log("YES Trailer exist")
-            this.movieTrailer = videoResponse.results.filter(({name}) => name.includes(`Trailer`))
+            console.log("YES Trailer exist")
+            this.movieTrailer = videoResponse.results.filter(({name}) => name.includes(`Trailer`)
+                || name.includes(`трейлер`)
+                || name.includes(`annonce`)
+            )
+            if(this.movieTrailer.length === 0) {
+              this.movieTrailer = videoResponse.results.filter(({name}) => name.length>0 )
+            }
+            console.log("this.movieTrailer after filtering = ", this.movieTrailer)
+
           }
 
-          //console.log(`videoResponse.results in DataService after filter= `, this.movieTrailer)
+          console.log(`videoResponse.results in DataService after filter= `, this.movieTrailer)
           if (this.movieTrailer[0]) {
             this.movieTrailerKey = this.movieTrailer[0].key
           }
-          //console.log(`this.movieTrailerKey in DataService =`, this.movieTrailerKey)
+          console.log(`this.movieTrailerKey in DataService =`, this.movieTrailerKey)
         } else {
           this.movieTrailer = null
           this.movieTrailerKey = null
@@ -288,8 +297,8 @@ export class DataService {
           propertyLang === "movieCardF" ?  BLR.movieCardF : BLR.movieCardDetailedF
         break;
       case "ja":
-        PageString = propertyLang === "navigation" ?  BLR.navigation :
-          propertyLang === "movieCardF" ?  BLR.movieCardF : BLR.movieCardDetailedF
+        PageString = propertyLang === "navigation" ?  JA.navigation :
+          propertyLang === "movieCardF" ?  JA.movieCardF : JA.movieCardDetailedF
         break;
       default:
         PageString = propertyLang === "navigation" ?  ENG.navigation :

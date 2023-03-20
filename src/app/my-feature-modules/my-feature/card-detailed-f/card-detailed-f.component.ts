@@ -188,7 +188,7 @@ export class CardDetailedFComponent {
     console.log('playTrayler ', this.cardDetailMovieID)
     this.dataService.getMovieTrailer(this.cardDetailMovieID)
     this.showTrailer = true
-    this.openSnackBar('playTraylerMessage', 'openSnackBar')
+    //this.openSnackBar('playTraylerMessage', 'openSnackBar')
     this.showSuccessToastr(`${this.movieDetails.title} Play Trailer Button clicked`)
   }
 
@@ -199,14 +199,14 @@ export class CardDetailedFComponent {
 
   onPlayerReady($event: YT.PlayerEvent) {
     console.log('onPlayerReady clicked')
-    this.openSnackBar('onPlayerReady', 'openSnackBar')
+    // this.openSnackBar('onPlayerReady', 'openSnackBar')
     this.showSuccessToastr(`${this.movieDetails.title} reade to play`)
     $event.target.playVideo()
   }
 
   onApiChange($event: YT.PlayerEvent) {
     console.log('onApiChange clicked', $event)
-    this.openSnackBar('onApiChangeMessage', 'openSnackBar')
+    // this.openSnackBar('onApiChangeMessage', 'openSnackBar')
     this.showSuccessToastr(`${this.movieDetails.title} API changed`)
   }
 
