@@ -3,15 +3,27 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {
   IConfigurationLanguages,
-  IGenres, IMovieCastPeople,
+  IGenres,
+  IMovieCastPeople,
   IMovieCrewPeople,
-  IMovieDetails, IMovieExternalSourcesDetails,
-  IMoviePeople, IMoviePeopleCredits,
+  IMovieDetails,
+  IMovieExternalSourcesDetails,
+  IMoviePeople,
+  IMoviePeopleCredits,
   IMovieResults,
   IMoviesAllData,
   IMovieVideos,
-  IMovieVideosResults, IPersonDetails, IPersonDetailsExternal_ids
+  IMovieVideosResults,
+  IPersonDetails,
+  IPersonDetailsExternal_ids
 } from "../interfaces/global";
+import {DE} from "../strings/DE/de-string";
+import {ENG} from "../strings/ENG/eng-string";
+import {FR} from "../strings/FR/fr-string";
+import {PL} from "../strings/PL/pl-string";
+import {RU} from "../strings/RU/ru-string";
+import {UKR} from "../strings/UK/ukr-string";
+import {BLR} from "../strings/BLR/blr-string";
 
 // export const API_KEY: string = ""; перенес в interceptor
 export const base_URL: string = "https://api.themoviedb.org/3";
@@ -239,6 +251,55 @@ export class DataService {
           movieTrailerKeyFromDataService: this.movieTrailerKey
         }
       }))
+  }
+
+  getLanguage(languageInLocalStorage: string,
+              propertyLang: string,
+              ) {
+    let PageString: any
+      //INavigationLanguage | ImovieCardFLanguage | IcardDetailPageLanguage
+    switch (languageInLocalStorage) {
+      case "de":
+        PageString = propertyLang === "navigation" ?  DE.navigation :
+                     propertyLang === "movieCardF" ?  DE.movieCardF : DE.movieCardDetailedF
+        break;
+      case "en":
+        PageString = propertyLang === "navigation" ?  ENG.navigation :
+          propertyLang === "movieCardF" ?  DE.movieCardF : DE.movieCardDetailedF
+        break;
+      case "fr":
+        PageString = propertyLang === "navigation" ?  FR.navigation :
+          propertyLang === "movieCardF" ?  FR.movieCardF : FR.movieCardDetailedF
+        break;
+      case "pl":
+        PageString = propertyLang === "navigation" ?  PL.navigation :
+          propertyLang === "movieCardF" ?  PL.movieCardF : PL.movieCardDetailedF
+        break;
+      case "ru":
+        PageString = propertyLang === "navigation" ?  RU.navigation :
+          propertyLang === "movieCardF" ?  RU.movieCardF : RU.movieCardDetailedF
+        break;
+      case "uk":
+        PageString = propertyLang === "navigation" ?  UKR.navigation :
+          propertyLang === "movieCardF" ?  UKR.movieCardF : UKR.movieCardDetailedF
+        break;
+      case "be":
+        PageString = propertyLang === "navigation" ?  BLR.navigation :
+          propertyLang === "movieCardF" ?  BLR.movieCardF : BLR.movieCardDetailedF
+        break;
+      case "ja":
+        PageString = propertyLang === "navigation" ?  BLR.navigation :
+          propertyLang === "movieCardF" ?  BLR.movieCardF : BLR.movieCardDetailedF
+        break;
+      default:
+        PageString = propertyLang === "navigation" ?  ENG.navigation :
+          propertyLang === "movieCardF" ?  ENG.movieCardF : ENG.movieCardDetailedF
+    }
+    console.log("~~~~~~~~~~~navPageStringFromComponent in getLanguage = ", PageString)
+    //navPageStringFromComponent = PageString
+
+    return PageString
+
   }
 
   myData: number = 1;

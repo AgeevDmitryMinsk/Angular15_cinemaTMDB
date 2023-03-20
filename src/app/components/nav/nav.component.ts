@@ -7,16 +7,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {ToastrService} from "ngx-toastr";
 import {LocalService} from "../../services/local.service";
 import {Observable} from "rxjs";
-import {DE} from "../../strings/DE/de-string";
-import {ENG} from "../../strings/ENG/eng-string";
-import {FR} from "../../strings/FR/fr-string";
-import {PL} from "../../strings/PL/pl-string";
-import {RU} from "../../strings/RU/ru-string";
-import {UKR} from "../../strings/UK/ukr-string";
-import {BLR} from "../../strings/BLR/blr-string";
-import {JA} from "../../strings/JA/jpn-string";
-
-// export const languageSelected = {language : 'en'}
 
 @Component({
   selector: 'app-nav',
@@ -55,34 +45,6 @@ export class NavComponent {
     if (this.languageInLocalStorage) {
       console.log(`this.languageInLocalStorage exist`)
       this.dataService.languageSelected.next({language: this.languageInLocalStorage})
-      switch (this.languageInLocalStorage) {
-        case "de":
-          this.navPageString = DE.navigation
-          break;
-        case "en":
-          this.navPageString = ENG.navigation
-          break;
-        case "fr":
-          this.navPageString = FR.navigation
-          break;
-        case "pl":
-          this.navPageString = PL.navigation
-          break;
-        case "ru":
-          this.navPageString = RU.navigation
-          break;
-        case "uk":
-          this.navPageString = UKR.navigation
-          break;
-        case "be":
-          this.navPageString = BLR.navigation
-          break;
-        case "ja":
-          this.navPageString = JA.navigation
-          break;
-        default:
-          this.navPageString = ENG.navigation
-      }
     }
 
     this.dataService.languageSelected.subscribe(
@@ -90,35 +52,7 @@ export class NavComponent {
         next: (result) => {
           console.log("languageSelected result in HeaderComponent", result.language)
           this.languageFromQueryParams = result.language
-
-          switch (result.language) {
-            case "de":
-              this.navPageString = DE.navigation
-              break;
-            case "en":
-              this.navPageString = ENG.navigation
-              break;
-            case "fr":
-              this.navPageString = FR.navigation
-              break;
-            case "pl":
-              this.navPageString = PL.navigation
-              break;
-            case "ru":
-              this.navPageString = RU.navigation
-              break;
-            case "uk":
-              this.navPageString = UKR.navigation
-              break;
-            case "be":
-              this.navPageString = BLR.navigation
-              break;
-            case "ja":
-              this.navPageString = JA.navigation
-              break;
-            default:
-              this.navPageString = ENG.navigation
-          }
+          this.navPageString = this.dataService.getLanguage(result.language, 'navigation')
         }
       }
     )
