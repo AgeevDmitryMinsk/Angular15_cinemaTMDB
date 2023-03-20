@@ -26,7 +26,7 @@ export const RU:ILanguageString = {
     writer: "Сценарист",
     topBilledCast : "Актерский состав с самым высоким рейтингом",
     you_can_visit_this_movie_here: "Можете посмотреть фильм здесь",
-    no_extra_page : "Никакой дополнительной страницы",
+    no_extra_page : "Нет доп.страниц",
     visit_movie_at_Facebook_right : "Посетить фильм на Facebook, верно",
     visit_movie_at_Twitter_right : "Посетить фильм на Twitter, верно",
     visit_movie_at_Instagram_right : "Посетить фильм на Instagram, верно",

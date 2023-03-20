@@ -245,4 +245,18 @@ export class CardDetailedFComponent {
     )
 
   }
+
+  get isFlagYouCanVisitThisMovieHere(): boolean {
+    return !this.movieDetails.homepage ||
+    !this.movieExternalFacebook_id ||
+    !this.movieExternalTwitter_id ||
+    !this.movieExternalInstagram_id
+  }
+
+  get isFlagNoExtraPage(): boolean{
+    return !this.movieDetails.homepage &&
+      !this.movieExternalFacebook_id &&
+      !this.movieExternalTwitter_id &&
+      !this.movieExternalInstagram_id
+  }
 }

@@ -96,17 +96,20 @@
 <!--        Top Billed Cast-->
         {{cardDetailPageString.topBilledCast}}:
       </div>
-      <div class="pl-5" *ngIf="movieDetails.homepage ||
-                               movieExternalFacebook_id ||
-                               movieExternalTwitter_id ||
-                               movieExternalInstagram_id">
+<!--      <div class="pl-5" *ngIf="movieDetails.homepage ||-->
+<!--                               movieExternalFacebook_id ||-->
+<!--                               movieExternalTwitter_id ||-->
+<!--                               movieExternalInstagram_id"> -->
+        <div class="pl-5" *ngIf="!isFlagYouCanVisitThisMovieHere">
 <!--        You can visit this movie here:-->
         {{cardDetailPageString.you_can_visit_this_movie_here}}:
       </div>
-      <div class="pl-5 w-3/12" *ngIf="!movieDetails.homepage &&
-                                      !movieExternalFacebook_id &&
-                                      !movieExternalTwitter_id &&
-                                      movieExternalInstagram_id">
+      
+<!--      <div class="pl-5 w-3/12" *ngIf="!movieDetails.homepage &&-->
+<!--                                      !movieExternalFacebook_id &&-->
+<!--                                      !movieExternalTwitter_id &&-->
+<!--                                      !movieExternalInstagram_id">-->
+        <div class="pl-5 w-3/12" *ngIf="!!isFlagNoExtraPage">
 <!--        No extra page (FaceBook, Twitter, Instagram, MovieHomePage)-->
         {{cardDetailPageString.no_extra_page}} (FaceBook, Twitter, Instagram, MovieHomePage)
       </div>

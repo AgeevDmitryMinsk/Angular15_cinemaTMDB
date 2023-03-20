@@ -265,7 +265,7 @@ export class DataService {
         break;
       case "en":
         PageString = propertyLang === "navigation" ?  ENG.navigation :
-          propertyLang === "movieCardF" ?  DE.movieCardF : DE.movieCardDetailedF
+          propertyLang === "movieCardF" ?  ENG.movieCardF : ENG.movieCardDetailedF
         break;
       case "fr":
         PageString = propertyLang === "navigation" ?  FR.navigation :
