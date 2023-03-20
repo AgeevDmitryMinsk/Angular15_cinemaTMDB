@@ -11,7 +11,7 @@ export const ENG:ILanguageString = {
     genre: "Genre",
     overview: "Overview",
     user_score:  "User Score",
-    dont_have_an_overview: "Unfortunately, we don't have a review yet for"
+    dont_have_an_overview: "Unfortunately, we don't have a review in English yet for"
   },
   movieCardDetailedF: {
     user: "User",

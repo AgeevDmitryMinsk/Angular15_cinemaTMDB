@@ -11,7 +11,7 @@ export const BLR: ILanguageString = {
     genre: "Жанр",
     overview: "Агляд",
     user_score:  "Ацэнка карыстальнікаў",
-    dont_have_an_overview: "У нас на жаль няма яшчэ агляду для"
+    dont_have_an_overview: "У нас на жаль няма яшчэ агляду на беларускай мове для"
   },
   movieCardDetailedF: {
     user: "Ацэнка",

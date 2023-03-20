@@ -11,7 +11,7 @@ export const RU:ILanguageString = {
     genre: "Жанр",
     overview: "Обзор",
     user_score:  "Оценка пользователей",
-    dont_have_an_overview: "У нас к сожалению нет еще обзора для"
+    dont_have_an_overview: "У нас к сожалению нет еще обзора на русском языке для"
   },
   movieCardDetailedF: {
     user: "Оценка ",

@@ -11,7 +11,7 @@ export const PL:ILanguageString = {
     genre: "Gatunek",
     overview: "Przegląd",
     user_score:  "Wynik Użytkownika",
-    dont_have_an_overview: "Niestety nie mamy jeszcze recenzji dla"
+    dont_have_an_overview: "Niestety nie mamy jeszcze recenzji w języku polskim dla"
   },
   movieCardDetailedF: {
     user: "Ocena",

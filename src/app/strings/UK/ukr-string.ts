@@ -11,7 +11,7 @@ export const UKR:ILanguageString = {
     genre: "Жанр",
     overview: "Огляд",
     user_score:  "Оцінка користувачів",
-    dont_have_an_overview: "У нас на жаль немає ще огляду для"
+    dont_have_an_overview: "У нас на жаль немає ще огляду українською мовою для"
   },
   movieCardDetailedF: {
     user: "Оцінка",
