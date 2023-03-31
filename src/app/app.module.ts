@@ -7,7 +7,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AngularSvgIconModule} from "angular-svg-icon";
 import {DataService} from "./services/data.service";
 import {ParamInterceptor} from "./interceptors/param.interceptor";
-import {RouterModule, Routes} from "@angular/router";
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {HomeComponent} from './components/home/home/home.component';
 import {HeaderComponent} from './components/header/header.component';
@@ -22,19 +21,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {ToastrModule} from "ngx-toastr";
 import {MatButtonModule} from "@angular/material/button";
 import {MyFeatureModule} from "./my-feature-modules/my-feature/my-feature.module";
-import {ResultsFComponent} from "./my-feature-modules/my-feature/results-f/results-f.component";
-import {CardDetailedFComponent} from "./my-feature-modules/my-feature/card-detailed-f/card-detailed-f.component";
-import {PersonDetailedFComponent} from "./my-feature-modules/my-feature/person-detailed-f/person-detailed-f.component";
-
-
-const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'movie-results/:id', component: ResultsFComponent, data: {id: '1', name: "Angular"}},
-  {path: 'tv-results/:id', component: ResultsFComponent, data: {id: '1', name: "Angular"}},
-  {path: 'movie/:id', component: CardDetailedFComponent, data: {id: '1', name: "Angular"}},
-  {path: 'person/:id', component: PersonDetailedFComponent, data: {id: '1', name: "Angular"}},
-  {path: '**', component: NotFoundComponent},
-]
+import {AppRoutingModule} from "./app-routing/app-routing.module";
 
 @NgModule({
   declarations: [
@@ -46,11 +33,11 @@ const appRoutes: Routes = [
     FooterComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
     AngularSvgIconModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     MatSlideToggleModule,
     MatCardModule,

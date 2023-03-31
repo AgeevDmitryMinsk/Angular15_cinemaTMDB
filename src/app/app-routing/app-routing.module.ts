@@ -1,11 +1,22 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from "@angular/router";
+import {HomeComponent} from "../components/home/home/home.component";
+import {ResultsFComponent} from "../my-feature-modules/my-feature/results-f/results-f.component";
+import {CardDetailedFComponent} from "../my-feature-modules/my-feature/card-detailed-f/card-detailed-f.component";
+import {PersonDetailedFComponent} from "../my-feature-modules/my-feature/person-detailed-f/person-detailed-f.component";
+import {NotFoundComponent} from "../components/not-found/not-found.component";
 
+export const appRoutes: Routes = [
+  {path: '', component: HomeComponent},
+  {path: 'movie-results/:id', component: ResultsFComponent, data: {id: '1', name: "Angular"}},
+  {path: 'tv-results/:id', component: ResultsFComponent, data: {id: '1', name: "Angular"}},
+  {path: 'movie/:id', component: CardDetailedFComponent, data: {id: '1', name: "Angular"}},
+  {path: 'person/:id', component: PersonDetailedFComponent, data: {id: '1', name: "Angular"}},
+  {path: '**', component: NotFoundComponent},
+]
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [RouterModule.forRoot(appRoutes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
