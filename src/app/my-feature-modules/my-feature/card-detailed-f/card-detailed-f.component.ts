@@ -100,6 +100,7 @@ export class CardDetailedFComponent {
             this.imageBackGroundCard = this.base_image_URL + this.movieDetails.poster_path
             if (this.movieDetails.backdrop_path) {
               this.imageBackGroundCard = this.base_image_URL1920 + this.movieDetails.backdrop_path;
+              console.log('this.imageBackGroundCard = ', this.imageBackGroundCard)
             }
             this.imageCardPoster = this.base_image_URL + this.movieDetails.poster_path
             this.showSuccessToastr(`Movie details are loaded from back`)
@@ -212,7 +213,7 @@ export class CardDetailedFComponent {
 
   onErrorYoutube($event: YT.OnErrorEvent) {
     // check data
-    //console.log('onErrorYoutube some error:', $event)
+    console.log('onErrorYoutube some error:', $event)
     this.openSnackBar('onErrorYoutubeMessage', 'openSnackBar')
   }
 

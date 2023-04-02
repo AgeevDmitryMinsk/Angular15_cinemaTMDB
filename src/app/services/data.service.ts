@@ -61,6 +61,8 @@ export class DataService {
   actorDetailsKnownFor: IMoviePeopleCredits
   actorDetailsExternal_ids: IPersonDetailsExternal_ids
 
+  insideIndex: number = 1
+
   constructor(
     private http: HttpClient
   ) {
@@ -103,6 +105,21 @@ export class DataService {
           response: [...this.allClickedMovies, ...data.results]
         };
       }));
+  }
+
+  getSearch(text:string):Observable<any>{
+    return this.http.get<IMoviesAllData>(`${base_URL}/search/multi?query=${text}&page=${this.page}`)
+      .pipe(map((data) => {
+        // check data
+        console.log("data in getSearch = ", data)
+        // console.log('data.page in dataServise = ', data.page)
+        // console.log(`this.allClickedMovies in DataService = `, this.allClickedMovies)
+        return {
+          page: this.page,
+          // response: [...this.allClickedMovies, ...data.results]
+          response: data.results
+        };
+      }))
   }
 
   //method to get the name of the director in the component MovieCardComponent
@@ -270,41 +287,50 @@ export class DataService {
     switch (languageInLocalStorage) {
       case "de":
         PageString = propertyLang === "navigation" ?  DE.navigation :
-                     propertyLang === "movieCardF" ?  DE.movieCardF : DE.movieCardDetailedF
+                     propertyLang === "movieCardF" ?  DE.movieCardF :
+                     propertyLang === "movieCardDetailedF" ?  DE.movieCardDetailedF : DE.home
         break;
       case "en":
         PageString = propertyLang === "navigation" ?  ENG.navigation :
-          propertyLang === "movieCardF" ?  ENG.movieCardF : ENG.movieCardDetailedF
+                     propertyLang === "movieCardF" ?  ENG.movieCardF :
+                     propertyLang === "movieCardDetailedF" ?  ENG.movieCardDetailedF : ENG.home
         break;
       case "fr":
         PageString = propertyLang === "navigation" ?  FR.navigation :
-          propertyLang === "movieCardF" ?  FR.movieCardF : FR.movieCardDetailedF
+                     propertyLang === "movieCardF" ?  FR.movieCardF :
+                     propertyLang === "movieCardDetailedF" ?  FR.movieCardDetailedF : FR.home
         break;
       case "pl":
         PageString = propertyLang === "navigation" ?  PL.navigation :
-          propertyLang === "movieCardF" ?  PL.movieCardF : PL.movieCardDetailedF
+                     propertyLang === "movieCardF" ?  PL.movieCardF :
+                     propertyLang === "movieCardDetailedF" ?  PL.movieCardDetailedF : PL.home
         break;
       case "ru":
         PageString = propertyLang === "navigation" ?  RU.navigation :
-          propertyLang === "movieCardF" ?  RU.movieCardF : RU.movieCardDetailedF
+                     propertyLang === "movieCardF" ?  RU.movieCardF :
+                     propertyLang === "movieCardDetailedF" ?  RU.movieCardDetailedF : RU.home
         break;
       case "uk":
         PageString = propertyLang === "navigation" ?  UKR.navigation :
-          propertyLang === "movieCardF" ?  UKR.movieCardF : UKR.movieCardDetailedF
+                     propertyLang === "movieCardF" ?  UKR.movieCardF :
+                     propertyLang === "movieCardDetailedF" ?  UKR.movieCardDetailedF : UKR.home
         break;
       case "be":
         PageString = propertyLang === "navigation" ?  BLR.navigation :
-          propertyLang === "movieCardF" ?  BLR.movieCardF : BLR.movieCardDetailedF
+                     propertyLang === "movieCardF" ?  BLR.movieCardF :
+                     propertyLang === "movieCardDetailedF" ?  BLR.movieCardDetailedF : BLR.home
         break;
       case "ja":
         PageString = propertyLang === "navigation" ?  JA.navigation :
-          propertyLang === "movieCardF" ?  JA.movieCardF : JA.movieCardDetailedF
+                     propertyLang === "movieCardF" ?  JA.movieCardF :
+                     propertyLang === "movieCardDetailedF" ?  JA.movieCardDetailedF : JA.home
         break;
       default:
         PageString = propertyLang === "navigation" ?  ENG.navigation :
-          propertyLang === "movieCardF" ?  ENG.movieCardF : ENG.movieCardDetailedF
+                     propertyLang === "movieCardF" ?  ENG.movieCardF :
+                     propertyLang === "movieCardDetailedF" ?  ENG.movieCardDetailedF : ENG.home
     }
-    console.log("~~~~~~~~~~~navPageStringFromComponent in getLanguage = ", PageString)
+    //console.log("~~~~~~~~~~~navPageStringFromComponent in getLanguage = ", PageString)
     //navPageStringFromComponent = PageString
 
     return PageString

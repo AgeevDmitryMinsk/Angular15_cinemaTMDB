@@ -1,0 +1,21 @@
+<div class="border border-blue-600 p-4"  *ngIf="searchInputMoviesFromRoute">
+
+  <app-movie-list-for-search-input
+    *ngFor="let multiSearchResult of searchInputMoviesFromRoute "
+    [searchInputMovies]="multiSearchResult"
+  >
+  </app-movie-list-for-search-input>
+
+</div>
+
+<!--<ng-template ngFor let multiSearchResult [ngForOf]="searchInputMoviesFromRoute"   let-i="index">-->
+<!--  <app-movie-list-for-search-input-->
+<!--    *ngFor="let multiSearchResult of searchInputMoviesFromRoute; index as i"-->
+<!--    [searchInputMovies]="multiSearchResult"-->
+<!--    [index] = "i"-->
+
+<!--  >-->
+
+<!--  </app-movie-list-for-search-input>-->
+<!--</ng-template>-->
+

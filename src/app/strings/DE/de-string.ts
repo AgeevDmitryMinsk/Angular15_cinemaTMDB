@@ -31,5 +31,12 @@ export const DE:ILanguageString = {
     visit_movie_at_Twitter_right : "Besuchen Sie den Film auf Twitter, richtig",
     visit_movie_at_Instagram_right : "Besuchen Sie den Film auf Instagram, richtig",
     visit_movie_homepage_right : "Besuchen Sie die Filmhomepage, richtig"
+  },
+  home: {
+    welcome: "Willkommen zurück.",
+    millions_of_films: "Millionen von Filmen, Serien und Personen. Jetzt erkunden.",
+    find_film_series_persona: "Finde einen Film, eine Serie, eine Person...",
+    search: "Finden"
   }
+
 }

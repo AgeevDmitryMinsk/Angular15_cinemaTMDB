@@ -40,17 +40,17 @@ export class NavComponent {
     //this.router.routeReuseStrategy.shouldReuseRoute = () => false; // use the Router and override the shouldReuseRoute from the routeReuseStrategy  method which returns false statement
 
     this.languageInLocalStorage = this.localStore.getData("languageInLocalStorage")
-    console.log("this.languageInLocalStorage in NavComponent", this.languageInLocalStorage)
+    //console.log("this.languageInLocalStorage in NavComponent", this.languageInLocalStorage)
 
     if (this.languageInLocalStorage) {
-      console.log(`this.languageInLocalStorage exist`)
+      //console.log(`this.languageInLocalStorage exist`)
       this.dataService.languageSelected.next({language: this.languageInLocalStorage})
     }
 
     this.dataService.languageSelected.subscribe(
       {
         next: (result) => {
-          console.log("languageSelected result in HeaderComponent", result.language)
+          //console.log("languageSelected result in HeaderComponent", result.language)
           this.languageFromQueryParams = result.language
           this.navPageString = this.dataService.getLanguage(result.language, 'navigation')
         }
@@ -62,10 +62,10 @@ export class NavComponent {
     // console.log("this.languageInLocalStorage in NavComponent", this.languageInLocalStorage)
 
     if (this.languageInLocalStorage) {
-      console.log(`this.languageInLocalStorage exist`)
+      //console.log(`this.languageInLocalStorage exist`)
       this.dataService.languageSelected.next({language: this.languageInLocalStorage})
     } else {
-      console.log(`this.languageInLocalStorage NOT exist`)
+      //console.log(`this.languageInLocalStorage NOT exist`)
       this.dataService.languageSelected.subscribe({
         next: (result) => {
           console.log("languageSelected result in NavComponent", result)
@@ -79,11 +79,11 @@ export class NavComponent {
           //get genres from backend
           //console.log(' JSON.stringify getGenresMovieData = ',JSON.stringify(result)) // {"genres":[{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]}
           this.genres = result.genres
-          console.log('this.genresMovie in NavComponent', this.genres)
+          //console.log('this.genresMovie in NavComponent', this.genres)
           //this.showSuccessToastr('Movie-genres are loaded from back')
         },
         error: (e) => {
-          console.log("ERROR in getGenresMovieData:", e.message)
+          //console.log("ERROR in getGenresMovieData:", e.message)
           this.openSnackBar(e.message)
           this.showErrorToastr(e.message)
         },
@@ -97,11 +97,11 @@ export class NavComponent {
       .subscribe({
         next: (result) => {
           this.genresTV = result.genres
-          console.log('this.genresTV in NavComponent', this.genresTV)
+          //console.log('this.genresTV in NavComponent', this.genresTV)
           //this.showSuccessToastr('TV-genres are loaded from backend')
         },
         error: (e) => {
-          console.log("ERROR in getGenresTV_Data:", e.message)
+          //console.log("ERROR in getGenresTV_Data:", e.message)
           this.openSnackBar(e.message)
           this.showErrorToastr(e.message)
         },
@@ -129,7 +129,7 @@ export class NavComponent {
           // this.languages = this.languages
           //   .sort((a,b) => (b.name > a.name)?1:(a.name>b.name)?-1:0)
 
-          console.log('this.languages in NavComponent = ', this.languages)
+          //console.log('this.languages in NavComponent = ', this.languages)
         }
       })
 

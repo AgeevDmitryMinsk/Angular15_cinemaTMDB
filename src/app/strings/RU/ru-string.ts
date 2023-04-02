@@ -31,5 +31,12 @@ export const RU:ILanguageString = {
     visit_movie_at_Twitter_right : "Посетить фильм на Twitter, верно",
     visit_movie_at_Instagram_right : "Посетить фильм на Instagram, верно",
     visit_movie_homepage_right : "Посетить домашнюю страницу фильма, верно"
+  },
+  home: {
+    welcome: "Добро пожаловать.",
+    millions_of_films: "Миллионы фильмов, сериалов и людей. Исследуйте сейчас.",
+    find_film_series_persona: "Найти фильм, сериал, персону...",
+    search: "Найти"
   }
+
 }

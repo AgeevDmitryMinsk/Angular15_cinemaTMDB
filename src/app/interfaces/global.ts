@@ -207,6 +207,8 @@ export interface ILanguageString {
   navigation: INavigationLanguage
   movieCardF: ImovieCardFLanguage
   movieCardDetailedF: IcardDetailPageLanguage
+  home: IHomePageLanguage
+
 }
 
 export interface INavigationLanguage {
@@ -241,8 +243,13 @@ export interface IcardDetailPageLanguage {
   visit_movie_at_Twitter_right : string
   visit_movie_at_Instagram_right : string
   visit_movie_homepage_right : string
+}
 
-
+export interface IHomePageLanguage {
+  welcome: string
+  millions_of_films: string
+  find_film_series_persona: string
+  search: string
 }
 
 export enum numberToGenre {

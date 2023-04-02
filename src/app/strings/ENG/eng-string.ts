@@ -31,5 +31,12 @@ export const ENG:ILanguageString = {
     visit_movie_at_Twitter_right : "Visit movie at Twitter, right",
     visit_movie_at_Instagram_right : "Visit movie at Instagram, right",
     visit_movie_homepage_right : "Visit movie homepage, right"
+  },
+  home: {
+    welcome: "Welcome.",
+    millions_of_films: "Millions of movies, series and people. Explore now.",
+    find_film_series_persona: "Find a movie, series, person...",
+    search: "Search"
   }
+
 }

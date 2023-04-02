@@ -16,7 +16,7 @@ export class ParamInterceptor implements HttpInterceptor {
       (x) => {
         // @ts-ignore
         this.languageInInterceptor = x.language
-        console.log('got value ' + x.language);
+        //console.log('got value ' + x.language);
       },
       // error(err) {
       //   console.error('something wrong occurred: ' + err);

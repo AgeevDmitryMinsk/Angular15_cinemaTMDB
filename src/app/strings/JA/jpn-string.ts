@@ -31,5 +31,12 @@ export const JA: ILanguageString = {
     visit_movie_at_Twitter_right : "Twitterで映画を見る,右 (Visit movie at Twitter, right)",
     visit_movie_at_Instagram_right : "右、Instagramで映画を訪問 (Visit movie at Instagram, right)",
     visit_movie_homepage_right : "映画のホームページをご覧ください,右 (Visit movie homepage, right)"
+  },
+  home: {
+    welcome: "いらっしゃいませ。(welcome)",
+    millions_of_films: "何百万もの映画、シリーズ、人々。 今すぐ探索してください。",
+    find_film_series_persona: "映画、シリーズ、人物を探す... (find a film)",
+    search: "探す(Search)"
   }
+
 }

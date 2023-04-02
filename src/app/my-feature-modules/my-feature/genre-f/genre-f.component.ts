@@ -23,7 +23,7 @@ export class GenreFComponent implements OnInit{
     if(this.localStore.getData("language_english_nameInLocalStorage")) {
       this.language_english_nameInLocalStorage = this.localStore.getData("language_english_nameInLocalStorage")
     }
-    console.log("this.language_english_nameInLocalStorage in GenreFComponent", this.language_english_nameInLocalStorage)
+    //console.log("this.language_english_nameInLocalStorage in GenreFComponent", this.language_english_nameInLocalStorage)
   }
 
 

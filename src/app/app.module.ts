@@ -22,6 +22,8 @@ import {ToastrModule} from "ngx-toastr";
 import {MatButtonModule} from "@angular/material/button";
 import {MyFeatureModule} from "./my-feature-modules/my-feature/my-feature.module";
 import {AppRoutingModule} from "./app-routing/app-routing.module";
+import { SearchInputMoviesComponent } from './my-feature-modules/search-input-movies/search-input-movies.component';
+import { MovieListForSearchInputComponent } from './my-feature-modules/search-input-movies/movie-list-for-search-input/movie-list-for-search-input.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import {AppRoutingModule} from "./app-routing/app-routing.module";
     HomeComponent,
     HeaderComponent,
     FooterComponent,
+    SearchInputMoviesComponent,
+    MovieListForSearchInputComponent,
   ],
   imports: [
     AppRoutingModule,

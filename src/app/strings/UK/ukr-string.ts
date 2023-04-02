@@ -31,5 +31,12 @@ export const UKR:ILanguageString = {
     visit_movie_at_Twitter_right : "Заходьте на фільм на Twitter, вірно",
     visit_movie_at_Instagram_right : "Заходьте на фільм на Instagram, вірно",
     visit_movie_homepage_right : "Відвідайте домашню сторінку фільму, правда?"
+  },
+  home: {
+    welcome: "Ласкаво просимо.",
+    millions_of_films: "Мільйони фільмів, серіалів та людей. Дослідіть зараз.",
+    find_film_series_persona: "Знайти фільм, серіал, персону...",
+    search: "Знайти"
   }
+
 }

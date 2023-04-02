@@ -22,17 +22,17 @@ export class HeaderComponent implements OnInit{
   public ngOnInit(): void {
 
     this.languageInLocalStorage = this.localStore.getData("languageInLocalStorage")
-    console.log("this.languageInLocalStorage in HeaderComponent", this.languageInLocalStorage)
+    //console.log("this.languageInLocalStorage in HeaderComponent", this.languageInLocalStorage)
 
     if (this.languageInLocalStorage) {
-      console.log(`this.languageInLocalStorage exist`)
+      //console.log(`this.languageInLocalStorage exist`)
       this.dataService.languageSelected.next({language: this.languageInLocalStorage})
     }
 
     this.dataService.languageSelected.subscribe(
       {
         next: (result) => {
-          console.log("languageSelected result in HeaderComponent", result.language)
+          //console.log("languageSelected result in HeaderComponent", result.language)
           this.languageFromQueryParams = result.language
           this.navPageString = this.dataService.getLanguage(result.language, 'navigation')
 

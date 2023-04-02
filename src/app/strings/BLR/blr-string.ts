@@ -31,5 +31,11 @@ export const BLR: ILanguageString = {
     visit_movie_at_Twitter_right : "Наведаць фільм у Twitter, праўда",
     visit_movie_at_Instagram_right : "Наведаць фільм у Instagram, праўда",
     visit_movie_homepage_right : "Наведаць галоўную старонку фільма, праўда"
+  },
+  home: {
+    welcome: "Сардэчна запрашаем.",
+    millions_of_films: "Мільёны фільмаў, серыялаў і людзей. Даследуйце зараз.",
+    find_film_series_persona: "Знайсці фільм, серыял, персону...",
+    search: "Знайсці"
   }
 }
